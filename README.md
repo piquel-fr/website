@@ -4,8 +4,8 @@ The [piquel.fr](https://piquel.fr) website.
 
 ## TODO
 
-- Setup base http server with ``gorilla/mux``
-- Setup web pages and components with ``templ``
 - Setup ``TailwindCSS`` for actual styling
 - Setup ``Air`` for live reloading
+- Convert old pages and components to new site using ``htmx``
 - Setup database with ``sqlc``
+- Setup authentication with ``OAuth``

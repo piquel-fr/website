@@ -18,3 +18,7 @@ Dockerfile
 # Environment
 .env
 .env.*
+
+# Templ files
+*_templ.txt
+*_templ.go*

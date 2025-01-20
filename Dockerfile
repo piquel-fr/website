@@ -16,6 +16,9 @@ RUN go mod tidy
 # Copy src for compilation
 COPY . .
 
+# Generate needed code
+RUN templ generate
+
 # Build the binary
 RUN go build -o ./bin/main ./main.go
 
