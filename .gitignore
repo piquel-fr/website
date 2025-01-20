@@ -1,0 +1,10 @@
+# Go files
+go.sum
+
+# Compiled binaries
+*.exe
+bin/
+
+# Environment
+.env
+.env.*

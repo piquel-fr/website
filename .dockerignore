@@ -1,0 +1,20 @@
+# Go files
+go.sum
+
+# Compiled binaries
+*.exe
+bin/
+
+# Dockerfiles
+Dockerfile
+.dockerignore
+
+# Git files
+.gitignore
+.gitattributes
+.git/
+.github/
+
+# Environment
+.env
+.env.*
