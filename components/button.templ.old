@@ -1,0 +1,5 @@
+package components
+
+templ Button(class_name string, type string, form string, pop_out bool = false, use_card_classes bool = true, full_width bool = false) {
+    <button class={full_width ? "w-full" : ""}
+}

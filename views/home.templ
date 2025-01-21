@@ -1,7 +1,12 @@
 package views
 
+import "github.com/PiquelChips/piquel.fr/components"
+
 templ Home() {
     @Page() {
-        <div>Hello World!</div>
+        @components.Card("", true, true, 110) {
+            <h1>Hello World!</h1>
+            <p>You are gay!</p>
+        }
     }
 }
