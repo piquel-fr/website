@@ -2,13 +2,19 @@ FROM golang:1.22 AS builder
 
 WORKDIR /piquel.fr
 
-# Dependencies
-#RUN apt-get update && apt-get upgrade -y
-
 # Setup env
 RUN export PATH="$PATH:$(go env GOPATH)/bin"
 
-# Setup go env
+# Dependencies
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install curl
+
+# Setup Tailwindcss
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+RUN mv tailwindcss-linux-x64 tailwindcss
+RUN chmod +x tailwindcss
+
+# Setup go dependencies
 COPY go.mod .
 RUN go mod download
 RUN go mod tidy
@@ -18,6 +24,8 @@ COPY . .
 
 # Generate needed code
 RUN templ generate
+# Generate tailwind code
+RUN tailwindcss -i views/css/styles.css -o public/styles.css
 
 # Build the binary
 RUN go build -o ./bin/main ./main.go
