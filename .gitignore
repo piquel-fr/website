@@ -12,3 +12,6 @@ bin/
 # Templ files
 *_templ.txt
 *_templ.go*
+
+# TailwindCSS files
+public/styles.css
