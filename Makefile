@@ -1,3 +1,12 @@
+dev: tailwind templ air
+
+tailwind:
+	@tailwind -i views/css/styles.css -o public/styles.css --watch
+templ:
+	@templ generate -watch -proxy=http://localhost:50000
+air:
+	@air
+
 run: build
 	@./bin/main
 
