@@ -50,7 +50,7 @@ templ Page() {
 	            	@components.NavButton("p-1 m-1", false, true, "/profile/piquel", false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
-                    <div class="border-t-2 my-2 m-1 border-gray-200"></div>
+                    <hr class="h-px m-1 bg-gray-300 border-0">
 	            	@components.NavButton("p-1 m-1 text-red-700", false, true, "/auth/logout", false) { Signout }
 	            </div>
 		    	<div class="py-2 flex flex-col items-center">{ children... }</div>
