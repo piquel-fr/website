@@ -45,7 +45,7 @@ templ Page() {
                     }
                 </div>
             </header>
-		    <main>
+		    <main hx-on:click="document.getElementById('profile_bar').classList.add('hidden')">
 	            <div id="profile_bar" class="hidden fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1">
 	            	@components.NavButton("p-1 m-1", false, true, "/profile/piquel", false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
@@ -53,7 +53,7 @@ templ Page() {
                     <hr class="h-px m-1 bg-gray-300 border-0">
 	            	@components.NavButton("p-1 m-1 text-red-700", false, true, "/auth/logout", false) { Signout }
 	            </div>
-		    	<div class="py-2 flex flex-col items-center">{ children... }</div>
+		    	<div class="flex flex-col items-center">{ children... }</div>
 		    </main>
             <footer class="m-1 mt-auto text-xs">Page designed and developed by Joe</footer>
         </body>
