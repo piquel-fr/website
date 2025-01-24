@@ -22,6 +22,10 @@ func main() {
 
 	router.HandleFunc("/", handler.HandleHome).Methods("GET")
 
+	router.HandleFunc("/snt/linus", handler.HandleLinus).Methods("GET")
+	router.HandleFunc("/snt/linux", handler.HandleLinux).Methods("GET")
+	router.HandleFunc("/snt/musset", handler.HandleMusset).Methods("GET")
+
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
 	log.Printf("Starting web server on %s", address)
