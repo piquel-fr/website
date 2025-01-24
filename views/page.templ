@@ -29,7 +29,7 @@ templ Page() {
                                     <div class="py-1 pr-2"> Piquel </div>
                                     <div class="pr-2">
                                         <img
-                                            src="/public/piquel-jar.png"
+                                            src="/piquel-jar.png"
                                             alt="PFP"
                                             height="32"
                                             width="32"
@@ -50,11 +50,12 @@ templ Page() {
 	            	@components.NavButton("p-1 m-1", false, true, "/profile/piquel", false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
+                    <div class="border-t-2 my-2 m-1 border-gray-200"></div>
 	            	@components.NavButton("p-1 m-1 text-red-700", false, true, "/auth/logout", false) { Signout }
 	            </div>
-		    	<div class="flex flex-col items-center">{ children... }</div>
+		    	<div class="py-2 flex flex-col items-center">{ children... }</div>
 		    </main>
-            <footer class="n-1 mt-auto text-xs">Page designed and developed by Joe</footer>
+            <footer class="m-1 mt-auto text-xs">Page designed and developed by Joe</footer>
         </body>
 	</html>
 }
