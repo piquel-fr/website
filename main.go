@@ -22,7 +22,7 @@ func main() {
 
 	router.HandleFunc("/", handler.HandleHome).Methods("GET")
 
-	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
+	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
 	log.Printf("Starting web server on %s", address)
 	log.Fatalf("%s", http.ListenAndServe(address, router).Error())
