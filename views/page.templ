@@ -23,7 +23,7 @@ templ Page() {
                 <div class="flex justify-end">
                     if true {
                         // Setup profile
-                        <button onclick="toggleMenu()">
+                        <button hx-on:click="document.getElementById('profile_bar').classList.toggle('hidden')">
                             @components.Card("py-3", false, false, 110) {
                                 <div class="flex">
                                     <div class="py-1 pr-2"> Piquel </div>
@@ -46,7 +46,7 @@ templ Page() {
                 </div>
             </header>
 		    <main>
-	            <div id="profile_bar" class="fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1">
+	            <div id="profile_bar" class="hidden fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1">
 	            	@components.NavButton("p-1 m-1", false, true, "/profile/piquel", false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
@@ -56,15 +56,6 @@ templ Page() {
 		    	<div class="py-2 flex flex-col items-center">{ children... }</div>
 		    </main>
             <footer class="m-1 mt-auto text-xs">Page designed and developed by Joe</footer>
-
-            <script>
-                let profile_bar = document.getElementById("profile_bar")
-                profile_bar.classList.toggle("hidden")
-
-                toggleMenu = () => {
-                    profile_bar.classList.toggle("hidden")
-                }
-            </script>
         </body>
 	</html>
 }
