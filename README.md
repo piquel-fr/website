@@ -7,3 +7,6 @@ The [piquel.fr](https://piquel.fr) website.
 - Convert old pages and components to new site using ``htmx``
 - Setup communication with database with ``sqlc``
   - Storing and retrieving user data
+  - Use email address as identifier for data from provider
+  - Use username as identifier for user-side code
+  - Use autoincrement id for internal identification

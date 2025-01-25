@@ -25,11 +25,14 @@ func InitAuthService(store sessions.Store) *AuthService {
 			config.Envs.GoogleClientID,
 			config.Envs.GoogleClientSecret,
 			buildCallbackURL("google"),
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email",
 		),
 		github.New(
 			config.Envs.GithubClientID,
 			config.Envs.GithubClientSecret,
 			buildCallbackURL("github"),
+            "user:email",
 		),
 	)
 
