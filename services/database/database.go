@@ -1,0 +1,31 @@
+package database
+
+import (
+	"database/sql"
+	"fmt"
+	"log"
+
+	"github.com/PiquelChips/piquel.fr/config"
+	_ "github.com/lib/pq"
+)
+
+func InitDB() *sql.DB {
+
+    log.Printf("[Database] Attempting to connect to database...\n")
+
+    connectString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.Envs.DBHost, config.Envs.DBPort, config.Envs.DBUser, config.Envs.DBPassword, config.Envs.DBName)
+    db, err := sql.Open("postgres", connectString)
+    if err != nil {
+        panic(err)
+    }
+
+    err = db.Ping()
+    if err != nil {
+        panic(err)
+    }
+
+    log.Printf("[Database] Successfully connected to the database!\n")
+
+    return db
+}
+
