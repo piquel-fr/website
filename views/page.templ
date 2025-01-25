@@ -1,8 +1,9 @@
 package views
 
 import "github.com/PiquelChips/piquel.fr/components"
+import "github.com/PiquelChips/piquel.fr/types"
 
-templ Page() {
+templ Page(data *types.PageData) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -10,7 +11,7 @@ templ Page() {
 			<meta charset="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link rel="stylesheet" href="/styles.css"/>
-			<link rel="icon" href="/piquel-jar.png"/>
+			<link rel="icon" href="/favicon.ico"/>
 			<script src="/htmx.js" defer></script>
 		</head>
 		<body class="flex min-h-screen flex-col bg-white">
@@ -21,15 +22,14 @@ templ Page() {
                     @components.NavButton("p-2 m-2", false, false, "/dirk", false) { Dirk }
                 </nav>
                 <div class="flex justify-end">
-                    if true {
-                        // Setup profile
+                    if data.User.Username != "" {
                         <button hx-on:click="document.getElementById('profile_bar').classList.toggle('hidden')">
                             @components.Card("py-3", false, false, 110) {
                                 <div class="flex">
-                                    <div class="py-1 pr-2"> Piquel </div>
+                                    <div class="py-1 pr-2">{ data.User.Name }</div>
                                     <div class="pr-2">
                                         <img
-                                            src="/piquel-jar.png"
+                                            src={ data.User.Image }
                                             alt="PFP"
                                             height="32"
                                             width="32"
