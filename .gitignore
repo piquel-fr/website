@@ -15,3 +15,6 @@ bin/
 
 # TailwindCSS files
 public/styles.css
+
+# sqlc files
+database/generated

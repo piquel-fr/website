@@ -1,18 +1,16 @@
 package handlers
 
 import (
-	"database/sql"
-
+	repository "github.com/PiquelChips/piquel.fr/database/generated"
 	"github.com/PiquelChips/piquel.fr/services/auth"
 )
 
 type Handler struct {
-    // Store ref to database and other stuff here
-    db *sql.DB
+    db *repository.Queries
     auth *auth.AuthService
 }
 
-func Init(db *sql.DB, auth *auth.AuthService) *Handler {
+func Init(db *repository.Queries, auth *auth.AuthService) *Handler {
     return &Handler{
         db: db,
         auth: auth,
