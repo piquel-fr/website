@@ -33,6 +33,7 @@ func main() {
 
     router.HandleFunc("/settings", handler.HandleSettingsRedirect).Methods("GET")
     router.HandleFunc("/settings/profile", handler.HandleProfileSettings).Methods("GET")
+    router.HandleFunc("/settings/profile", handler.HandleProfileSettingsUpdate).Methods("POST")
 
 	// Basic public endpoints
 	router.HandleFunc("/minecraft", handler.HandleMinecraft).Methods("GET")

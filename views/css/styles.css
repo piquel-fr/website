@@ -7,3 +7,15 @@ html {
 .max-div-width {
     max-width: 65em;
 }
+
+.red {
+    border-color: red;
+}
+
+.gray {
+    border-color: gray;
+}
+
+.blue {
+    border-color: blue;
+}
