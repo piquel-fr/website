@@ -10,3 +10,9 @@ The [piquel.fr](https://piquel.fr) website.
   - Use email address as identifier for data from provider
   - Use username as identifier for user-side code
   - Use autoincrement id for internal identification
+- Make dockerfile
+- Use alpine for runner
+- Optimize builder
+- Setup proper error handling
+  - Send to user
+  - Panic some

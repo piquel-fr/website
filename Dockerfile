@@ -7,7 +7,7 @@ RUN export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Dependencies
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install curl
+RUN apt-get install curl sqlc
 
 # Setup Tailwindcss
 RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
@@ -18,6 +18,9 @@ RUN chmod +x tailwindcss
 COPY go.mod .
 RUN go mod download
 RUN go mod tidy
+
+# Generate sqlc files
+COPY database .
 
 # Copy src for compilation
 COPY . .
@@ -36,6 +39,7 @@ FROM alpine:latest
 WORKDIR /piquel.fr
 
 COPY --from=builder /piquel.fr/bin/main .
+COPY --from=builder /piquel.fr/public .
 
 EXPOSE 50000
 
