@@ -2,8 +2,8 @@ package settings
 
 import "github.com/PiquelChips/piquel.fr/types"
 
-templ ProfileSettings(data *types.PageData, page string) {
-    @Settings(data, page) {
+templ ProfileSettings(data *types.PageData) {
+    @Settings(data, "profile") {
         <form hx-post="/" hx-targer="name-error" class="mb-2">
             <label for="name" class="text-lg pl-1">
                 Name<br />
