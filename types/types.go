@@ -9,3 +9,8 @@ type PageData struct {
     UserColor string
 }
 
+type UserProfile struct {
+    User repository.User
+    UserColor string
+    UserGroup string
+}

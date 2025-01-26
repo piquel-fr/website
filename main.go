@@ -29,6 +29,7 @@ func main() {
 	router.Use(authService.AuthMiddleware)
 
 	router.HandleFunc("/", handler.HandleHome).Methods("GET")
+    router.HandleFunc("/profile/{profile}", handler.HandleProfile).Methods("GET")
 
 	// Basic public endpoints
 	router.HandleFunc("/minecraft", handler.HandleMinecraft).Methods("GET")

@@ -12,7 +12,7 @@ import (
 
 func InitDBService() *repository.Queries {
 
-    log.Printf("[Database] Attempting to connect to database...\n")
+    log.Printf("[Database] Attempting to connect to the database...\n")
 
     connectString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.Envs.DBHost, config.Envs.DBPort, config.Envs.DBUser, config.Envs.DBPassword, config.Envs.DBName)
     connection, err := sql.Open("postgres", connectString)

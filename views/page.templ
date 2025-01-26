@@ -33,8 +33,7 @@ templ Page(data *types.PageData) {
                                             alt="PFP"
                                             height="32"
                                             width="32"
-                                            class="size-8 border-2"
-                                            style="border-color: red;"
+                                            class={"size-8 border-2", data.UserColor}
                                             loading="lazy"
                                         />
                                     </div>
@@ -48,7 +47,7 @@ templ Page(data *types.PageData) {
             </header>
 		    <main hx-on:click="document.getElementById('profile_bar').classList.add('hidden')">
 	            <div id="profile_bar" class="hidden fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1">
-	            	@components.NavButton("p-1 m-1", false, true, "/profile/piquel", false) { Profile }
+	            	@components.NavButton("p-1 m-1", false, true, "/profile/" + data.User.Username, false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
                     <hr class="h-px m-1 bg-gray-300 border-0">
@@ -59,4 +58,15 @@ templ Page(data *types.PageData) {
             <footer class="m-1 mt-auto text-xs">Page designed and developed by Joe</footer>
         </body>
 	</html>
+    <style>
+        .red {
+            border-color: red;
+        }
+        .gray {
+            border-color: gray;
+        }
+        .blue {
+            border-color: blue;
+        }
+    </style>
 }
