@@ -2,27 +2,24 @@ package auth
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
+	"github.com/PiquelChips/piquel.fr/config"
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 )
 
-type SessionsOptions struct {
-    CookiesKey string
-    MaxAge int
-    HttpOnly bool // should be true if http
-    Secure bool // should be true if https
-}
+func InitCookieService() *sessions.CookieStore {
+    store := sessions.NewCookieStore([]byte(config.Envs.CookiesAuthSecret))
 
-func InitCookieStore(options SessionsOptions) *sessions.CookieStore {
-    store := sessions.NewCookieStore([]byte(options.CookiesKey))
-
-    store.MaxAge(options.MaxAge)
+    store.MaxAge(config.Envs.CookiesAuthAgeInSeconds)
     store.Options.Path = "/"
-    store.Options.HttpOnly = options.HttpOnly
-    store.Options.Secure = options.Secure
+    store.Options.HttpOnly = config.Envs.CookiesAuthIsHttpOnly // should be true if http
+    store.Options.Secure = config.Envs.CookiesAuthIsSecure // should be true if https
+
+    log.Printf("[Cookies] Initialized cookie service!\n")
 
     return store
 }

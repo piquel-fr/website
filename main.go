@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/PiquelChips/piquel.fr/config"
 	"github.com/PiquelChips/piquel.fr/handlers"
 	"github.com/PiquelChips/piquel.fr/services/auth"
 	"github.com/PiquelChips/piquel.fr/services/database"
+	"github.com/PiquelChips/piquel.fr/services/users"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -16,21 +16,16 @@ import (
 func main() {
 	log.Printf("Initializing piquel.fr website...\n")
 
-	godotenv.Load()
-	address := os.Getenv("HOST") + ":" + os.Getenv("PORT")
+    // Setup various services
+	dbService := database.InitDBService()
+	cookieService := auth.InitCookieService()
+	authService := auth.InitAuthService(cookieService)
+    userService := users.InitUserService(dbService)
+	handler := handlers.InitHandler(dbService, authService, userService)
 
 	router := mux.NewRouter()
 
-	dbService := database.InitDB()
-	cookieStore := auth.InitCookieStore(auth.SessionsOptions{
-	    CookiesKey: config.Envs.CookiesAuthSecret,
-	    MaxAge: config.Envs.CookiesAuthAgeInSeconds,
-	    Secure: config.Envs.CookiesAuthIsSecure,
-	    HttpOnly: config.Envs.CookiesAuthIsHttpOnly,
-	})
-	authService := auth.InitAuthService(cookieStore)
-	handler := handlers.Init(dbService, authService)
-
+    // Setup middleware
 	router.Use(authService.AuthMiddleware)
 
 	router.HandleFunc("/", handler.HandleHome).Methods("GET")
@@ -50,7 +45,11 @@ func main() {
 	router.HandleFunc("/auth/{provider}", handler.HandleProviderLogin).Methods("GET")
 	router.HandleFunc("/auth/{provider}/callback", handler.HandleAuthCallback).Methods("GET")
 
+    // Serve static files
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
+
+	godotenv.Load()
+	address := os.Getenv("HOST") + ":" + os.Getenv("PORT")
 
 	log.Printf("[Mux] Starting web server on %s", address)
 	log.Fatalf("%s", http.ListenAndServe(address, router).Error())

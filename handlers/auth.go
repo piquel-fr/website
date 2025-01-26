@@ -3,13 +3,12 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/PiquelChips/piquel.fr/services/users"
 	"github.com/PiquelChips/piquel.fr/views/auth"
 	"github.com/markbates/goth/gothic"
 )
 
 func (handler *Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
-	auth.Login(users.GetPageData(w, r)).Render(r.Context(), w)
+	auth.Login(handler.users.GetPageData(w, r)).Render(r.Context(), w)
 }
 
 func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Request) {

@@ -10,7 +10,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func InitDB() *repository.Queries {
+func InitDBService() *repository.Queries {
 
     log.Printf("[Database] Attempting to connect to database...\n")
 
@@ -28,6 +28,8 @@ func InitDB() *repository.Queries {
     log.Printf("[Database] Successfully connected to the database!\n")
 
     queries := repository.New(connection)
+
+    log.Printf("[Database] Initialized database serviec!\n")
 
     return queries
 }

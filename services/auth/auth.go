@@ -36,6 +36,8 @@ func InitAuthService(store sessions.Store) *AuthService {
 		),
 	)
 
+    log.Printf("[Auth] Initialized auth service!\n")
+
 	return &AuthService{}
 }
 
