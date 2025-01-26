@@ -1,15 +1,11 @@
 package types
 
-type PageData struct {
-    User User
-}
+import (
+	repository "github.com/PiquelChips/piquel.fr/database/generated"
+)
 
-type User struct {
-    Username string
-    Name string
-    Image string
-    Email string
-    Color string
-    GroupName string
+type PageData struct {
+    User repository.User
+    UserColor string
 }
 

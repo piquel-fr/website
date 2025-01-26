@@ -1,11 +1,11 @@
 package auth
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/PiquelChips/piquel.fr/config"
+	"github.com/PiquelChips/piquel.fr/errors"
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -32,7 +32,7 @@ func (s *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
 
 	user := session.Values["user"]
 	if user == nil {
-		return goth.User{}, fmt.Errorf("User is not authenticated! %v", user)
+		return goth.User{}, errors.ErrorNotAuthenticated
 	}
 	return user.(goth.User), nil
 }
@@ -48,7 +48,7 @@ func (s *AuthService) StoreUserSession(w http.ResponseWriter, r *http.Request, u
 	err = session.Save(r, w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return err
+		panic(err)
 	}
 
 	return nil

@@ -1,16 +1,23 @@
 package users
 
 import (
+	"context"
+	"database/sql"
 	"log"
 	"net/http"
+	"strings"
+	"time"
 
 	repository "github.com/PiquelChips/piquel.fr/database/generated"
+	"github.com/PiquelChips/piquel.fr/errors"
+	"github.com/PiquelChips/piquel.fr/services/auth"
 	"github.com/PiquelChips/piquel.fr/types"
 	"github.com/markbates/goth"
 )
 
 type UserService struct {
 	queries *repository.Queries
+    auth *auth.AuthService
 }
 
 func InitUserService(queries *repository.Queries) *UserService {
@@ -22,9 +29,65 @@ func InitUserService(queries *repository.Queries) *UserService {
 }
 
 func (s *UserService) GetPageData(w http.ResponseWriter, r *http.Request) *types.PageData {
-	return &types.PageData{User: types.User{Username: "piquel", Name: "Piquel", Image: "https://avatars.githubusercontent.com/u/63727792?v=4", Email: "ronanggx2008@gmail.com", Color: "red", GroupName: "admin"}}
+    data := &types.PageData{}
+
+    s.getUserData(r, data)
+
+	return data
 }
 
-func (s *UserService) RegisterUser(user *goth.User) {
+func (s *UserService) getUserData(r *http.Request, data *types.PageData) {
+    gothUser, err := s.auth.GetSessionUser(r)
+    if err != nil {
+        if err == errors.ErrorNotAuthenticated {
+            log.Printf("%s", err)
+            return
+        }
+        panic(err)
+    }
 
+    dbUser, err := s.queries.GetUserByEmail(r.Context(), gothUser.Email)
+    if err != nil {
+        panic(err)
+    }
+
+    group, err := s.queries.GetGroupInfo(r.Context(), dbUser.Group)
+
+    data.User = dbUser
+    data.UserColor = group.Color
+}
+
+func (s *UserService) VerifyUser(context context.Context, inUser *goth.User) {
+    _, err := s.queries.GetUserByEmail(context, inUser.Email)
+    if err != nil {
+        if err == sql.ErrNoRows {
+            s.registerUser(context, inUser)
+            return
+        }
+        panic(err)
+    }
+}
+
+func (s *UserService) registerUser(context context.Context, inUser *goth.User) {
+    params := repository.AddUserParams{}
+
+    params.Email = inUser.Email
+    params.Group = "default"
+    params.Image = inUser.AvatarURL
+    params.Created = time.Now()
+    params.Name = inUser.Name
+
+    switch inUser.Provider {
+    case "google":
+        params.Username = strings.ReplaceAll(strings.ToLower(inUser.Name), " ", "")
+    case "github":
+        params.Username = strings.ReplaceAll(strings.ToLower(inUser.NickName), " ", "")
+    }
+
+    log.Printf("Registering user:\n %v", params)
+
+    err := s.queries.AddUser(context, params)
+    if err != nil {
+        panic(err)
+    }
 }

@@ -11,8 +11,8 @@ The [piquel.fr](https://piquel.fr) website.
   - Use username as identifier for user-side code
   - Use autoincrement id for internal identification
 - Make dockerfile
-- Use alpine for runner
-- Optimize builder
+  - Use alpine for runner
+  - Optimize builder
 - Setup proper error handling
   - Send to user
   - Panic some
