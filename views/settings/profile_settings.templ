@@ -4,6 +4,29 @@ import "github.com/PiquelChips/piquel.fr/types"
 
 templ ProfileSettings(data *types.PageData, page string) {
     @Settings(data, page) {
-        Profile
+        <form hx-post="/" hx-targer="name-error" class="mb-2">
+            <label for="name" class="text-lg pl-1">
+                Name<br />
+                <input type="text" id="name" name="name" value={data.Profile.User.Name} class="text-base border-2 border-gray-300 rounded-md p-1" />
+                <button class="text-base bg-gray-200 rounded-md px-6 p-1" type="submit">Update</button>
+            </label>
+            <div id="name-error" />
+        </form>
+        <form hx-post="/" hx-targer="username-error" class="my-2">
+            <label for="username" class="text-lg pl-1">
+                Username<br />
+                <input type="text" id="username" name="username" value={data.Profile.User.Username} class="text-base border-2 border-gray-300 rounded-md p-1" />
+                <button class="text-base bg-gray-200 rounded-md px-6 p-1" type="submit">Update</button>
+            </label>
+            <div id="username-error" />
+        </form>
+        <form hx-post="/" hx-targer="image-error" class="my-2">
+            <label for="image" class="text-lg pl-1">
+                Image<br />
+                <input type="text" id="image" name="image" value={data.Profile.User.Image} class="text-base border-2 border-gray-300 rounded-md p-1" />
+                <button class="text-base bg-gray-200 rounded-md px-6 p-1" type="submit">Update</button>
+            </label>
+            <div id="image-error" class="pl-1 h-1" />
+        </form>
     }
 }

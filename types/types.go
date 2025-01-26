@@ -5,8 +5,7 @@ import (
 )
 
 type PageData struct {
-    User repository.User
-    UserColor string
+    Profile UserProfile
 }
 
 type UserProfile struct {

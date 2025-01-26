@@ -17,7 +17,7 @@ templ Profile(data *types.PageData, user *types.UserProfile) {
                 if user.User.Group != "default" {
         			<p class="text-lg">{user.UserGroup}</p>
                 }
-        		if data.User.Username == user.User.Username {
+        		if data.Profile.User.Username == user.User.Username {
                     @components.NavButton("text-xl px-6 p-2 my-1 bg-gray-300 max-w-fit", false, true, "/settings/profile", false) { Edit Profile }
                 }
         	</div>

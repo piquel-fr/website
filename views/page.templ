@@ -22,21 +22,12 @@ templ Page(data *types.PageData) {
                     @components.NavButton("p-2 m-2", false, false, "/dirk", false) { Dirk }
                 </nav>
                 <div class="flex justify-end">
-                    if data.User.Username != "" {
-                        <button hx-on:click="document.getElementById('profile_bar').classList.toggle('hidden')">
+                    if data.Profile.User.Username != "" {
+                        <button hx-on:click="document.getElementById('profile_bar').classList.toggle('hidden')" class="cursor-pointer">
                             @components.Card("py-3", false, false, 110) {
                                 <div class="flex">
-                                    <div class="py-1 pr-2">{ data.User.Name }</div>
-                                    <div class="pr-2">
-                                        <img
-                                            src={ data.User.Image }
-                                            alt="PFP"
-                                            height="32"
-                                            width="32"
-                                            class={"size-8 border-2", data.UserColor}
-                                            loading="lazy"
-                                        />
-                                    </div>
+                                    <div class="py-1 pr-2">{ data.Profile.User.Name }</div>
+                                    <div class="pr-2"><img src={ data.Profile.User.Image } alt="PFP" height="32" width="32" class={"size-8 border-2", data.Profile.UserColor} loading="lazy" /></div>
                                 </div>
                             }
                         </button>
@@ -47,7 +38,7 @@ templ Page(data *types.PageData) {
             </header>
 		    <main hx-on:click="document.getElementById('profile_bar').classList.add('hidden')">
 	            <div id="profile_bar" class="hidden fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1">
-	            	@components.NavButton("p-1 m-1", false, true, "/profile/" + data.User.Username, false) { Profile }
+	            	@components.NavButton("p-1 m-1", false, true, "/profile/" + data.Profile.User.Username, false) { Profile }
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
                     <hr class="h-px m-1 bg-gray-300 border-0">

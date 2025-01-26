@@ -53,8 +53,9 @@ func (s *UserService) getUserData(r *http.Request, data *types.PageData) {
 
     group, err := s.queries.GetGroupInfo(r.Context(), dbUser.Group)
 
-    data.User = dbUser
-    data.UserColor = group.Color
+    data.Profile.User = dbUser
+    data.Profile.UserColor = group.Color
+    data.Profile.UserGroup = group.Displayname.String
 }
 
 func (s *UserService) VerifyUser(context context.Context, inUser *goth.User) {
