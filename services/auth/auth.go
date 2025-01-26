@@ -47,13 +47,12 @@ func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		session, err := s.GetSessionUser(r)
+		_, err := s.GetSessionUser(r)
 		if err != nil {
 			http.Redirect(w, r, "/auth/login", http.StatusTemporaryRedirect)
 			return
 		}
 
-		log.Printf("user session %v", session)
 		next.ServeHTTP(w, r)
 	})
 }

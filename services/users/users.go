@@ -84,8 +84,6 @@ func (s *UserService) registerUser(context context.Context, inUser *goth.User) {
         params.Username = strings.ReplaceAll(strings.ToLower(inUser.NickName), " ", "")
     }
 
-    log.Printf("Registering user:\n %v", params)
-
     err := s.queries.AddUser(context, params)
     if err != nil {
         panic(err)

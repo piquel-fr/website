@@ -23,7 +23,7 @@ func (handler *Handler) HandleProfile(w http.ResponseWriter, r *http.Request) {
     user, err := handler.queries.GetUserByUsername(r.Context(), username)
     if err != nil {
         if err == sql.ErrNoRows {
-            http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+            http.Redirect(w, r, "/", http.StatusNotFound)
             return
         }
     }
