@@ -2,6 +2,8 @@
 
 The [piquel.fr](https://piquel.fr) website.
 
+## Air does no work on Windows
+
 ## TODO
 
 - Make dockerfile

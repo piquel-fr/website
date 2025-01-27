@@ -6,7 +6,7 @@ tmp_dir = "bin"
   cmd = "make build"
 
   delay = 1000
-  exclude_dir = ["bin", "public", "database/generated", "database\\generated"]
+  exclude_dir = ["bin", "public", "database/generated"]
   exclude_file = ["public/styles.css"]
   exclude_regex = ['.*_templ\.go$']
   exclude_unchanged = false
