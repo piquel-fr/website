@@ -40,13 +40,14 @@ jobs:
 
       - name: Create env file
         run: |
+          echo "${{ env.ENVIRONMENT }}" >> ./envfile
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
 
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
         with:
           name: piquel-fr
-          file: docker-stack.yaml
+          file: docker-stack.yml
           host: piquel.fr
           user: deploy
           ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
