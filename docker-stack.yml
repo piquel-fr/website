@@ -1,0 +1,99 @@
+services:
+  traefik:
+    image: traefik:v3.1
+    command:
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+    ports:
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
+    volumes:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+  piquel-fr:
+    image: ghcr.io/piquelchips/piquel.fr:${GIT_COMMIT_HASH:-latest}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.piquel-fr.loadbalancer.server.port=8080"
+      - "traefik.http.routers.piquel-fr.rule=Host(`${HOST}`)"
+      - "traefik.http.routers.piquel-fr.entrypoints=websecure"
+      - "traefik.http.routers.piquel-fr.tls.certresolver=myresolver"
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      # Database
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      # Auth
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      # Cookies
+      COOKIES_AUTH_SECRET: ${COOKIES_AUTH_SECRET}
+      COOKIES_AUTH_AGE_IN_SECONDS: ${COOKIES_AUTH_AGE_IN_SECONDS}
+      COOKIES_AUTH_IS_SECURE: ${COOKIES_AUTH_IS_SECURE}
+      COOKIES_AUTH_IS_HTTP_ONLY: ${COOKIES_AUTH_IS_HTTP_ONLY}
+    deploy:
+      update_config:
+        order: start-first
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    user: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${DATA_PATH}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #     # ports:
+  #     #   - '${PGADMIN_PORT}:80'
+  #   volumes:
+  #     - ${DATA_PATH}/pgadmin:/var/lib/pgadmin
+  # satisfactory:
+  #   image: wolveix/satisfactory-server:latest
+  #   container_name: satisfactory
+  #   ports:
+  #       - '7777:7777/udp'
+  #       - '7777:7777/tcp'
+  #   volumes:
+  #       - '${DATA_PATH}/satisfactory:/config'
+  #   environment:
+  #       - MAXPLAYERS=4
+  #       - PGID=1000
+  #       - PUID=1000
+  #       - ROOTLESS=false
+  #       - STEAMBETA=false
+  #   restart: always
+
+volumes:
+  letsencrypt:
