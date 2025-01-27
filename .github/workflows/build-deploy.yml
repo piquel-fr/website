@@ -4,26 +4,26 @@ on:
     branches:
       - "main"
 
-  permissions:
-    packages: write
+permissions:
+  packages: write
 
-  jobs:
-    build-and-push:
-      run-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-        - name: Login to Container registry
-          uses: docker/login-action@v3
-          with:
-            registry: https://ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-        - name: Build and push Docker image
-          uses: docker/build-push-action@v6
-          with:
-            context: .
-            push: true
-            tags: |
-              ghcr.io/PiquelChips/piquel.fr:latest
-              ghcr.io/PiquelChips/piquel.fr:${{ github.sha }}
+jobs:
+  build-and-push:
+    run-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Login to Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/PiquelChips/piquel.fr:latest
+            ghcr.io/PiquelChips/piquel.fr:${{ github.sha }}
