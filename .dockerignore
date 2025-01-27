@@ -15,6 +15,10 @@ Dockerfile
 .git/
 .github/
 
+# Other config and files
+.air.toml
+Makefile
+
 # Environment
 .env
 .env.*
@@ -24,7 +28,7 @@ Dockerfile
 *_templ.go*
 
 # sqlc files
-database/generated
+database/generated/
 
 # TailwindCSS files
 public/styles.css
