@@ -40,7 +40,7 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "${{ env.ENVIRONMENT }}" >> ./envfile
+          echo "$ENVIRONMENT" >> ./envfile
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
           cat ./envfile
 
