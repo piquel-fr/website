@@ -43,7 +43,7 @@ RUN tailwindcss -i views/css/styles.css -o public/styles.css
 RUN go mod tidy
 
 # Build the binary
-RUN go build -o ./bin/main ./main.go
+RUN CGO_ENABLED=0 go build -o ./bin/main ./main.go
 
 # Now for run env
 FROM alpine:latest
@@ -51,7 +51,7 @@ FROM alpine:latest
 WORKDIR /piquel.fr
 
 COPY --from=builder /piquel.fr/bin/main .
-COPY --from=builder /piquel.fr/public .
+COPY --from=builder /piquel.fr/public public
 
 EXPOSE 50000
 

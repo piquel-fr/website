@@ -29,10 +29,8 @@ type Config struct {
 var Envs = initConfig()
 
 func initConfig() Config {
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
+    godotenv.Load()
+
 	return Config{
 		PublicHost:              getEnv("HOST"),
 		Port:                    getEnv("PORT"),
