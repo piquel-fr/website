@@ -6,7 +6,6 @@ The [piquel.fr](https://piquel.fr) website.
 
 ## TODO
 
-- Make CI/CD pipelines
 - Setup proper error handling
   - Send to user
   - Panic some
