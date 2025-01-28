@@ -8,6 +8,7 @@ bin/
 # Dockerfiles
 Dockerfile
 .dockerignore
+docker-stack.yml
 
 # Git files
 .gitignore
