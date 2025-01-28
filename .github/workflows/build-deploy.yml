@@ -55,7 +55,6 @@ jobs:
           echo "AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }}" >> ./envfile
           echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./envfile
           echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./envfile
-          echo "COOKIES_AUTH_AGE_IN_SECONDS=${{ secrets.COOKIES_AUTH_AGE_IN_SECONDS }}" >> ./envfile
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
 
       - name: Docker Stack Deploy

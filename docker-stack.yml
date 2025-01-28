@@ -47,7 +47,6 @@ services:
       AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET}
       # Cookies
       COOKIES_AUTH_SECRET: ${COOKIES_AUTH_SECRET}
-      COOKIES_AUTH_AGE_IN_SECONDS: ${COOKIES_AUTH_AGE_IN_SECONDS}
     deploy:
       update_config:
         order: start-first
