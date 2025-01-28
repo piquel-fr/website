@@ -16,8 +16,8 @@ func InitCookieService() *sessions.CookieStore {
 
     store.MaxAge(config.Envs.CookiesAuthAgeInSeconds)
     store.Options.Path = "/"
-    store.Options.HttpOnly = config.Envs.CookiesAuthIsHttpOnly // should be true if http
-    store.Options.Secure = config.Envs.CookiesAuthIsSecure // should be true if https
+    store.Options.HttpOnly = false // should be true if http
+    store.Options.Secure = true // should be true if https
 
     log.Printf("[Cookies] Initialized cookie service!\n")
 

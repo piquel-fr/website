@@ -43,12 +43,10 @@ func initConfig() Config {
 		DBPassword:              getEnv("DB_PASSWORD"),
 		CookiesAuthSecret:       getEnv("COOKIES_AUTH_SECRET"),
 		CookiesAuthAgeInSeconds: getEnvAsInt("COOKIES_AUTH_AGE_IN_SECONDS"),
-		CookiesAuthIsSecure:     getEnvAsBool("COOKIES_AUTH_IS_SECURE"),
-		CookiesAuthIsHttpOnly:   getEnvAsBool("COOKIES_AUTH_IS_HTTP_ONLY"),
-		GoogleClientID:          getEnv("GOOGLE_CLIENT_ID"),
-		GoogleClientSecret:      getEnv("GOOGLE_CLIENT_SECRET"),
-		GithubClientID:          getEnv("GITHUB_CLIENT_ID"),
-		GithubClientSecret:      getEnv("GITHUB_CLIENT_SECRET"),
+		GoogleClientID:          getEnv("AUTH_GOOGLE_CLIENT_ID"),
+		GoogleClientSecret:      getEnv("AUTH_GOOGLE_CLIENT_SECRET"),
+		GithubClientID:          getEnv("AUTH_GITHUB_CLIENT_ID"),
+		GithubClientSecret:      getEnv("AUTH_GITHUB_CLIENT_SECRET"),
 	}
 }
 
