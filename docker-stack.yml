@@ -2,15 +2,8 @@ services:
   traefik:
     image: traefik:v3.1
     command:
+      - "--api.insecure=true"
       - "--providers.docker"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.piquel-resolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.piquel-resolver.acme.email=jesus@heaven.is" # ${VPS_USER_EMAIL}"
-      - "--certificatesresolvers.piquel-resolver.acme.storage=/letsencrypt/acme.json"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
     ports:
       - mode: host
         protocol: tcp
@@ -20,17 +13,12 @@ services:
         protocol: tcp
         published: 443
         target: 443
+      - "8080:8080"
     volumes:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
   piquel-fr:
     image: ghcr.io/piquelorganization/piquel.fr:${GIT_COMMIT_HASH:-latest}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.services.piquel-fr.loadbalancer.server.port=8080"
-      - "traefik.http.routers.piquel-fr.rule=Host(`piquel.fr`)" # '${HOST}')"
-      - "traefik.http.routers.piquel-fr.entrypoints=websecure"
-      - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"
     environment:
       HOST: ${HOST}
       PORT: ${PORT}
