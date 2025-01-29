@@ -56,6 +56,7 @@ jobs:
           echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./envfile
           echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./envfile
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
+          echo "VPS_USER_EMAIL=${{ secrets.VPS_USER_EMAIL }}" >> ./envfile
 
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
