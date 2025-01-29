@@ -13,12 +13,15 @@ services:
         protocol: tcp
         published: 443
         target: 443
+      - mode:
       - "8080:8080"
     volumes:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
   piquel-fr:
     image: ghcr.io/piquelorganization/piquel.fr:${GIT_COMMIT_HASH:-latest}
+    labels:
+      - "traefik.http.routers.piquel-fr.rule=Host(`piquel.fr`)"
     environment:
       HOST: ${HOST}
       PORT: ${PORT}
