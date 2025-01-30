@@ -45,18 +45,18 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "DB_HOST=${{ vars.DB_HOST }}" >> ./envfile
-          echo "DB_PORT=${{ vars.DB_PORT }}" >> ./envfile
-          echo "DB_NAME=${{ vars.DB_NAME }}" >> ./envfile
-          echo "DB_USER=${{ secrets.DB_USER }}" >> ./envfile
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./envfile
-          echo "AUTH_GITHUB_CLIENT_ID=${{ secrets.AUTH_GITHUB_CLIENT_ID }}" >> ./envfile
-          echo "AUTH_GITHUB_CLIENT_SECRET=${{ secrets.AUTH_GITHUB_CLIENT_SECRET }}" >> ./envfile
-          echo "AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }}" >> ./envfile
-          echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./envfile
-          echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./envfile
-          echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
-          echo "VPS_USER_EMAIL=${{ secrets.VPS_USER_EMAIL }}" >> ./envfile
+          echo "DB_HOST=${{ vars.DB_HOST }}" >> ./.env
+          echo "DB_PORT=${{ vars.DB_PORT }}" >> ./.env
+          echo "DB_NAME=${{ vars.DB_NAME }}" >> ./.env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> ./.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
+          echo "AUTH_GITHUB_CLIENT_ID=${{ secrets.AUTH_GITHUB_CLIENT_ID }}" >> ./.env
+          echo "AUTH_GITHUB_CLIENT_SECRET=${{ secrets.AUTH_GITHUB_CLIENT_SECRET }}" >> ./.env
+          echo "AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }}" >> ./.env
+          echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./.env
+          echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./.env
+          echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
+          echo "VPS_USER_EMAIL=${{ secrets.VPS_USER_EMAIL }}" >> ./.env
 
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
@@ -66,4 +66,4 @@ jobs:
           host: piquel.fr
           user: deploy
           ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          env_file: ./envfile
+          env_file: ./.env
