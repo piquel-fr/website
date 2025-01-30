@@ -1,22 +1,4 @@
 services:
-  traefik:
-    image: traefik:v3.1
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker"
-    ports:
-      - mode: host
-        protocol: tcp
-        published: 80
-        target: 80
-      - mode: host
-        protocol: tcp
-        published: 443
-        target: 443
-      - "8080:8080"
-    volumes:
-      - letsencrypt:/letsencrypt
-      - /var/run/docker.sock:/var/run/docker.sock
   piquel-fr:
     image: ghcr.io/piquelorganization/piquel.fr:${GIT_COMMIT_HASH:-latest}
     labels:
@@ -40,6 +22,3 @@ services:
     deploy:
       update_config:
         order: start-first
-
-volumes:
-  letsencrypt:

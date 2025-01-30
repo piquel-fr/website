@@ -19,6 +19,8 @@ docker-stack.yml
 # Other config and files
 .air.toml
 Makefile
+README.md
+LICENSE
 
 # Environment
 .env
