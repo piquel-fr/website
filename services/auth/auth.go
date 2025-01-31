@@ -63,8 +63,6 @@ func IsAuthenticatedRoute(r *http.Request) bool {
     switch routes[0] {
     case "settings":
         return true
-    case "dirk":
-        return true
     }
 	return false
 }
