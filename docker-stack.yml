@@ -11,7 +11,7 @@ services:
       PUBLIC_HOST: ${PUBLIC_HOST}
       HOST: ${HOST}
       PORT: ${PORT}
-      SSL: true
+      SSL: "true"
       # Database
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
