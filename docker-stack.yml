@@ -8,8 +8,10 @@ services:
       - "traefik.http.routers.piquel-fr.entrypoints=websecure"
       - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"
     environment:
+      PUBLIC_HOST: ${PUBLIC_HOST}
       HOST: ${HOST}
       PORT: ${PORT}
+      SSL: true
       # Database
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}

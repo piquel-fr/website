@@ -2,44 +2,51 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	PublicHost              string
-	Port                    string
-	DBHost                  string
-	DBPort                  string
-	DBName                  string
-	DBUser                  string
-	DBPassword              string
-	CookiesAuthSecret       string
-	GoogleClientID          string
-	GoogleClientSecret      string
-	GithubClientID          string
-	GithubClientSecret      string
+	PublicHost         string
+	Host               string
+	Port               string
+	SSL                string
+	DBHost             string
+	DBPort             string
+	DBName             string
+	DBUser             string
+	DBPassword         string
+	CookiesAuthSecret  string
+	GoogleClientID     string
+	GoogleClientSecret string
+	GithubClientID     string
+	GithubClientSecret string
 }
 
 var Envs = initConfig()
 
 func initConfig() Config {
-    godotenv.Load()
+	godotenv.Load()
+
+    log.Printf("[Config] Loading configuration...")
 
 	return Config{
-		PublicHost:              getEnv("HOST"),
-		Port:                    getEnv("PORT"),
-		DBHost:                  getEnv("DB_HOST"),
-		DBPort:                  getEnv("DB_PORT"),
-		DBName:                  getEnv("DB_NAME"),
-		DBUser:                  getEnv("DB_USER"),
-		DBPassword:              getEnv("DB_PASSWORD"),
-		CookiesAuthSecret:       getEnv("COOKIES_AUTH_SECRET"),
-		GoogleClientID:          getEnv("AUTH_GOOGLE_CLIENT_ID"),
-		GoogleClientSecret:      getEnv("AUTH_GOOGLE_CLIENT_SECRET"),
-		GithubClientID:          getEnv("AUTH_GITHUB_CLIENT_ID"),
-		GithubClientSecret:      getEnv("AUTH_GITHUB_CLIENT_SECRET"),
+		PublicHost:         getEnv("PUBLIC_HOST"),
+		Host:               getEnv("HOST"),
+		Port:               getEnv("PORT"),
+		SSL:                getEnv("SSL"),
+		DBHost:             getEnv("DB_HOST"),
+		DBPort:             getEnv("DB_PORT"),
+		DBName:             getEnv("DB_NAME"),
+		DBUser:             getEnv("DB_USER"),
+		DBPassword:         getEnv("DB_PASSWORD"),
+		CookiesAuthSecret:  getEnv("COOKIES_AUTH_SECRET"),
+		GoogleClientID:     getEnv("AUTH_GOOGLE_CLIENT_ID"),
+		GoogleClientSecret: getEnv("AUTH_GOOGLE_CLIENT_SECRET"),
+		GithubClientID:     getEnv("AUTH_GITHUB_CLIENT_ID"),
+		GithubClientSecret: getEnv("AUTH_GITHUB_CLIENT_SECRET"),
 	}
 }
 

@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
+	"github.com/PiquelChips/piquel.fr/config"
 	"github.com/PiquelChips/piquel.fr/handlers"
 	"github.com/PiquelChips/piquel.fr/services/auth"
 	"github.com/PiquelChips/piquel.fr/services/database"
@@ -54,7 +54,7 @@ func main() {
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
 	godotenv.Load()
-	address := os.Getenv("HOST") + ":" + os.Getenv("PORT")
+	address := config.Envs.Host + ":" + config.Envs.Port
 
 	log.Printf("[Mux] Starting web server on %s", address)
 	log.Fatalf("%s", http.ListenAndServe(address, router).Error())
