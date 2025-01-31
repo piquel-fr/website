@@ -26,6 +26,8 @@ services:
     deploy:
       update_config:
         order: start-first
+    networks:
+      - piquel-network
 
 networks:
   piquel-network:
