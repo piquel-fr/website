@@ -53,6 +53,6 @@ WORKDIR /piquel.fr
 COPY --from=builder /piquel.fr/bin/main .
 COPY --from=builder /piquel.fr/public public
 
-EXPOSE 50000
+# EXPOSE 50000
 
 CMD [ "./main" ]
