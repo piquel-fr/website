@@ -1,8 +1,8 @@
 services:
   piquel-fr:
     image: ghcr.io/piquelorganization/piquel.fr:${GIT_COMMIT_HASH:-latest}
-    labels:
-      - "traefik.http.routers.piquel-fr.rule=Host(`piquel.fr`)"
+   # labels:
+   #   - "traefik.http.routers.piquel-fr.rule=Host(`piquel.fr`)"
     environment:
       HOST: ${HOST}
       PORT: ${PORT}
