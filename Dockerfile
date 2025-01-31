@@ -53,6 +53,4 @@ WORKDIR /piquel.fr
 COPY --from=builder /piquel.fr/bin/main .
 COPY --from=builder /piquel.fr/public public
 
-EXPOSE 80
-
 CMD [ "./main" ]
