@@ -23,9 +23,9 @@ services:
       AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET}
       # Cookies
       COOKIES_AUTH_SECRET: ${COOKIES_AUTH_SECRET}
-      deploy:
-        update_config:
-          order: start-first
+    deploy:
+      update_config:
+        order: start-first
 
 networks:
   piquel-network:
