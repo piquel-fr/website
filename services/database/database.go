@@ -29,7 +29,7 @@ func InitDBService() *repository.Queries {
 
     queries := repository.New(connection)
 
-    log.Printf("[Database] Initialized database serviec!\n")
+    log.Printf("[Database] Initialized database service!\n")
 
     return queries
 }
