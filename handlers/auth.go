@@ -35,13 +35,11 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 	}
 
     handler.users.VerifyUser(r.Context(), &user)
-    /*
 
 	err = handler.auth.StoreUserSession(w, r, user)
 	if err != nil {
 		panic(err)
 	}
-    */
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
