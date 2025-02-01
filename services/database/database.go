@@ -1,36 +1,33 @@
 package database
 
 import (
-	"database/sql"
-	"fmt"
+	"context"
 	"log"
 
 	"github.com/PiquelChips/piquel.fr/config"
 	repository "github.com/PiquelChips/piquel.fr/database/generated"
-	_ "github.com/lib/pq"
+	"github.com/jackc/pgx/v5"
 )
 
 func InitDBService() *repository.Queries {
 
-    log.Printf("[Database] Attempting to connect to the database...\n")
+	log.Printf("[Database] Attempting to connect to the database...\n")
 
-    connectString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", config.Envs.DBHost, config.Envs.DBPort, config.Envs.DBUser, config.Envs.DBPassword, config.Envs.DBName)
-    connection, err := sql.Open("postgres", connectString)
-    if err != nil {
-        panic(err)
-    }
+	connection, err := pgx.Connect(context.Background(), config.Envs.DB_URL)
+	if err != nil {
+		panic(err)
+	}
 
-    err = connection.Ping()
-    if err != nil {
-        panic(err)
-    }
+	err = connection.Ping(context.Background())
+	if err != nil {
+		panic(err)
+	}
 
-    log.Printf("[Database] Successfully connected to the database!\n")
+	log.Printf("[Database] Successfully connected to the database!\n")
 
-    queries := repository.New(connection)
+	queries := repository.New(connection)
 
-    log.Printf("[Database] Initialized database service!\n")
+	log.Printf("[Database] Initialized database service!\n")
 
-    return queries
+	return queries
 }
-

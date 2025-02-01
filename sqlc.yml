@@ -7,3 +7,9 @@ sql:
       go:
         package: "repository"
         out: "database/generated"
+        sql_package: "pgx/v5"
+        overrides:
+          - db_type: "timestamptz"
+            go_type:
+              import: "time"
+              type: "Time"

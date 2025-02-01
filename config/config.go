@@ -13,11 +13,7 @@ type Config struct {
 	Host               string
 	Port               string
 	SSL                string
-	DBHost             string
-	DBPort             string
-	DBName             string
-	DBUser             string
-	DBPassword         string
+	DB_URL             string
 	CookiesAuthSecret  string
 	GoogleClientID     string
 	GoogleClientSecret string
@@ -30,18 +26,14 @@ var Envs = initConfig()
 func initConfig() Config {
 	godotenv.Load()
 
-    log.Printf("[Config] Loading configuration...")
+	log.Printf("[Config] Loading configuration...")
 
 	return Config{
 		PublicHost:         getEnv("PUBLIC_HOST"),
 		Host:               getEnv("HOST"),
 		Port:               getEnv("PORT"),
 		SSL:                getEnv("SSL"),
-		DBHost:             getEnv("DB_HOST"),
-		DBPort:             getEnv("DB_PORT"),
-		DBName:             getEnv("DB_NAME"),
-		DBUser:             getEnv("DB_USER"),
-		DBPassword:         getEnv("DB_PASSWORD"),
+		DB_URL:             getEnv("DB_URL"),
 		CookiesAuthSecret:  getEnv("COOKIES_AUTH_SECRET"),
 		GoogleClientID:     getEnv("AUTH_GOOGLE_CLIENT_ID"),
 		GoogleClientSecret: getEnv("AUTH_GOOGLE_CLIENT_SECRET"),

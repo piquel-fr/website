@@ -48,18 +48,16 @@ jobs:
           echo "PUBLIC_HOST=${{ vars.PUBLIC_HOST }}" >> ./.env
           echo "HOST=${{ vars.HOST }}" >> ./.env
           echo "PORT=${{ vars.PORT }}" >> ./.env
-          echo "DB_HOST=${{ vars.DB_HOST }}" >> ./.env
-          echo "DB_PORT=${{ vars.DB_PORT }}" >> ./.env
-          echo "DB_NAME=${{ vars.DB_NAME }}" >> ./.env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> ./.env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
+
+          echo "DB_URL=${{ secrets.DB_URL }}" >> ./.env
+
           echo "AUTH_GITHUB_CLIENT_ID=${{ secrets.AUTH_GITHUB_CLIENT_ID }}" >> ./.env
           echo "AUTH_GITHUB_CLIENT_SECRET=${{ secrets.AUTH_GITHUB_CLIENT_SECRET }}" >> ./.env
           echo "AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }}" >> ./.env
           echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./.env
           echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./.env
+
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
-          echo "VPS_USER_EMAIL=${{ secrets.VPS_USER_EMAIL }}" >> ./.env
 
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
