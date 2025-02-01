@@ -43,10 +43,9 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 	if err != nil {
 		panic(err)
 	}
+    */
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
-    */
-    return
 }
 
 func (handler *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
