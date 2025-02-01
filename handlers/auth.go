@@ -29,6 +29,7 @@ func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Reque
 }
 
 func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
+    /*
 	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
 		panic(err)
@@ -43,7 +44,9 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-	// http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+    */
+    return
 }
 
 func (handler *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
