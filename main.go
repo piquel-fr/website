@@ -48,7 +48,7 @@ func main() {
 	router.HandleFunc("/auth/login", handler.HandleLogin).Methods("GET")
 	router.HandleFunc("/auth/logout", handler.HandleLogout).Methods("GET")
 	router.HandleFunc("/auth/{provider}", handler.HandleProviderLogin).Methods("GET")
-	router.HandleFunc("/auth/{provider}/callback", handler.HandleAuthCallback).Methods("GET")
+	router.HandleFunc("/auth/callback/{provider}", handler.HandleAuthCallback).Methods("GET")
 
     // Serve static files
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
