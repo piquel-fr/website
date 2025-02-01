@@ -32,7 +32,7 @@ templ Page(data *types.PageData) {
                             }
                         </button>
                     } else {
-                        @components.NavButton("p-2 m-2 px-6", false, true, "/auth/login", false) { Login }
+                        @components.NavButton("p-2 m-2 px-6", false, true, "/authentication/login", false) { Login }
                     }
                 </div>
             </header>
@@ -42,7 +42,7 @@ templ Page(data *types.PageData) {
 	            	@components.NavButton("p-1 m-1", false, true, "/settings", false) { Settings }
 	            	// Add admin and thermostat pages behind login
                     <hr class="h-px m-1 bg-gray-300 border-0">
-	            	@components.NavButton("p-1 m-1 text-red-700", false, true, "/auth/logout", false) { Signout }
+	            	@components.NavButton("p-1 m-1 text-red-700", false, true, "/authentication/logout", false) { Signout }
 	            </div>
 		    	<div class="flex flex-col items-center">{ children... }</div>
 		    </main>

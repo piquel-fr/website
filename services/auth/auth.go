@@ -49,7 +49,7 @@ func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
 
 		_, err := s.GetSessionUser(r)
 		if err != nil {
-			http.Redirect(w, r, "/auth/login", http.StatusTemporaryRedirect)
+			http.Redirect(w, r, "/authentication/login", http.StatusTemporaryRedirect)
 			return
 		}
 
@@ -70,9 +70,9 @@ func IsAuthenticatedRoute(r *http.Request) bool {
 func buildCallbackURL(provider string) string {
     var url string
     if config.Envs.SSL == "true" {
-        url = fmt.Sprintf("https://%s/auth/%s/callback", config.Envs.PublicHost, provider)
+        url = fmt.Sprintf("https://%s/authentication/%s/callback", config.Envs.PublicHost, provider)
     } else {
-        url = fmt.Sprintf("http://%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider) 
+        url = fmt.Sprintf("http://%s:%s/authentication/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider) 
     }
     log.Printf("[Auth] Added auth provider listener for %s on %s", provider, url)
 	return url
