@@ -34,7 +34,7 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-    handler.users.VerifyUser(r.Context(), &user)
+    // handler.users.VerifyUser(r.Context(), &user)
 
 	err = handler.auth.StoreUserSession(w, r, user)
 	if err != nil {
