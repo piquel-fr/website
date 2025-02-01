@@ -29,8 +29,9 @@ func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Reque
 }
 
 func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
+    _, _ = gothic.CompleteUserAuth(w, r)
+	//user, err := gothic.CompleteUserAuth(w, r)
     /*
-	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
 		panic(err)
         //http.Error(w, err.Error(), http.StatusInternalServerError)
