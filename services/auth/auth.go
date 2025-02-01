@@ -70,7 +70,7 @@ func IsAuthenticatedRoute(r *http.Request) bool {
 func buildCallbackURL(provider string) string {
     var url string
     if config.Envs.SSL == "true" {
-        url = fmt.Sprintf("https://%s/auth/%s/callback", config.Envs.PublicHost, provider)
+        url = fmt.Sprintf("https://%s/auth/callback/%s", config.Envs.PublicHost, provider)
     } else {
         url = fmt.Sprintf("http://%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider) 
     }
