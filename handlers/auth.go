@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/PiquelChips/piquel.fr/errors"
@@ -11,7 +12,7 @@ import (
 func (handler *Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
     _, err := handler.auth.GetSessionUser(r)
     if err == errors.ErrorNotAuthenticated {
-	    auth.Login(handler.users.GetPageData(w, r)).Render(r.Context(), w)
+	    auth.Login(handler.users.GetPageData(w, r)).Render(context.Background(), w)
     }
     http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
@@ -23,7 +24,7 @@ func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-    handler.users.VerifyUser(r.Context(), &user)
+    handler.users.VerifyUser(&user)
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
@@ -34,7 +35,7 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-    handler.users.VerifyUser(r.Context(), &user)
+    handler.users.VerifyUser(&user)
 
 	err = handler.auth.StoreUserSession(w, r, user)
 	if err != nil {
