@@ -43,7 +43,7 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+	// http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
 
 func (handler *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
