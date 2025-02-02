@@ -52,5 +52,6 @@ WORKDIR /piquel.fr
 
 COPY --from=builder /piquel.fr/bin/main .
 COPY --from=builder /piquel.fr/public public
+COPY --from=builder /piquel.fr/config.ini .
 
 CMD [ "./main" ]
