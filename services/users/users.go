@@ -2,7 +2,6 @@ package users
 
 import (
 	"context"
-	"database/sql"
 	"log"
 	"net/http"
 	"strings"
@@ -12,6 +11,7 @@ import (
 	"github.com/PiquelChips/piquel.fr/errors"
 	"github.com/PiquelChips/piquel.fr/services/auth"
 	"github.com/PiquelChips/piquel.fr/types"
+	"github.com/jackc/pgx/v5"
 	"github.com/markbates/goth"
 )
 
@@ -61,7 +61,7 @@ func (s *UserService) getUserData(r *http.Request, data *types.PageData) {
 func (s *UserService) VerifyUser(inUser *goth.User) {
     _, err := s.queries.GetUserByEmail(context.Background(), inUser.Email)
     if err != nil {
-        if err == sql.ErrNoRows {
+        if err == pgx.ErrNoRows {
             s.registerUser(inUser)
             return
         }
