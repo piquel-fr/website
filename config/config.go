@@ -26,14 +26,14 @@ type Config struct {
 }
 
 type RouteConfig struct {
-	isAuthenticated bool
-	permission      string
+	IsAuthenticated bool
+	Permission      string
 }
 
 var Envs Config
 var RouteSettings map[string]RouteConfig
 
-func InitConfig() {
+func LoadConfig() {
 	godotenv.Load()
 	log.Printf("[Config] Loading configuration...")
 
@@ -68,8 +68,8 @@ func InitConfig() {
         }
 
         config := RouteConfig{
-            isAuthenticated: isAuthenticated,
-            permission: routeConfigParts[1],
+            IsAuthenticated: isAuthenticated,
+            Permission: routeConfigParts[1],
         }
 
         RouteSettings[route] = config

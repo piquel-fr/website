@@ -6,19 +6,14 @@ import (
 	"net/http"
 
 	"github.com/PiquelChips/piquel.fr/config"
-	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
-	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
 	"github.com/markbates/goth/providers/google"
 )
 
 const SessionName = "user_session"
 
-type AuthService struct{}
-
-func InitAuthService(store sessions.Store) *AuthService {
-	gothic.Store = store
+func InitAuthentication() {
 	goth.UseProviders(
 		google.New(
 			config.Envs.GoogleClientID,
@@ -35,8 +30,6 @@ func InitAuthService(store sessions.Store) *AuthService {
 	)
 
     log.Printf("[Auth] Initialized auth service!\n")
-
-	return &AuthService{}
 }
 
 func buildCallbackURL(provider string) string {
@@ -50,14 +43,16 @@ func buildCallbackURL(provider string) string {
 	return url
 }
 
-func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
+func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if true {
+        route := r.URL.Path
+        routeConfig := config.RouteSettings[route]
+		if !routeConfig.IsAuthenticated {
 			next.ServeHTTP(w, r)
 			return
 		}
 
-		_, err := s.GetSessionUser(r)
+		_, err := GetSessionUser(r)
 		if err != nil {
 			http.Redirect(w, r, "/auth/login", http.StatusTemporaryRedirect)
 			return

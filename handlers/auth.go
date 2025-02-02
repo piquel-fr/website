@@ -5,39 +5,41 @@ import (
 	"net/http"
 
 	"github.com/PiquelChips/piquel.fr/errors"
-	"github.com/PiquelChips/piquel.fr/views/auth"
+	"github.com/PiquelChips/piquel.fr/services/auth"
+	"github.com/PiquelChips/piquel.fr/services/users"
+	auth_views "github.com/PiquelChips/piquel.fr/views/auth"
 	"github.com/markbates/goth/gothic"
 )
 
-func (handler *Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
-    _, err := handler.auth.GetSessionUser(r)
+func HandleLogin(w http.ResponseWriter, r *http.Request) {
+    _, err := auth.GetSessionUser(r)
     if err == errors.ErrorNotAuthenticated {
-	    auth.Login(handler.users.GetPageData(w, r)).Render(context.Background(), w)
+	    auth_views.Login(users.GetPageData(w, r)).Render(context.Background(), w)
     }
     http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
 
-func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Request) {
+func HandleProviderLogin(w http.ResponseWriter, r *http.Request) {
 	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
 		gothic.BeginAuthHandler(w, r)
 		return
 	}
 
-    handler.users.VerifyUser(r.Context(), &user)
+    users.VerifyUser(r.Context(), &user)
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
 
-func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
+func HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
 	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
 		panic(err)
 	}
 
-    handler.users.VerifyUser(r.Context(), &user)
+    users.VerifyUser(r.Context(), &user)
 
-	err = handler.auth.StoreUserSession(w, r, user)
+	err = auth.StoreUserSession(w, r, user)
 	if err != nil {
 		panic(err)
 	}
@@ -45,12 +47,12 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
 
-func (handler *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
+func HandleLogout(w http.ResponseWriter, r *http.Request) {
     err := gothic.Logout(w, r)
     if err != nil {
         panic(err)
     }
 
-    handler.auth.RemoveUserSession(w, r)
+    auth.RemoveUserSession(w, r)
     http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }

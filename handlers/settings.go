@@ -5,18 +5,20 @@ import (
 	"strings"
 
 	repository "github.com/PiquelChips/piquel.fr/database/generated"
+	"github.com/PiquelChips/piquel.fr/services/database"
+	"github.com/PiquelChips/piquel.fr/services/users"
 	"github.com/PiquelChips/piquel.fr/views/settings"
 )
 
-func (handler *Handler) HandleSettingsRedirect(w http.ResponseWriter, r *http.Request) {
+func HandleSettingsRedirect(w http.ResponseWriter, r *http.Request) {
     http.Redirect(w, r, "/settings/profile", http.StatusTemporaryRedirect)
 }
 
-func (handler *Handler) HandleProfileSettings(w http.ResponseWriter, r *http.Request) {
-    settings.ProfileSettings(handler.users.GetPageData(w, r), "", 200).Render(r.Context(), w)
+func HandleProfileSettings(w http.ResponseWriter, r *http.Request) {
+    settings.ProfileSettings(users.GetPageData(w, r), "", 200).Render(r.Context(), w)
 }
 
-func (handler *Handler) HandleProfileSettingsUpdate(w http.ResponseWriter, r *http.Request) {
+func HandleProfileSettingsUpdate(w http.ResponseWriter, r *http.Request) {
     user_id := 20
     params := repository.UpdateUserParams{
         ID: int32(user_id),
@@ -24,7 +26,7 @@ func (handler *Handler) HandleProfileSettingsUpdate(w http.ResponseWriter, r *ht
         Name: r.FormValue("name"),
         Image: r.FormValue("image"),
     }
-    handler.queries.UpdateUser(r.Context(), params)
+    database.Queries.UpdateUser(r.Context(), params)
     
-    settings.ProfileSettings(handler.users.GetPageData(w, r), "Successfully updated settings!", 200).Render(r.Context(), w)
+    settings.ProfileSettings(users.GetPageData(w, r), "Successfully updated settings!", 200).Render(r.Context(), w)
 }

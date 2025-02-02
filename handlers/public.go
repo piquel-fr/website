@@ -4,23 +4,25 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/PiquelChips/piquel.fr/services/database"
+	"github.com/PiquelChips/piquel.fr/services/users"
 	"github.com/PiquelChips/piquel.fr/types"
 	"github.com/PiquelChips/piquel.fr/views"
 	"github.com/gorilla/mux"
 )
 
-func (handler *Handler) HandleDirk(w http.ResponseWriter, r *http.Request) {
-    views.Dirk(handler.users.GetPageData(w, r)).Render(r.Context(), w)
+func HandleDirk(w http.ResponseWriter, r *http.Request) {
+    views.Dirk(users.GetPageData(w, r)).Render(r.Context(), w)
 }
 
-func (handler *Handler) HandleMinecraft(w http.ResponseWriter, r *http.Request) {
-    views.Minecraft(handler.users.GetPageData(w, r)).Render(r.Context(), w)
+func HandleMinecraft(w http.ResponseWriter, r *http.Request) {
+    views.Minecraft(users.GetPageData(w, r)).Render(r.Context(), w)
 }
 
-func (handler *Handler) HandleProfile(w http.ResponseWriter, r *http.Request) {
+func HandleProfile(w http.ResponseWriter, r *http.Request) {
     username := mux.Vars(r)["profile"]
 
-    user, err := handler.queries.GetUserByUsername(r.Context(), username)
+    user, err := database.Queries.GetUserByUsername(r.Context(), username)
     if err != nil {
         if err == sql.ErrNoRows {
             http.Redirect(w, r, "/", http.StatusNotFound)
@@ -30,7 +32,7 @@ func (handler *Handler) HandleProfile(w http.ResponseWriter, r *http.Request) {
 
     profile := &types.UserProfile{ User: user }
 
-    group, err := handler.queries.GetGroupInfo(r.Context(), user.Group)
+    group, err := database.Queries.GetGroupInfo(r.Context(), user.Group)
     if err != nil {
         panic(err)
     }
@@ -38,5 +40,5 @@ func (handler *Handler) HandleProfile(w http.ResponseWriter, r *http.Request) {
     profile.UserColor = group.Color
     profile.UserGroup = group.Displayname.String
 
-    views.Profile(handler.users.GetPageData(w, r), profile).Render(r.Context(), w)
+    views.Profile(users.GetPageData(w, r), profile).Render(r.Context(), w)
 }

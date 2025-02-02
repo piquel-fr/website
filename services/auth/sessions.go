@@ -11,7 +11,7 @@ import (
 	"github.com/markbates/goth/gothic"
 )
 
-func InitCookieService() *sessions.CookieStore {
+func InitCookieStore() {
     store := sessions.NewCookieStore([]byte(config.Envs.CookiesAuthSecret))
 
     store.MaxAge(178200)
@@ -21,10 +21,10 @@ func InitCookieService() *sessions.CookieStore {
 
     log.Printf("[Cookies] Initialized cookie service!\n")
 
-    return store
+    gothic.Store = store
 }
 
-func (s *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
+func GetSessionUser(r *http.Request) (goth.User, error) {
 	session, err := gothic.Store.Get(r, SessionName)
 	if err != nil {
 		return goth.User{}, err
@@ -37,7 +37,7 @@ func (s *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
 	return user.(goth.User), nil
 }
 
-func (s *AuthService) StoreUserSession(w http.ResponseWriter, r *http.Request, user goth.User) error {
+func StoreUserSession(w http.ResponseWriter, r *http.Request, user goth.User) error {
 	session, err := gothic.Store.Get(r, SessionName)
     if err != nil {
         panic(err)
@@ -54,7 +54,7 @@ func (s *AuthService) StoreUserSession(w http.ResponseWriter, r *http.Request, u
 	return nil
 }
 
-func (s *AuthService) RemoveUserSession(w http.ResponseWriter, r *http.Request) {
+func RemoveUserSession(w http.ResponseWriter, r *http.Request) {
     session , err := gothic.Store.Get(r, SessionName)
     if err != nil {
         panic(err)

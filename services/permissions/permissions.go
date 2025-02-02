@@ -2,26 +2,13 @@ package permissions
 
 import (
 	"context"
-	"log"
 	"strings"
 
-	repository "github.com/PiquelChips/piquel.fr/database/generated"
+	"github.com/PiquelChips/piquel.fr/services/database"
 )
 
-type PermissionsService struct {
-	queries *repository.Queries
-}
-
-func InitPermissionsService(queries *repository.Queries) *PermissionsService {
-    log.Printf("[Permissions] Initialized permissions service!")
-
-	return &PermissionsService{
-		queries: queries,
-    }
-}
-
-func (service *PermissionsService) UserHasPermission(userId int32, permission string) bool {
-    userPermissions, _ := service.queries.GetUserPermissions(context.Background(), userId)
+func UserHasPermission(userId int32, permission string) bool {
+    userPermissions, _ := database.Queries.GetUserPermissions(context.Background(), userId)
 
     for _, userPermission := range userPermissions {
         if matchPermission(permission, userPermission) {

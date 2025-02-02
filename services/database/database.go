@@ -9,7 +9,9 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func InitDBService() *repository.Queries {
+var Queries *repository.Queries
+
+func InitDatabase() {
 
 	log.Printf("[Database] Attempting to connect to the database...\n")
 
@@ -25,9 +27,7 @@ func InitDBService() *repository.Queries {
 
 	log.Printf("[Database] Successfully connected to the database!\n")
 
-	queries := repository.New(connection)
+	Queries = repository.New(connection)
 
 	log.Printf("[Database] Initialized database service!\n")
-
-	return queries
 }
