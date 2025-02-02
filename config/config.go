@@ -21,14 +21,14 @@ type Config struct {
 	GithubClientSecret string
 }
 
-var Envs = initConfig()
+var Envs Config
 
-func initConfig() Config {
+func InitConfig() {
 	godotenv.Load()
 
 	log.Printf("[Config] Loading configuration...")
 
-	return Config{
+	Envs = Config{
 		PublicHost:         getEnv("PUBLIC_HOST"),
 		Host:               getEnv("HOST"),
 		Port:               getEnv("PORT"),

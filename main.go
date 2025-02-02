@@ -16,6 +16,8 @@ import (
 func main() {
 	log.Printf("Initializing piquel.fr website...\n")
 
+    config.InitConfig()
+
     // Setup various services
 	dbService := database.InitDBService()
 	cookieService := auth.InitCookieService()
