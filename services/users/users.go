@@ -58,18 +58,18 @@ func (s *UserService) getUserData(r *http.Request, data *types.PageData) {
     data.Profile.UserGroup = group.Displayname.String
 }
 
-func (s *UserService) VerifyUser(inUser *goth.User) {
-    _, err := s.queries.GetUserByEmail(context.Background(), inUser.Email)
+func (s *UserService) VerifyUser(context context.Context, inUser *goth.User) {
+    _, err := s.queries.GetUserByEmail(context, inUser.Email)
     if err != nil {
         if err == pgx.ErrNoRows {
-            s.registerUser(inUser)
+            s.registerUser(context, inUser)
             return
         }
         panic(err)
     }
 }
 
-func (s *UserService) registerUser(inUser *goth.User) {
+func (s *UserService) registerUser(context context.Context, inUser *goth.User) {
     params := repository.AddUserParams{}
 
     params.Email = inUser.Email
@@ -85,7 +85,7 @@ func (s *UserService) registerUser(inUser *goth.User) {
         params.Username = strings.ReplaceAll(strings.ToLower(inUser.NickName), " ", "")
     }
 
-    err := s.queries.AddUser(context.Background(), params)
+    err := s.queries.AddUser(context, params)
     if err != nil {
         panic(err)
     }

@@ -24,7 +24,7 @@ func (handler *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-    handler.users.VerifyUser(&user)
+    handler.users.VerifyUser(r.Context(), &user)
 
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 }
@@ -35,7 +35,7 @@ func (handler *Handler) HandleAuthCallback(w http.ResponseWriter, r *http.Reques
 		panic(err)
 	}
 
-    handler.users.VerifyUser(&user)
+    handler.users.VerifyUser(r.Context(), &user)
 
 	err = handler.auth.StoreUserSession(w, r, user)
 	if err != nil {
