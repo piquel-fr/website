@@ -9,6 +9,7 @@ require (
 	github.com/jackc/pgx/v5 v5.7.2
 	github.com/joho/godotenv v1.5.1
 	github.com/markbates/goth v1.80.0
+	gopkg.in/ini.v1 v1.67.0
 )
 
 require (

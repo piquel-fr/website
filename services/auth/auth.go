@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/PiquelChips/piquel.fr/config"
 	"github.com/gorilla/sessions"
@@ -40,9 +39,20 @@ func InitAuthService(store sessions.Store) *AuthService {
 	return &AuthService{}
 }
 
+func buildCallbackURL(provider string) string {
+    var url string
+    if config.Envs.SSL == "true" {
+        url = fmt.Sprintf("https://%s/auth/%s/callback", config.Envs.PublicHost, provider)
+    } else {
+        url = fmt.Sprintf("http://%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider) 
+    }
+    log.Printf("[Auth] Added auth provider listener for %s on %s", provider, url)
+	return url
+}
+
 func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !IsAuthenticatedRoute(r) {
+		if true {
 			next.ServeHTTP(w, r)
 			return
 		}
@@ -55,25 +65,4 @@ func (s *AuthService) AuthMiddleware(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r)
 	})
-}
-
-func IsAuthenticatedRoute(r *http.Request) bool {
-    // remove the empty string caused by leading slash
-    routes := strings.Split(r.URL.String(), "/")[1:]
-    switch routes[0] {
-    case "settings":
-        return true
-    }
-	return false
-}
-
-func buildCallbackURL(provider string) string {
-    var url string
-    if config.Envs.SSL == "true" {
-        url = fmt.Sprintf("https://%s/auth/%s/callback", config.Envs.PublicHost, provider)
-    } else {
-        url = fmt.Sprintf("http://%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider) 
-    }
-    log.Printf("[Auth] Added auth provider listener for %s on %s", provider, url)
-	return url
 }

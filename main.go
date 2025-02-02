@@ -61,6 +61,6 @@ func main() {
 	godotenv.Load()
 	address := config.Envs.Host + ":" + config.Envs.Port
 
-	log.Printf("[Mux] Starting web server on %s", address)
+	log.Printf("Starting web server on %s", address)
 	log.Fatalf("%s", http.ListenAndServe(address, router).Error())
 }
