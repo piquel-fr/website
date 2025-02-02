@@ -28,6 +28,8 @@ func main() {
 	router.Use(auth.AuthMiddleware)
 
 	router.HandleFunc("/", handlers.HandleHome).Methods("GET")
+
+    router.HandleFunc("/profile", handlers.HandleBaseProfile).Methods("GET")
     router.HandleFunc("/profile/{profile}", handlers.HandleProfile).Methods("GET")
 
     router.HandleFunc("/settings", handlers.HandleSettingsRedirect).Methods("GET")
