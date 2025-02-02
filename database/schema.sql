@@ -12,7 +12,8 @@ ALTER TABLE
 CREATE TABLE "groups"(
     "name" TEXT NOT NULL,
     "color" TEXT NOT NULL,
-    "displayname" TEXT NULL
+    "displayname" TEXT NULL,
+    "weight" BIGINT NOT NULL
 );
 ALTER TABLE
     "groups" ADD PRIMARY KEY("name");

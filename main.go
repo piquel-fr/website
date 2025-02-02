@@ -8,6 +8,7 @@ import (
 	"github.com/PiquelChips/piquel.fr/handlers"
 	"github.com/PiquelChips/piquel.fr/services/auth"
 	"github.com/PiquelChips/piquel.fr/services/database"
+	"github.com/PiquelChips/piquel.fr/services/permissions"
 	"github.com/PiquelChips/piquel.fr/services/users"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -23,7 +24,9 @@ func main() {
 	cookieService := auth.InitCookieService()
 	authService := auth.InitAuthService(cookieService)
     userService := users.InitUserService(dbService)
-	handler := handlers.InitHandler(dbService, authService, userService)
+    permissionsService := permissions.InitPermissionsService(dbService)
+
+	handler := handlers.InitHandler(dbService, authService, userService, permissionsService)
 
 	router := mux.NewRouter()
 

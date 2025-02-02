@@ -13,6 +13,3 @@ SELECT * FROM "users" WHERE "email" = $1;
 
 -- name: UpdateUser :exec
 UPDATE "users" SET "username" = $2, "name" = $3, "image" = $4 WHERE "id" = $1;
-
--- name: GetGroupInfo :one
-SELECT * FROM "groups" WHERE "name" = $1;
