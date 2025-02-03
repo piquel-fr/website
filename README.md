@@ -16,11 +16,9 @@ The [piquel.fr](https://piquel.fr) website.
 
 ### Refactor permission and routing system
 
-- Make custom router struct that uses Mix under the hood
-  - YML/JSON file for every route and their params
+- Make custom router struct that uses Mux under the hood YML/JSON file for every route and their params
   - Add route of custom router checks that route is saved in YML/JSON config and panics if not
 - AuthMiddleware
   - Match route with conf
   - Do perm and auth checks after
  
-    

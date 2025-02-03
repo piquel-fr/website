@@ -2,13 +2,12 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/PiquelChips/piquel.fr/config"
 	"github.com/PiquelChips/piquel.fr/handlers"
 	"github.com/PiquelChips/piquel.fr/services/auth"
+	"github.com/PiquelChips/piquel.fr/services/config"
 	"github.com/PiquelChips/piquel.fr/services/database"
-	"github.com/gorilla/mux"
+	"github.com/PiquelChips/piquel.fr/services/router"
 	"github.com/joho/godotenv"
 )
 
@@ -23,41 +22,35 @@ func main() {
     defer database.DeinitDatabase()
 
     // Setup various services
-	router := mux.NewRouter()
+	//router := mux.NewRouter()
+    router := router.InitRouter()
 
-    // Setup middleware
-	router.Use(auth.AuthMiddleware)
 
-	router.HandleFunc("/", handlers.HandleHome).Methods("GET")
+	router.AddRoute("/", handlers.HandleHome, "GET")
 
-    router.HandleFunc("/profile", handlers.HandleBaseProfile).Methods("GET")
-    router.HandleFunc("/profile/{profile}", handlers.HandleProfile).Methods("GET")
+    router.AddRoute("/profile", handlers.HandleBaseProfile, "GET")
+    router.AddRoute("/profile/{profile}", handlers.HandleProfile, "GET")
 
-    router.HandleFunc("/settings", handlers.HandleSettingsRedirect).Methods("GET")
-    router.HandleFunc("/settings/profile", handlers.HandleProfileSettings).Methods("GET")
-    router.HandleFunc("/settings/profile", handlers.HandleProfileSettingsUpdate).Methods("POST")
+    router.AddRoute("/settings", handlers.HandleSettingsRedirect, "GET")
+    router.AddRoute("/settings/profile", handlers.HandleProfileSettings, "GET")
+    router.AddRoute("/settings/profile", handlers.HandleProfileSettingsUpdate, "POST")
 
 	// Basic public endpoints
-	router.HandleFunc("/minecraft", handlers.HandleMinecraft).Methods("GET")
-	router.HandleFunc("/dirk", handlers.HandleDirk).Methods("GET")
+	router.AddRoute("/minecraft", handlers.HandleMinecraft, "GET")
+	router.AddRoute("/dirk", handlers.HandleDirk, "GET")
 
 	// SNT endpoints
-	router.HandleFunc("/snt/linus", handlers.HandleLinus).Methods("GET")
-	router.HandleFunc("/snt/linux", handlers.HandleLinux).Methods("GET")
-	router.HandleFunc("/snt/musset", handlers.HandleMusset).Methods("GET")
+	router.AddRoute("/snt/linus", handlers.HandleLinus, "GET")
+	router.AddRoute("/snt/linux", handlers.HandleLinux, "GET")
+	router.AddRoute("/snt/musset", handlers.HandleMusset, "GET")
 
 	// Auth
-	router.HandleFunc("/auth/login", handlers.HandleLogin).Methods("GET")
-	router.HandleFunc("/auth/logout", handlers.HandleLogout).Methods("GET")
-	router.HandleFunc("/auth/{provider}", handlers.HandleProviderLogin).Methods("GET")
-	router.HandleFunc("/auth/{provider}/callback", handlers.HandleAuthCallback).Methods("GET")
-
-    // Serve static files
-	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
+	router.AddRoute("/auth/login", handlers.HandleLogin, "GET")
+	router.AddRoute("/auth/logout", handlers.HandleLogout, "GET")
+	router.AddRoute("/auth/{provider}", handlers.HandleProviderLogin, "GET")
+	router.AddRoute("/auth/{provider}/callback", handlers.HandleAuthCallback, "GET")
 
 	godotenv.Load()
 	address := config.Envs.Host + ":" + config.Envs.Port
-
-	log.Printf("Starting web server on %s", address)
-	log.Fatalf("%s", http.ListenAndServe(address, router).Error())
+    router.Start(address)
 }

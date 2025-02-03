@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/PiquelChips/piquel.fr/config"
+	"github.com/PiquelChips/piquel.fr/services/config"
 	"github.com/PiquelChips/piquel.fr/errors"
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"

@@ -1,0 +1,7 @@
+routes:
+  - route: /
+    auth: false
+  - route: /settings
+    auth: true
+    permission: api.settings
+

@@ -5,10 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/PiquelChips/piquel.fr/config"
-	"github.com/PiquelChips/piquel.fr/services/database"
-	"github.com/PiquelChips/piquel.fr/services/permissions"
-	"github.com/jackc/pgx/v5"
+	"github.com/PiquelChips/piquel.fr/services/config"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/providers/github"
 	"github.com/markbates/goth/providers/google"
@@ -48,6 +45,7 @@ func buildCallbackURL(provider string) string {
 
 func AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        /*
 		routeConfig := config.RouteSettings[r.URL.Path]
 		if !routeConfig.IsAuthenticated {
 			next.ServeHTTP(w, r)
@@ -80,5 +78,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
         }
 
         http.Redirect(w, r, "/auth/login", http.StatusMethodNotAllowed)
+        */
+        next.ServeHTTP(w, r)
 	})
 }
