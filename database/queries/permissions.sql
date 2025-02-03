@@ -7,7 +7,7 @@ WHERE "group" IN (
     WHERE "weight" <= (
         SELECT "weight"
         FROM "users"
-        INNER JOIN groups ON "group" = groups.name
+        INNER JOIN "groups" ON "group" = "groups"."name"
         WHERE "id" = $1
     )
 );
