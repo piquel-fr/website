@@ -10,6 +10,7 @@ import (
 )
 
 var Queries *repository.Queries
+var connection *pgx.Conn
 
 func InitDatabase() {
 
@@ -31,3 +32,8 @@ func InitDatabase() {
 
 	log.Printf("[Database] Initialized database service!\n")
 }
+
+func DeinitDatabase() {
+    connection.Close(context.Background())
+}
+

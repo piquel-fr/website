@@ -20,6 +20,7 @@ func main() {
     auth.InitAuthentication()
     auth.InitCookieStore()
     database.InitDatabase()
+    defer database.DeinitDatabase()
 
     // Setup various services
 	router := mux.NewRouter()
