@@ -8,33 +8,33 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Router struct {}
-
-var router *mux.Router
+type Router struct {
+    Router *mux.Router
+}
 
 func InitRouter() *Router {
     log.Printf("[Router] Initializing router...")
-    router = mux.NewRouter()
+    router := &Router{Router: mux.NewRouter()}
 
     // Setup middleware
-	router.Use(auth.AuthMiddleware)
+	router.Router.Use(auth.AuthMiddleware)
 
     log.Printf("[Router] Initialized routed!")
     return &Router{}
 }
 
-func (r *Router) Start(address string) {
+func (router *Router) Start(address string) {
     log.Printf("[Router] Starting router...")
 
     // Serve static files
-	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
+	router.Router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
     log.Printf("[Router] Listening on %s!", address)
-    log.Fatalf("%s", http.ListenAndServe(address, router).Error())
+    log.Fatalf("%s", http.ListenAndServe(address, router.Router).Error())
 }
 
-func (r *Router) AddRoute(path string, handler func(http.ResponseWriter, *http.Request), method string) {
+func (router *Router) AddRoute(path string, handler func(http.ResponseWriter, *http.Request), method string) {
     // Check with configuration
 
-    router.HandleFunc(path, handler).Methods(method)
+    router.Router.HandleFunc(path, handler).Methods(method)
 }
