@@ -13,13 +13,12 @@ type Router struct {
 }
 
 func InitRouter() *Router {
-    log.Printf("[Router] Initializing router...")
     router := &Router{Router: mux.NewRouter()}
 
     // Setup middleware
 	router.Router.Use(auth.AuthMiddleware)
 
-    log.Printf("[Router] Initialized routed!")
+    log.Printf("[Router] Initialized router!")
     return router
 }
 
@@ -35,6 +34,7 @@ func (router *Router) Start(address string) {
 
 func (router *Router) AddRoute(path string, handler func(http.ResponseWriter, *http.Request), method string) {
     // Check with configuration
+    
 
     router.Router.HandleFunc(path, handler).Methods(method)
 }

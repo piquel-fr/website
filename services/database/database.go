@@ -26,11 +26,8 @@ func InitDatabase() {
 		panic(err)
 	}
 
-	log.Printf("[Database] Successfully connected to the database!\n")
-
 	Queries = repository.New(connection)
-
-	log.Printf("[Database] Initialized database service!\n")
+	log.Printf("[Database] Successfully connected to the database!\n")
 }
 
 func DeinitDatabase() {
