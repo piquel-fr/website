@@ -22,9 +22,7 @@ func main() {
     defer database.DeinitDatabase()
 
     // Setup various services
-	//router := mux.NewRouter()
     router := router.InitRouter()
-
 
 	router.AddRoute("/", handlers.HandleHome, "GET")
 

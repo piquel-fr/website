@@ -20,7 +20,7 @@ func InitRouter() *Router {
 	router.Router.Use(auth.AuthMiddleware)
 
     log.Printf("[Router] Initialized routed!")
-    return &Router{}
+    return router
 }
 
 func (router *Router) Start(address string) {
