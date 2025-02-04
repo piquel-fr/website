@@ -16,6 +16,7 @@ type Config struct {
 
 type Route struct {
 	Name       string `yaml:"route"`
+	Method     string
 	Auth       bool
 	Permission string
 }

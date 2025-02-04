@@ -1,18 +1,13 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
-	"gopkg.in/yaml.v3"
 )
 
 var Envs Config
-var Routes struct {
-    Routes []Route
-}
 
 func LoadConfig() {
 	godotenv.Load()
@@ -34,18 +29,7 @@ func LoadConfig() {
 	}
 	log.Printf("[Config] Loaded environment configuration!")
 
-    // Load routes config
-    routesData, err := os.ReadFile(fmt.Sprintf("%s/routes.yml", Envs.ConfigPath))
-    if err != nil {
-        panic(err)
-    }
-    
-    err = yaml.Unmarshal(routesData, &Routes)
-    if err != nil {
-        panic(err)
-    }
-
-    log.Printf("%v", Routes)
+    loadRouteConfig()
 }
 
 func getEnv(key string) string {
@@ -53,7 +37,8 @@ func getEnv(key string) string {
 		return value
 	}
 
-	panic(fmt.Sprintf("Environment variable %s is not set", key))
+	log.Fatalf("Environment variable %s is not set", key)
+    return ""
 }
 
 func getDefaultEnv(key string, defaultValue string) string {
