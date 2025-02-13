@@ -1,10 +1,3 @@
-# Go files
-go.sum
-
-# Compiled binaries
-*.exe
-bin/
-
 # Dockerfiles
 Dockerfile
 .dockerignore
@@ -22,16 +15,25 @@ Makefile
 README.md
 LICENSE
 
-# Environment
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+node_modules
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
 .env
 .env.*
+!.env.example
+!.env.test
 
-# Templ files
-*_templ.txt
-*_templ.go*
-
-# sqlc files
-database/generated/
-
-# TailwindCSS files
-public/styles.css
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
