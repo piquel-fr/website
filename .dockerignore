@@ -22,6 +22,10 @@ LICENSE
 .wrangler
 /.svelte-kit
 /build
+
+# Deno and npm
+deno.lock
+package-lock.json
 node_modules
 
 # OS
