@@ -45,20 +45,11 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "PUBLIC_HOST=${{ vars.PUBLIC_HOST }}" >> ./.env
           echo "HOST=${{ vars.HOST }}" >> ./.env
           echo "PORT=${{ vars.PORT }}" >> ./.env
-
-          echo "DB_URL=${{ secrets.DB_URL }}" >> ./.env
-
-          echo "AUTH_GITHUB_CLIENT_ID=${{ secrets.AUTH_GITHUB_CLIENT_ID }}" >> ./.env
-          echo "AUTH_GITHUB_CLIENT_SECRET=${{ secrets.AUTH_GITHUB_CLIENT_SECRET }}" >> ./.env
-          echo "AUTH_GOOGLE_CLIENT_ID=${{ secrets.AUTH_GOOGLE_CLIENT_ID }}" >> ./.env
-          echo "AUTH_GOOGLE_CLIENT_SECRET=${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}" >> ./.env
-          echo "COOKIES_AUTH_SECRET=${{ secrets.COOKIES_AUTH_SECRET }}" >> ./.env
+          echo "API=${{ vars.API }}" >> ./.env
 
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
-
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
         with:

@@ -4,22 +4,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.piquel-fr.loadbalancer.server.port=${PORT}"
-      - "traefik.http.routers.piquel-fr.rule=Host(`${PUBLIC_HOST}`)"
+      - "traefik.http.routers.piquel-fr.rule=Host(`${HOST}`)"
       - "traefik.http.routers.piquel-fr.entrypoints=piquel-https"
       - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"
     environment:
-      PUBLIC_HOST: ${PUBLIC_HOST}
       HOST: ${HOST}
       PORT: ${PORT}
-      SSL: "true"
-      DB_URL: ${DB_URL}
-      # Auth
-      AUTH_GITHUB_CLIENT_ID: ${AUTH_GITHUB_CLIENT_ID}
-      AUTH_GITHUB_CLIENT_SECRET: ${AUTH_GITHUB_CLIENT_SECRET}
-      AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID}
-      AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET}
-      # Cookies
-      COOKIES_AUTH_SECRET: ${COOKIES_AUTH_SECRET}
+      API: ${API}
     deploy:
       update_config:
         order: start-first
