@@ -10,9 +10,7 @@ COPY . .
 
 RUN deno task build
 
-FROM denoland/deno:alpine
+FROM nginx:alpine
 
-WORKDIR /piquel.fr
-
-COPY --from=builder /piquel.fr/build .
-CMD deno run --allow-env --allow-read --allow-net index.js
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /piquel.fr/build /usr/share/nginx/html
