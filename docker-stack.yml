@@ -7,9 +7,6 @@ services:
       - "traefik.http.routers.piquel-fr.rule=Host(`${HOST}`)"
       - "traefik.http.routers.piquel-fr.entrypoints=piquel-https"
       - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"
-    environment:
-      HOST: 0.0.0.0
-      PORT: 80
     deploy:
       update_config:
         order: start-first
