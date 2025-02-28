@@ -10,7 +10,6 @@ services:
     environment:
       HOST: 0.0.0.0
       PORT: 80
-      PUBLIC_API: ${API}
     deploy:
       update_config:
         order: start-first

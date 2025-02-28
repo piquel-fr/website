@@ -2,11 +2,15 @@ FROM denoland/deno:alpine AS builder
 
 WORKDIR /piquel.fr
 
+ARG API
+
 COPY package.json .
 
 RUN deno install
 
 COPY . .
+
+ENV PUBLIC_API=${API}
 
 RUN deno task build
 
