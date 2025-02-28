@@ -45,8 +45,6 @@ jobs:
 
       - name: Create env file
         run: |
-          echo "HOST=${{ vars.HOST }}" >> ./.env
-          echo "PORT=${{ vars.PORT }}" >> ./.env
           echo "API=${{ vars.API }}" >> ./.env
 
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env

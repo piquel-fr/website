@@ -8,9 +8,9 @@ services:
       - "traefik.http.routers.piquel-fr.entrypoints=piquel-https"
       - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"
     environment:
-      HOST: ${HOST}
-      PORT: ${PORT}
-      API: ${API}
+      HOST: 0.0.0.0
+      PORT: 80
+      PUBLIC_API: ${API}
     deploy:
       update_config:
         order: start-first

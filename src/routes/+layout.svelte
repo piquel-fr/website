@@ -9,6 +9,7 @@
     import type { LayoutProps } from "./$types";
     import { onMount } from "svelte";
     import { error } from "@sveltejs/kit";
+    import { PUBLIC_API } from "$env/static/public";
 
     let { children }: LayoutProps = $props();
 
@@ -16,7 +17,7 @@
     let loggedIn = $state(false);
 
     onMount(async () => {
-        const response = await fetch("http://127.0.0.1:50000/profile/piquelchips");
+        const response = await fetch(`${PUBLIC_API}/profile`);
         if (response.status == 200) {
             profile = await response.json();
             loggedIn = true;
