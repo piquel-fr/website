@@ -3,7 +3,7 @@ services:
     image: ghcr.io/piquelorganization/piquel.fr:${GIT_COMMIT_HASH:-latest}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.piquel-fr.loadbalancer.server.port=${PORT}"
+      - "traefik.http.services.piquel-fr.loadbalancer.server.port=80"
       - "traefik.http.routers.piquel-fr.rule=Host(`${HOST}`)"
       - "traefik.http.routers.piquel-fr.entrypoints=piquel-https"
       - "traefik.http.routers.piquel-fr.tls.certresolver=piquel-resolver"

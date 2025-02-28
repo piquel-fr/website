@@ -47,6 +47,8 @@ jobs:
 
       - name: Create env file
         run: |
+          echo "HOST=${{ vars.HOST }}" >> ./.env
+
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
