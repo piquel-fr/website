@@ -17,7 +17,9 @@
     let loggedIn = $state(false);
 
     onMount(async () => {
-        const response = await fetch(`${PUBLIC_API}/profile`);
+        const response = await fetch(`${PUBLIC_API}/profile`, {
+            credentials: "include",
+        });
         if (response.status == 200) {
             profile = await response.json();
             loggedIn = true;
