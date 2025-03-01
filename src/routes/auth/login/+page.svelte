@@ -25,7 +25,7 @@
             <img src={github} alt="github" class="size-8" />
             <span class="text-2xl">Login with GitHub</span>
         </NavButton>
-        <NavButton
+        <!-- <NavButton
             dest={`${PUBLIC_API}/auth/google?redirectTo=/`}
             popOut={false}
             className="px-5 py-3 border flex gap-2
@@ -34,6 +34,6 @@
         >
             <img src={google} alt="google" class="size-8" />
             <span class="text-2xl">Login with Google</span>
-        </NavButton>
+        </NavButton> -->
     </Card>
 </div>
