@@ -126,7 +126,7 @@
                 <NavButton
                     popOut={false}
                     className="m-1 p-1 text-red-700"
-                    dest="/auth/logout">Sign out</NavButton
+                    dest={`${PUBLIC_API}/auth/logout`}>Sign out</NavButton
                 >
             </div>
         {/if}
