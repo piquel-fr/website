@@ -1,25 +1,15 @@
-import type { LayoutLoad, LayoutParams } from "./$types";
-import { PUBLIC_API } from "$env/static/public";
+import type { LayoutLoad } from "./$types";
+import { error, type LoadEvent } from "@sveltejs/kit";
+import { fetchAPI } from "$lib/utils/api";
 
 export const ssr = true;
 
-export const load: LayoutLoad = async ({ fetch, error }: LayoutParams) => {
-    const response = await fetch(`${PUBLIC_API}/profile`, {
-        credentials: "include",
-    });
-    let profile;
-    let loggedIn = false;
-    if (response.status == 200) {
-        profile = await response.json();
-        loggedIn = true;
-    } else if (response.status == 401) {
-        return;
-    } else {
+export const load: LayoutLoad = async (event: LoadEvent) => {
+    const response = await fetchAPI(event, "/profile");
+    if (response.status == 401) {
+        return {};
+    } else if (response.status != 200) {
         error(response.status);
     }
-
-    return {
-        profile,
-        loggedIn,
-    };
+    return { profile: response.data }
 };

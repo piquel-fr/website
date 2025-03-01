@@ -40,7 +40,7 @@
             >
         </nav>
         <div class="flex justify-end">
-            {#if data.loggedIn}
+            {#if data.profile}
                 <Button
                     popOut={false}
                     useCardClasses={false}
