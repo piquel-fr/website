@@ -7,5 +7,5 @@ export const load: PageLoad = async (event: LoadEvent) => {
     if (response.status != 200) {
         error(response.status);
     }
-    return { data: response.data };
+    return { data: await response.data };
 };

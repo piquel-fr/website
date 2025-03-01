@@ -9,8 +9,6 @@ export const fetchAPI = async (
         credentials: "include",
     });
 
-    console.log(response.headers.get("Content-Type"))
-
     if (response.headers.get("Content-Type") == "application/json") {
         return {
             data: response.json(),

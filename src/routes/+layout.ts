@@ -11,5 +11,5 @@ export const load: LayoutLoad = async (event: LoadEvent) => {
     } else if (response.status != 200) {
         error(response.status);
     }
-    return { profile: response.data }
+    return { profile: await response.data }
 };

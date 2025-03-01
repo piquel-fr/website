@@ -12,8 +12,6 @@
 
     let { data, children }: LayoutProps = $props();
 
-    console.log(data)
-
     let showSidebar = $state(false);
 </script>
 
