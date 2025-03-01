@@ -10,6 +10,7 @@
     import { onMount } from "svelte";
     import { error } from "@sveltejs/kit";
     import { PUBLIC_API } from "$env/static/public";
+    import { page } from "$app/state";
 
     let { children }: LayoutProps = $props();
 
@@ -83,7 +84,8 @@
                 <NavButton
                     popOut={false}
                     className="p-2 m-2 px-6"
-                    dest="/auth/login">Login</NavButton
+                    dest={`/auth/login?redirectTo=${page.url.pathname}`}
+                    >Login</NavButton
                 >
             {/if}
         </div>
@@ -126,7 +128,8 @@
                 <NavButton
                     popOut={false}
                     className="m-1 p-1 text-red-700"
-                    dest={`${PUBLIC_API}/auth/logout`}>Sign out</NavButton
+                    dest={`${PUBLIC_API}/auth/logout?redirectTo=${page.url.pathname}`}
+                    >Sign out</NavButton
                 >
             </div>
         {/if}
