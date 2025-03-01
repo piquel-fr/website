@@ -7,29 +7,10 @@
     // Import transitions and animations
     import { fade } from "svelte/transition";
     import type { LayoutProps } from "./$types";
-    import { onMount } from "svelte";
-    import { error } from "@sveltejs/kit";
     import { PUBLIC_API } from "$env/static/public";
     import { page } from "$app/state";
 
-    let { children }: LayoutProps = $props();
-
-    let profile: any = $state({});
-    let loggedIn = $state(false);
-
-    onMount(async () => {
-        const response = await fetch(`${PUBLIC_API}/profile`, {
-            credentials: "include",
-        });
-        if (response.status == 200) {
-            profile = await response.json();
-            loggedIn = true;
-        } else if (response.status == 401) {
-            return;
-        } else {
-            error(response.status);
-        }
-    });
+    let { data, children }: LayoutProps = $props();
 
     let showSidebar = $state(false);
 </script>
@@ -59,7 +40,7 @@
             >
         </nav>
         <div class="flex justify-end">
-            {#if loggedIn}
+            {#if data.loggedIn}
                 <Button
                     popOut={false}
                     useCardClasses={false}
@@ -67,15 +48,15 @@
                     onclick={() => (showSidebar = !showSidebar)}
                 >
                     <div class="flex">
-                        <div class="py-1 pr-2">{profile.name}</div>
+                        <div class="py-1 pr-2">{data.profile.name}</div>
                         <div class="pr-2">
                             <img
-                                src={profile.image}
+                                src={data.profile.image}
                                 alt="PFP"
                                 height="32"
                                 width="32"
                                 class="size-8 border-2"
-                                style="border-color: {profile.color};"
+                                style="border-color: {data.profile.color};"
                             />
                         </div>
                     </div>
@@ -101,7 +82,8 @@
                 <NavButton
                     popOut={false}
                     className="m-1 p-1"
-                    dest={`/profile/${profile.username}`}>Profile</NavButton
+                    dest={`/profile/${data.profile.username}`}
+                    >Profile</NavButton
                 >
                 <NavButton popOut={false} className="m-1 p-1" dest="/settings"
                     >Settings</NavButton
