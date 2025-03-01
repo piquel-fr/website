@@ -4,7 +4,7 @@ import type { LoadEvent } from "@sveltejs/kit";
 export const fetchAPI = async (
     { fetch }: LoadEvent,
     path: string,
-): Promise<{ data: object; status: number }> => {
+): Promise<{ data: any; status: number }> => {
     const response = await fetch(
         `${PUBLIC_API}${path}`,
         {
