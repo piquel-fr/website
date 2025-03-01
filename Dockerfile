@@ -14,7 +14,9 @@ ENV PUBLIC_API=${API}
 
 RUN deno task build
 
-FROM nginx:alpine
+FROM denoland/deno:alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /piquel.fr/build /usr/share/nginx/html
+WORKDIR /piquel.fr
+COPY --from=builder /piquel.fr/build .
+
+CMD [ "deno run --allow-env --allow-read --allow-net index.js" ]
