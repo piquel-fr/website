@@ -1,5 +1,5 @@
 import { PUBLIC_API } from "$env/static/public";
-import { LoadEvent } from "@sveltejs/kit";
+import type { LoadEvent } from "@sveltejs/kit";
 
 export const fetchAPI = async (
     { fetch }: LoadEvent,
