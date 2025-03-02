@@ -16,8 +16,8 @@
         />
         <p class="text-4xl">{data.profile.name}</p>
         <p class="text-2xl">{data.profile.username}</p>
-        {#if data.profile.group !== ""}
-            <p class="text-lg">{data.profile.group_name}</p>
+        {#if data.profile.role !== ""}
+            <p class="text-lg">{data.profile.role_name}</p>
         {/if}
         {#if data.profile.username === page.params.profile}
             <NavButton
