@@ -11,7 +11,7 @@ export const fetchDocsPage = async (
 
     if (response.headers.get("Content-Type") == "text/html") {
         return {
-            data: response.json(),
+            data: response.text(),
             status: response.status,
         };
     }
