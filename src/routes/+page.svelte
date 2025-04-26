@@ -1,7 +1,6 @@
 <script lang="ts">
     import Card from "$lib/components/Card.svelte";
     import NavButton from "$lib/components/NavButton.svelte";
-
 </script>
 
 <p class="text-center rounded-xl p-5 text-white font-bold text-3xl mt-3" style="background-color: #404040;">Welcome to the Piquel zone !</p>
