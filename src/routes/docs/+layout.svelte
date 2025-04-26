@@ -5,6 +5,6 @@
 </script>
 
 <div>
-{@html data.summary}
-{@render children()}
+    {@html data.summary}
+    {@render children()}
 </div>
