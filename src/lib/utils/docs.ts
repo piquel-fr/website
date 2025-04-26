@@ -9,7 +9,7 @@ export const fetchDocsPage = async (
         credentials: "include",
     });
 
-    if (response.headers.get("Content-Type") == "application/json") {
+    if (response.headers.get("Content-Type") == "text/html") {
         return {
             data: response.json(),
             status: response.status,
