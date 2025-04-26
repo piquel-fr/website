@@ -1,7 +1,3 @@
-<script>
-    import '$lib/styles/snt.css';
-</script>
-
 <svlete:head>
     <link rel="icon" href="/SNT/linus2.png">
     <title>Le Dieu de la programmation</title>

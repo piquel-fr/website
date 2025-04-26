@@ -1,7 +1,3 @@
-<script>
-    import '$lib/styles/snt.css';
-</script>
-
 <svelte:head>
     <link rel="icon" href="/SNT/tux.png">
     <title>Le Noyau Linux</title>

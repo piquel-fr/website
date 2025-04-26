@@ -1,7 +1,3 @@
-<script>
-    import '$lib/styles/snt.css';
-</script>
-
 <div>
 
     <h1>Alfred de MUSSET</h1>
