@@ -36,6 +36,7 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             API=${{ vars.API }}
+            DOCS_API=${{ vars.DOCS_API }}
 
   deploy:
     runs-on: ubuntu-latest
