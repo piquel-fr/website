@@ -5,7 +5,7 @@ export const fetchDocsPage = async (
     { fetch }: LoadEvent,
     page: string,
 ): Promise<{ data: any; status: number }> => {
-    const response = await fetch(`${PUBLIC_DOCS_API}${page}`, {
+    const response = await fetch(`${PUBLIC_DOCS_API}/${page}`, {
         credentials: "include",
     });
 
