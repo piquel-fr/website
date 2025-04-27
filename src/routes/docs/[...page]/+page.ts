@@ -3,7 +3,7 @@ import { error } from "@sveltejs/kit";
 import { fetchDocsPage } from "$lib/utils/docs";
 
 export const load: PageLoad = async (event: LoadEvent) => {
-    const response = await fetchDocsPage(event, event.params.page);
+    const response = await fetchDocsPage(event, event.params.page, "docs");
     if (response.status != 200)
         error(response.status);
 
