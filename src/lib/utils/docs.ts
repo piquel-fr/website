@@ -5,10 +5,13 @@ export const fetchDocsPage = async (
     { fetch }: LoadEvent,
     page: string,
     root: string,
-): Promise<{ data: any; status: number }> => {
-    const response = await fetch(`${PUBLIC_DOCS_API}/${page}?root=${root}`, {
-        credentials: "include",
-    });
+): Promise<{ data: Promise<string>; status: number }> => {
+    const response = await fetch(
+        `${PUBLIC_DOCS_API}/${page}?root=${root}&tailwind`,
+        {
+            credentials: "include",
+        },
+    );
 
     if (response.headers.get("Content-Type") == "text/html") {
         return {
@@ -17,5 +20,8 @@ export const fetchDocsPage = async (
         };
     }
 
-    return { data: {}, status: response.status };
+    return {
+        data: new Promise((resolve) => resolve("")),
+        status: response.status,
+    };
 };
