@@ -8,9 +8,6 @@ export const fetchDocsPage = async (
 ): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
         `${PUBLIC_DOCS_API}/${page}?root=${root}&tailwind`,
-        {
-            credentials: "include",
-        },
     );
 
     if (response.headers.get("Content-Type") == "text/html") {
