@@ -1,15 +1,20 @@
-name: Build and Deploy
+name: Deploy
 on:
   push:
     branches:
       - "main"
     paths-ignore:
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/pull_request_template.md'
+      - '.github/release.yml'
       - '.gitignore'
       - 'README.md'
+      - 'LICENSE'
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    name: Build Container and Push to Registry
     permissions:
       contents: read
       packages: write
@@ -43,6 +48,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    name: Deploy to Production
     needs:
       - build-and-push
     steps:
@@ -54,6 +60,7 @@ jobs:
           echo "HOST=${{ vars.HOST }}" >> ./.env
 
           echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
+
       - name: Docker Stack Deploy
         uses: cssnr/stack-deploy-action@v1
         with:
@@ -63,3 +70,4 @@ jobs:
           user: deploy
           ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           env_file: ./.env
+
