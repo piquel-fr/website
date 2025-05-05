@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+      - 'README.md'
+      - 'LICENSE'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'docker-stack.yml'
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+      - 'README.md'
+      - 'LICENSE'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'docker-stack.yml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Build the Website
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: vx.x.x
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: Build the service
+        run: deno task build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: piquel-fr-${{ github.sha }}
+          path: build/
