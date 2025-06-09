@@ -9,8 +9,6 @@ on:
       - '.gitignore'
       - 'README.md'
       - 'LICENSE'
-      - 'Dockerfile'
-      - '.dockerignore'
       - 'docker-stack.yml'
   pull_request:
     paths-ignore:
@@ -20,8 +18,6 @@ on:
       - '.gitignore'
       - 'README.md'
       - 'LICENSE'
-      - 'Dockerfile'
-      - '.dockerignore'
       - 'docker-stack.yml'
 
 jobs:
