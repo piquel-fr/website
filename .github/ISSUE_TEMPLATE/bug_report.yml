@@ -6,7 +6,7 @@ projects: ["PiquelOrganization/1"]
 body:
   - type: markdown
     attributes:
-      values: |
+      value: |
         Please fill out the bug report as accurately and diligently as possible.
   - type: textarea
     id: description
@@ -17,8 +17,8 @@ body:
       required: true
   - type: textarea
     id: logs
+    label: Logs
     attributes:
-      label: Logs
       description: If you have access to any logs, please paste them here.
     validations:
       required: false
