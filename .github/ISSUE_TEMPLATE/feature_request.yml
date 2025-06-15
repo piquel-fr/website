@@ -6,7 +6,6 @@ projects: ["PiquelOrganization/1"]
 body:
   - type: markdown
     attributes:
-      label: The feature
       value: |
         Please properly describe the requested feature.
   - type: textarea
