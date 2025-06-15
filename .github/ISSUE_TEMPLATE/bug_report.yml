@@ -24,7 +24,7 @@ body:
       required: false
   - type: checkboxes
     attributes:
-      label: ""
+      label: A few questions:
       options:
         - label: Would you be willing/able to fix this bug yourself?
           required: true
