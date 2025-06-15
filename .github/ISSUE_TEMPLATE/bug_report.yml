@@ -17,13 +17,14 @@ body:
       required: true
   - type: textarea
     id: logs
-    label: Logs
     attributes:
+      label: Logs
       description: If you have access to any logs, please paste them here.
     validations:
       required: false
   - type: checkboxes
     attributes:
+      label: ""
       options:
         - label: Would you be willing/able to fix this bug yourself?
           required: true
