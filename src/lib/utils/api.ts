@@ -1,10 +1,10 @@
-import { PUBLIC_API } from "$env/static/public";
+import { PUBLIC_API, PUBLIC_DOCS_API } from "$env/static/public";
 import { error, type LoadEvent } from "@sveltejs/kit";
 
-export const fetchAPI = async (
+export async function fetchAPI(
     { fetch }: LoadEvent,
     path: string,
-): Promise<{ data: any; status: number }> => {
+): Promise<{ data: any; status: number }> {
     const response = await fetch(`${PUBLIC_API}${path}`, {
         credentials: "include",
     });
@@ -25,4 +25,30 @@ export const fetchAPI = async (
     }
 
     return { data: {}, status: response.status };
-};
+}
+
+export async function fetchDocsPage(
+    { fetch }: LoadEvent,
+    page: string,
+    root: string,
+): Promise<{ data: Promise<string>; status: number }> {
+    const response = await fetch(
+        `${PUBLIC_DOCS_API}/${page}?root=${root}&tailwind`,
+    );
+
+    if (response.status != 200) {
+        error(response.status);
+    }
+
+    if (response.headers.get("Content-Type") == "text/html") {
+        return {
+            data: response.text(),
+            status: response.status,
+        };
+    }
+
+    return {
+        data: new Promise((resolve) => resolve("")),
+        status: response.status,
+    };
+}
