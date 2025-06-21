@@ -126,7 +126,7 @@
                     </NavButton>
                 </div>
             {:else}
-                <div class="fixed right-0">
+                <div class="fixed right-0" transition:fade={{ duration: 100 }}>
                     <Login redirectTo={page.url.pathname} />
                 </div>
             {/if}
