@@ -1,4 +1,5 @@
 import type { LayoutLoad, LoadEvent } from "./$types";
+import { error } from "@sveltejs/kit";
 import { fetchAPI } from "$lib/utils/api";
 
 export const ssr = true;
