@@ -1,20 +1,26 @@
 import { PUBLIC_API, PUBLIC_DOCS_API } from "$env/static/public";
-import { error, type LoadEvent } from "@sveltejs/kit";
+import { error, type LoadEvent, redirect } from "@sveltejs/kit";
 
 export async function fetchAPI(
-    { fetch }: LoadEvent,
+    { fetch, url }: LoadEvent,
     path: string,
+    handleError: boolean,
 ): Promise<{ data: any; status: number }> {
     const response = await fetch(`${PUBLIC_API}${path}`, {
         credentials: "include",
     });
 
-    switch (response.status) {
-        case 200:
-            break;
-        case 401:
-        default:
-            error(response.status);
+    if (handleError) {
+        switch (response.status) {
+            case 200:
+                break;
+            case 401:
+                redirect(307, `/auth/login?redirectTo=${url.pathname}`);
+                break;
+            default:
+                error(response.status);
+                break;
+        }
     }
 
     if (response.headers.get("Content-Type") == "application/json") {
