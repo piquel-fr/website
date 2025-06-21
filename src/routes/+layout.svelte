@@ -9,6 +9,7 @@
     import type { LayoutProps } from "./$types";
     import { PUBLIC_API } from "$env/static/public";
     import { page } from "$app/state";
+    import Login from "$lib/components/Login.svelte";
 
     let { data, children }: LayoutProps = $props();
 
@@ -78,45 +79,57 @@
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <main onclick={() => (showSidebar = false)}>
         {#if showSidebar}
-            <div
-                transition:fade={{ duration: 100 }}
-                class="fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1"
-            >
-                <NavButton
-                    popOut={false}
-                    className="m-1 p-1"
-                    dest={`/profile/${data.profile.username}`}
-                    >Profile</NavButton
+            {#if data.profile}
+                <div
+                    transition:fade={{ duration: 100 }}
+                    class="fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1"
                 >
-                <NavButton popOut={false} className="m-1 p-1" dest="/settings"
-                    >Settings</NavButton
-                >
-                <!--
-                {#await data.permissions then permissions}
-                    {#if permissions.thermostat}
-                        <NavButton
-                            popOut={false}
-                            className="m-1 p-1"
-                            dest="/thermostat">Thermostat</NavButton
-                        >
-                    {/if}
-                    {#if permissions.dashboard}
-                        <NavButton
-                            popOut={false}
-                            className="m-1 p-1"
-                            dest="/admin">Admin</NavButton
-                        >
-                    {/if}
-                {/await}
-                -->
-                <div class="m-1 my-2 border-t-2"></div>
-                <NavButton
-                    popOut={false}
-                    className="m-1 p-1 text-red-700"
-                    dest={`${PUBLIC_API}/auth/logout?redirectTo=${page.url.pathname}`}
-                    >Sign out</NavButton
-                >
-            </div>
+                    <NavButton
+                        popOut={false}
+                        className="m-1 p-1"
+                        dest={`/profile/${data.profile.username}`}
+                    >
+                        Profile
+                    </NavButton>
+                    <NavButton
+                        popOut={false}
+                        className="m-1 p-1"
+                        dest="/settings"
+                    >
+                        Settings
+                    </NavButton>
+                    <!--
+                        {#await data.permissions then permissions}
+                            {#if permissions.thermostat}
+                                <NavButton
+                                    popOut={false}
+                                    className="m-1 p-1"
+                                    dest="/thermostat">Thermostat</NavButton
+                                >
+                            {/if}
+                            {#if permissions.dashboard}
+                                <NavButton
+                                    popOut={false}
+                                    className="m-1 p-1"
+                                    dest="/admin">Admin</NavButton
+                                >
+                            {/if}
+                        {/await}
+                    -->
+                    <div class="m-1 my-2 border-t-2"></div>
+                    <NavButton
+                        popOut={false}
+                        className="m-1 p-1 text-red-700"
+                        dest={`${PUBLIC_API}/auth/logout?redirectTo=${page.url.pathname}`}
+                    >
+                        Sign out
+                    </NavButton>
+                </div>
+            {:else}
+                <div class="fixed right-0">
+                    <Login redirectTo={page.url.pathname} />
+                </div>
+            {/if}
         {/if}
         <div class="flex flex-col items-center">{@render children()}</div>
     </main>
