@@ -116,7 +116,7 @@
                             {/if}
                         {/await}
                     -->
-                    <div class="m-1 my-2 border-t-2"></div>
+                    <hr class="m-1 bg-gray-300 border-0 h-0.5" />
                     <NavButton
                         popOut={false}
                         className="m-1 p-1 text-red-700"
