@@ -39,7 +39,7 @@ export async function fetchDocsPage(
     root: string,
 ): Promise<{ data: Promise<string>; status: number }> {
     const response = await fetch(
-        `${PUBLIC_DOCS_API}/${page}?root=${root}&tailwind`,
+        `${PUBLIC_DOCS_API}${page}?root=${root}&tailwind`,
     );
 
     if (response.status != 200) {
