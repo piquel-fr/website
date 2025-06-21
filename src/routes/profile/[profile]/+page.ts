@@ -3,5 +3,5 @@ import { fetchAPI } from "$lib/utils/api";
 
 export const load: PageLoad = async (event: LoadEvent) => {
     const response = await fetchAPI(event, `/profile/${event.params.profile}`);
-    return { data: await response.data };
+    return { profileData: await response.data };
 };
