@@ -23,21 +23,23 @@
 <div class="flex min-h-screen flex-col bg-white">
     <header class="grid grid-cols-2 bg-gray-300">
         <nav class="flex justify-start">
-            <NavButton popOut={false} useCardClasses={false} className="p-2 m-2"
-                >🥒</NavButton
-            >
+            <NavButton popOut={false} useCardClasses={false} className="p-2 m-2">🥒</NavButton>
             <NavButton
                 popOut={false}
                 useCardClasses={false}
                 className="p-2 m-2"
-                dest="/minecraft">Minecraft</NavButton
+                dest="/minecraft"
             >
+                Minecraft
+            </NavButton>
             <NavButton
                 popOut={false}
                 useCardClasses={false}
                 className="p-2 m-2"
-                dest="/dirk">Dirk</NavButton
+                dest="/dirk"
             >
+                Dirk
+            </NavButton>
         </nav>
         <div class="flex justify-end">
             {#if data.profile}
@@ -62,12 +64,13 @@
                     </div>
                 </Button>
             {:else}
-                <NavButton
+                <Button
                     popOut={false}
                     className="p-2 m-2 px-6"
-                    dest={`/auth/login?redirectTo=${page.url.pathname}`}
-                    >Login</NavButton
+                    onclick={() => (showSidebar = !showSidebar)}
                 >
+                    Login
+                </Button>
             {/if}
         </div>
     </header>
