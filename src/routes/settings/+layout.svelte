@@ -3,6 +3,8 @@
 
     let { data, children } = $props();
 
+    let settings = data.settings;
+
     // if (currentPage === undefined) {
     //     activeItem = items[0];
     //     goto(`/settings/${activeItem.toLowerCase()}`);
@@ -14,24 +16,24 @@
         <div class="flex justify-start">
             <img
                 class="size-16 border-4"
-                src={data.profile.image}
-                alt={data.profile.username}
+                src={settings.profile.image}
+                alt={settings.profile.username}
                 style="border-color: {data.profile.color}; "
             />
             <div class="ml-1">
                 <p class="text-2xl">
-                    {data.profile.name}
+                    {settings.profile.name}
                     <span class="text-lg text-gray-600"
-                        >({data.profile.username})</span
+                        >({settings.profile.username})</span
                     >
                 </p>
-                <p>{data.profile.role}</p>
+                <p>{settings.profile.role}</p>
             </div>
         </div>
         <div class="flex items-center justify-end">
             <NavButton
                 className="p-2 px-3 rounded"
-                dest={`/profile/${data.profile.username}`}
+                dest={`/profile/${settings.profile.username}`}
                 popOut={false}>View profile</NavButton
             >
         </div>
