@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
     import NavButton from "$lib/components/NavButton.svelte";
+    import type { LayoutProps } from "./$types";
 
-    let { data, children } = $props();
+    let { data, children }: LayoutProps = $props();
 
     let settings = data.settings;
 
