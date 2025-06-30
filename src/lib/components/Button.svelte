@@ -2,9 +2,9 @@
     import Card from "./Card.svelte";
 
     let {
-        className = '',
+        className = "",
         type = undefined,
-        form = '',
+        form = "",
         popOut = false,
         useCardClasses = true,
         fullWidth = false,
