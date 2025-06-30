@@ -1,11 +1,11 @@
 import { PUBLIC_API, PUBLIC_DOCS_API } from "$env/static/public";
 import { error, type LoadEvent, redirect } from "@sveltejs/kit";
 
-export async function fetchAPI(
+export const fetchAPI = async (
     { fetch, url }: LoadEvent,
     path: string,
     handleError: boolean = true,
-): Promise<{ data: any; status: number }> {
+): Promise<{ data: any; status: number }> => {
     const response = await fetch(`${PUBLIC_API}${path}`, {
         credentials: "include",
     });
@@ -31,13 +31,13 @@ export async function fetchAPI(
     }
 
     return { data: {}, status: response.status };
-}
+};
 
-export async function fetchDocsPage(
+export const fetchDocsPage = async (
     { fetch }: LoadEvent,
     page: string,
     root: string,
-): Promise<{ data: Promise<string>; status: number }> {
+): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
         `${PUBLIC_DOCS_API}${page}?root=${root}&tailwind`,
     );
@@ -57,4 +57,4 @@ export async function fetchDocsPage(
         data: new Promise((resolve) => resolve("")),
         status: response.status,
     };
-}
+};
