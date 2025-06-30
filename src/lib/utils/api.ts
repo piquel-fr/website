@@ -4,7 +4,7 @@ import { error, type LoadEvent, redirect } from "@sveltejs/kit";
 export async function fetchAPI(
     { fetch, url }: LoadEvent,
     path: string,
-    handleError: boolean,
+    handleError: boolean = true,
 ): Promise<{ data: any; status: number }> {
     const response = await fetch(`${PUBLIC_API}${path}`, {
         credentials: "include",
