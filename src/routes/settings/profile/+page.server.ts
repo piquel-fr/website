@@ -20,8 +20,7 @@ export const actions = {
         });
 
         if (response.status != 200) {
-            console.log(response);
-            error(response.status, await response.text());
+            error(response.status, { message: await response.text() });
         }
     },
 } satisfies Actions;

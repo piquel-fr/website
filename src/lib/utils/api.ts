@@ -18,7 +18,7 @@ export const fetchAPI = async (
                 redirect(307, `/auth/login?redirectTo=${url.pathname}`);
                 break;
             default:
-                error(response.status);
+                error(response.status, { message: await response.text() });
                 break;
         }
     }
@@ -43,7 +43,7 @@ export const fetchDocsPage = async (
     );
 
     if (response.status != 200) {
-        error(response.status);
+        error(response.status, { message: await response.text() });
     }
 
     if (response.headers.get("Content-Type") == "text/html") {
