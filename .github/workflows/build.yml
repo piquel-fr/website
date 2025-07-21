@@ -1,4 +1,4 @@
-name: Deploy
+name: Build
 on:
   push:
     branches:
@@ -45,29 +45,3 @@ jobs:
           build-args: |
             API=${{ vars.API }}
             DOCS_API=${{ vars.DOCS_API }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy to Production
-    needs:
-      - build-and-push
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Create env file
-        run: |
-          echo "HOST=${{ vars.HOST }}" >> ./.env
-
-          echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./.env
-
-      - name: Docker Stack Deploy
-        uses: cssnr/stack-deploy-action@v1
-        with:
-          name: piquel-fr
-          file: docker-stack.yml
-          host: piquel.fr
-          user: deploy
-          ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          env_file: ./.env
-
