@@ -5,11 +5,6 @@
     let { data, children }: LayoutProps = $props();
 
     let settings = data.settings;
-
-    // if (currentPage === undefined) {
-    //     activeItem = items[0];
-    //     goto(`/settings/${activeItem.toLowerCase()}`);
-    // }
 </script>
 
 <div class="max-div-width flex w-full grow flex-wrap gap-1 p-2 px-8">
