@@ -1,11 +1,11 @@
 import { PUBLIC_API, PUBLIC_DOCS_API } from "$env/static/public";
 import { error, type LoadEvent, redirect } from "@sveltejs/kit";
 
-export async function fetchAPI(
+export const fetchAPI = async (
     { fetch, url }: LoadEvent,
     path: string,
-    handleError: boolean,
-): Promise<{ data: any; status: number }> {
+    handleError: boolean = true,
+): Promise<{ data: any; status: number }> => {
     const response = await fetch(`${PUBLIC_API}${path}`, {
         credentials: "include",
     });
@@ -18,7 +18,7 @@ export async function fetchAPI(
                 redirect(307, `/auth/login?redirectTo=${url.pathname}`);
                 break;
             default:
-                error(response.status);
+                error(response.status, { message: await response.text() });
                 break;
         }
     }
@@ -31,19 +31,19 @@ export async function fetchAPI(
     }
 
     return { data: {}, status: response.status };
-}
+};
 
-export async function fetchDocsPage(
+export const fetchDocsPage = async (
     { fetch }: LoadEvent,
     page: string,
     root: string,
-): Promise<{ data: Promise<string>; status: number }> {
+): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
         `${PUBLIC_DOCS_API}${page}?root=${root}&tailwind`,
     );
 
     if (response.status != 200) {
-        error(response.status);
+        error(response.status, { message: await response.text() });
     }
 
     if (response.headers.get("Content-Type") == "text/html") {
@@ -57,4 +57,4 @@ export async function fetchDocsPage(
         data: new Promise((resolve) => resolve("")),
         status: response.status,
     };
-}
+};

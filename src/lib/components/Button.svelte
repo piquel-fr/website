@@ -2,9 +2,9 @@
     import Card from "./Card.svelte";
 
     let {
-        className = '',
+        className = "hover:bg-gray-300 click:bg-gray-700",
         type = undefined,
-        form = '',
+        form = "",
         popOut = false,
         useCardClasses = true,
         fullWidth = false,
