@@ -12,6 +12,7 @@ RUN deno install
 
 COPY . .
 
+ENV NODE_ENV=production
 ENV PUBLIC_API=${API}
 ENV PUBLIC_DOCS_API=${DOCS_API}
 ENV ORIGIN=${ORIGIN}
@@ -23,4 +24,4 @@ FROM denoland/deno:alpine
 WORKDIR /piquel.fr
 COPY --from=builder /piquel.fr/build .
 
-CMD ["deno", "run", "--allow-env", "--allow-read", "--allow-net", "index.js"]
+CMD deno run --allow-env --allow-read --allow-net index.js
