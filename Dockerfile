@@ -28,4 +28,4 @@ ENV ORIGIN=${ORIGIN}
 WORKDIR /piquel.fr
 COPY --from=builder /piquel.fr/build .
 
-CMD ["ORIGIN=${ORIGIN}", "deno", "run", "--allow-env", "--allow-read", "--allow-net", "index.js"]
+CMD ["deno", "run", "--allow-env", "--allow-read", "--allow-net", "index.js"]
