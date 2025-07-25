@@ -1,3 +1,4 @@
+import { ORIGIN } from "$env/static/private";
 import type { Handle } from "@sveltejs/kit";
 
 export const handle = (({ event, resolve }) => {
@@ -31,7 +32,7 @@ export const handle = (({ event, resolve }) => {
         "x-forwarded-proto": event.request.headers.get("x-forwarded-proto"),
         referer: event.request.headers.get("referer"),
     });
-    console.log("Environment ORIGIN:", "https://piquel.fr");
+    console.log("Environment ORIGIN:", ORIGIN);
 
     return resolve(event, {
         // Forward all headers
