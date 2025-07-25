@@ -45,4 +45,3 @@ jobs:
           build-args: |
             API=${{ vars.API }}
             DOCS_API=${{ vars.DOCS_API }}
-            ORIGIN=${{ vars.ORIGIN }}

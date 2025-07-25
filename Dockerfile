@@ -13,14 +13,11 @@ ENV PUBLIC_API=${API}
 ARG DOCS_API
 ENV PUBLIC_DOCS_API=${DOCS_API}
 
-ENV NODE_ENV=production
-
 RUN deno task build
 
 FROM denoland/deno:alpine
 
-ARG ORIGIN
-ENV ORIGIN=${ORIGIN}
+ENV NODE_ENV=production
 
 WORKDIR /piquel.fr
 COPY --from=builder /piquel.fr/build .
