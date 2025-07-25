@@ -4,6 +4,7 @@ WORKDIR /piquel.fr
 
 ARG API
 ARG DOCS_API
+ARG ORIGIN
 
 COPY package.json .
 
@@ -13,6 +14,7 @@ COPY . .
 
 ENV PUBLIC_API=${API}
 ENV PUBLIC_DOCS_API=${DOCS_API}
+ENV ORIGIN=${ORIGIN}
 
 RUN deno task build
 
