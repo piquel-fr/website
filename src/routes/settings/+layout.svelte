@@ -3,8 +3,6 @@
     import type { LayoutProps } from "./$types";
 
     let { data, children }: LayoutProps = $props();
-
-    let settings = data.settings;
 </script>
 
 <div class="max-div-width flex w-full grow flex-wrap gap-1 p-2 px-8">
@@ -12,24 +10,24 @@
         <div class="flex justify-start">
             <img
                 class="size-16 border-4"
-                src={settings.profile.image}
-                alt={settings.profile.username}
+                src={data.settings.profile.image}
+                alt={data.settings.profile.username}
                 style="border-color: {data.profile.color}; "
             />
             <div class="ml-1">
                 <p class="text-2xl">
-                    {settings.profile.name}
+                    {data.settings.profile.name}
                     <span class="text-lg text-gray-600"
-                        >({settings.profile.username})</span
+                        >({data.settings.profile.username})</span
                     >
                 </p>
-                <p>{settings.profile.role}</p>
+                <p>{data.settings.profile.role}</p>
             </div>
         </div>
         <div class="flex items-center justify-end">
             <NavButton
                 className="p-2 px-3 rounded"
-                dest={`/profile/${settings.profile.username}`}
+                dest={`/profile/${data.settings.profile.username}`}
                 popOut={false}>View profile</NavButton
             >
         </div>
@@ -38,7 +36,7 @@
         <div class="w-auto grow justify-center">
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full"
-                dest="/settings/profile"
+                dest="/data.settings/profile"
                 popOut={false}>Profile</NavButton
             >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
