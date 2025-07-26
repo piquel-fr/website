@@ -1,7 +1,6 @@
 <script lang="ts">
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
-    import { error } from "@sveltejs/kit";
     import type { PageProps } from "./$types";
     import { PUBLIC_API } from "$env/static/public";
 
@@ -10,6 +9,8 @@
     let username: string = $state(data.settings.profile.username);
     let name: string = $state(data.settings.profile.name);
     let image: string = $state(data.settings.profile.image);
+
+    let error: string = $state("");
 
     async function updateProfile() {
         const response = await fetch(
@@ -25,7 +26,7 @@
         );
 
         if (response.status != 200) {
-            error(response.status, { message: await response.text() });
+            error = await response.text();
         }
 
         invalidateAll();
@@ -68,8 +69,9 @@
             type="text"
         />
     </label>
+    <p class="text-red-500 font-bold text-sm">{error}</p>
 
-    <Button className="mt-2" onclick={updateProfile} form="update-profile">
+    <Button className="mt-2 p-1" onclick={updateProfile} form="update-profile">
         Save
     </Button>
 </form>
