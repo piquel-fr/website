@@ -12,14 +12,17 @@
     let image: string = $state(data.settings.profile.image);
 
     async function updateProfile() {
-        const response = await fetch(`${PUBLIC_API}/profile`, {
-            headers: {
-                "Content-Type": "application/json",
+        const response = await fetch(
+            `${PUBLIC_API}/profile/${data.profile.username}/update`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                method: "PUT",
+                body: JSON.stringify({ username, name, image }),
             },
-            credentials: "include",
-            method: "PUT",
-            body: JSON.stringify({ username, name, image }),
-        });
+        );
 
         if (response.status != 200) {
             error(response.status, { message: await response.text() });
