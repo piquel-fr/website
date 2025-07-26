@@ -1,4 +1,4 @@
-import { PUBLIC_API, PUBLIC_DOCS_API } from "$env/static/public";
+import { PUBLIC_API } from "$env/static/public";
 import { error, type LoadEvent, redirect } from "@sveltejs/kit";
 
 export const fetchAPI = async (
@@ -39,7 +39,7 @@ export const fetchDocsPage = async (
     root: string,
 ): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
-        `${PUBLIC_DOCS_API}${page}?root=${root}&tailwind`,
+        `${PUBLIC_API}/docs${page}?root=${root}`,
     );
 
     if (response.status != 200) {
