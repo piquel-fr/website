@@ -1,6 +1,7 @@
 <script lang="ts">
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
+    import TextInput from "$lib/components/input/TextInput.svelte";
     import type { PageProps } from "./$types";
     import { PUBLIC_API } from "$env/static/public";
 
@@ -40,35 +41,10 @@
     }}
     class="flex flex-col"
 >
-    <label class="mb-1">
-        <p class="text-sm text-gray-600">Username</p>
-        <input
-            class="rounded-md border-gray-400 bg-gray-100 border-2 p-1"
-            bind:value={username}
-            name="username"
-            type="text"
-        />
-    </label>
+    <TextInput label="Username" name="username" bind:value={username} />
+    <TextInput label="Name" name="name" bind:value={name} />
+    <TextInput label="Image" name="image" bind:value={image} />
 
-    <label class="mb-1">
-        <p class="text-sm text-gray-600">Name</p>
-        <input
-            class="rounded-md border-gray-400 bg-gray-100 border-2 p-1"
-            bind:value={name}
-            name="name"
-            type="text"
-        />
-    </label>
-
-    <label class="mb-1">
-        <p class="text-sm text-gray-600">Image</p>
-        <input
-            class="rounded-md border-gray-400 bg-gray-100 border-2 p-1"
-            bind:value={image}
-            name="image"
-            type="text"
-        />
-    </label>
     <p class="text-red-500 font-bold text-sm">{error}</p>
 
     <Button className="mt-2 p-1" onclick={updateProfile} form="update-profile">
