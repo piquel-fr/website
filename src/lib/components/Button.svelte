@@ -9,6 +9,7 @@
         useCardClasses = true,
         fullWidth = false,
         defaultHover = true,
+        fit = false,
         children,
         onclick,
     } = $props();
@@ -21,7 +22,12 @@
     // export let fullWidth = false;
 </script>
 
-<button class={fullWidth ? "w-full" : ""} {onclick} {type} {form}>
+<button
+    class={(fullWidth ? "w-full" : "") + (fit ? " size-fit" : "")}
+    {onclick}
+    {type}
+    {form}
+>
     <Card
         {popOut}
         className={className +

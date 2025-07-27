@@ -21,7 +21,7 @@
     async function deleteInstance() {}
 </script>
 
-<Card popOut={false} className="p-1 my-1">
+<Card popOut={false} className="w-fit p-1 my-1">
     <TextInput label="Name" bind:value={name} />
     <TextInput label="Repository" bind:value={repo} />
     <TextInput label="Branch/Tag" bind:value={ref} />
