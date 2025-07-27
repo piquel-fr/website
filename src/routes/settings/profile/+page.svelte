@@ -41,9 +41,9 @@
     }}
     class="flex flex-col"
 >
-    <TextInput label="Username" name="username" bind:value={username} />
-    <TextInput label="Name" name="name" bind:value={name} />
-    <TextInput label="Image" name="image" bind:value={image} />
+    <TextInput label="Username" bind:value={username} />
+    <TextInput label="Name" bind:value={name} />
+    <TextInput label="Image" bind:value={image} />
 
     <p class="text-red-500 font-bold text-sm">{error}</p>
 

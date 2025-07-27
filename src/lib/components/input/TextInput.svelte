@@ -1,5 +1,5 @@
 <script lang="ts">
-    let { label, name, value = $bindable() } = $props();
+    let { label, value = $bindable() } = $props();
 </script>
 
 <label class="mb-1">
@@ -7,7 +7,6 @@
     <input
         class="rounded-md border-gray-400 bg-gray-100 border-2 p-1"
         bind:value
-        {name}
         type="text"
     />
 </label>
