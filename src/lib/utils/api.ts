@@ -23,8 +23,6 @@ export const fetchAPI = async (
         }
     }
 
-    console.log(response.headers.get("Content-Type"));
-
     switch (response.headers.get("Content-Type")) {
         case "application/json":
             return { data: response.json(), status: response.status };
@@ -40,10 +38,9 @@ export const fetchAPI = async (
 export const fetchDocsPage = async (
     { fetch }: LoadEvent,
     page: string,
-    root: string,
 ): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
-        `${PUBLIC_API}/docs${page}?root=${root}`,
+        `${PUBLIC_API}/docs/piquel${page}`,
     );
 
     if (response.status != 200) {
