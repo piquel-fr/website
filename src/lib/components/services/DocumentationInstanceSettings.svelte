@@ -2,6 +2,8 @@
     import TextInput from "$lib/components/input/TextInput.svelte";
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
+    import { PUBLIC_API } from "$env/static/public";
+    import { invalidateAll } from "$app/navigation";
 
     let { doc } = $props();
 
@@ -15,8 +17,43 @@
     let fullPage: boolean = $state(doc.fullPage);
     let useTailwind: boolean = $state(doc.useTailwind);
 
+    let error: string = $state("");
+
     async function testRepository() {}
-    async function updateInstance() {}
+
+    async function updateInstance() {
+        const repoSplit = repo.split("/");
+        const repoOwner = repoSplit[0];
+        const repoName = repoSplit[1];
+        const updatedDoc = {
+            name,
+            repoOwner,
+            repoName,
+            repoRef: ref,
+            root,
+            pathPrefix,
+            highlightStyle,
+            fullPage,
+            public: isPublic,
+            useTailwind,
+        };
+
+        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}/update`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            method: "PUT",
+            body: JSON.stringify(updatedDoc),
+        });
+
+        if (response.status != 200) {
+            error = await response.text();
+        }
+
+        invalidateAll();
+    }
+
     async function transferInstance() {}
     async function deleteInstance() {}
 </script>
@@ -28,6 +65,9 @@
     <TextInput label="Root" bind:value={root} />
     <TextInput label="Path prefix" bind:value={pathPrefix} />
     <TextInput label="Highlight style" bind:value={highlightStyle} />
+
+    <p class="text-red-500 font-bold text-sm">{error}</p>
+
     <Card
         popOut={false}
         className="w-fill flex-col mt-1 p-2 bg-gray-300 flex gap-2"
