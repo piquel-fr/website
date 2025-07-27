@@ -16,21 +16,25 @@ export const fetchAPI = async (
                 break;
             case 401:
                 redirect(307, `/auth/login?redirectTo=${url.pathname}`);
-                break;
+                return;
             default:
                 error(response.status, { message: await response.text() });
-                break;
+                return;
         }
     }
 
-    if (response.headers.get("Content-Type") == "application/json") {
-        return {
-            data: response.json(),
-            status: response.status,
-        };
-    }
+    console.log(response.headers.get("Content-Type"));
 
-    return { data: {}, status: response.status };
+    switch (response.headers.get("Content-Type")) {
+        case "application/json":
+            return { data: response.json(), status: response.status };
+        case "text/html":
+            return { data: response.text(), status: response.status };
+        case "text/plain":
+            return { data: response.text(), status: response.status };
+        default:
+            return { data: {}, status: response.status };
+    }
 };
 
 export const fetchDocsPage = async (
