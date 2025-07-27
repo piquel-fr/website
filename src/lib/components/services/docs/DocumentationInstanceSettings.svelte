@@ -49,6 +49,7 @@
 
         if (response.status != 200) {
             error = await response.text();
+            return
         }
 
         updated(false);
@@ -72,6 +73,7 @@
     }
 
     async function deleteInstance() {
+        // TODO: confirmation for deletion
         const response = await fetch(`${PUBLIC_API}/docs/${doc.name}/delete`, {
             credentials: "include",
             method: "PUT",
