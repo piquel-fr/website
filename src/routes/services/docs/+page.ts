@@ -20,9 +20,9 @@ export const load: PageLoad = async (event) => {
     return {
         docs: {
             instances: await listResponse.data,
-            limit: limit,
-            offset: offset,
-            count: await countResponse.data,
+            limit: parseInt(limit),
+            offset: parseInt(offset),
+            count: parseInt(await countResponse.data),
         },
     };
 };

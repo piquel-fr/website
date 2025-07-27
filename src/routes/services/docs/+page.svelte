@@ -6,6 +6,7 @@
 
     import edit from "$lib/svg/edit.svg";
     import cross from "$lib/svg/cross.svg";
+    import { page } from "$app/state";
 
     let { data }: PageProps = $props();
 
@@ -20,7 +21,14 @@
         }
     });
 
-    let editing: boolean = $state(true);
+    let editing: boolean = $state(false);
+
+    let prevUrl: string = $derived(
+        `/services/docs?limit=${data.docs.limit}&offset=${start - data.docs.limit}`,
+    );
+    let nextUrl: string = $derived(
+        `/services/docs?limit=${data.docs.limit}&offset=${end + 1}`,
+    );
 </script>
 
 <h1 class="text-xl">Your Documentation Instances</h1>
@@ -72,4 +80,16 @@
         </Card>
     {/if}
 {/each}
-<p>{start}-{end}/{data.docs.count}; page {currentPage}/{totalPages}</p>
+<div class="grid grid-cols-3 pt-0.5 mx-1">
+    <a
+        class="hover:text-gray-600 size-fit"
+        href={currentPage === 1 ? page.url.href : prevUrl}>prev</a
+    >
+    <p class="m-auto">
+        {start}-{end}/{data.docs.count}; page {currentPage}/{totalPages}
+    </p>
+    <a
+        href={currentPage === totalPages ? page.url.href : nextUrl}
+        class="hover:text-gray-600 ml-auto">next</a
+    >
+</div>
