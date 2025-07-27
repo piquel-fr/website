@@ -3,9 +3,9 @@
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
     import { PUBLIC_API } from "$env/static/public";
-    import { invalidateAll } from "$app/navigation";
+    import { goto, invalidateAll } from "$app/navigation";
 
-    let { doc } = $props();
+    let { doc, updated } = $props();
 
     let name: string = $state(doc.name);
     let repo: string = $state(doc.repoOwner + "/" + doc.repoName);
@@ -51,11 +51,39 @@
             error = await response.text();
         }
 
-        invalidateAll();
+        updated(false);
     }
 
-    async function transferInstance() {}
-    async function deleteInstance() {}
+    async function transferInstance(destination: string) {
+        const response = await fetch(
+            `${PUBLIC_API}/docs/${doc.name}/transfer/${destination}`,
+            {
+                credentials: "include",
+                method: "PUT",
+            },
+        );
+
+        if (response.status != 200) {
+            error = await response.text();
+            return;
+        }
+
+        updated(true);
+    }
+
+    async function deleteInstance() {
+        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}/delete`, {
+            credentials: "include",
+            method: "PUT",
+        });
+
+        if (response.status != 200) {
+            error = await response.text();
+            return;
+        }
+
+        updated(true);
+    }
 </script>
 
 <Card popOut={false} className="w-fit p-1 my-1">
@@ -88,7 +116,7 @@
         </div>
         <Button
             className="p-1 text-red-600 border-red-600 border-2"
-            onclick={transferInstance}
+            onclick={() => alert("not implemnted yet")}
             form="update-profile">Transfer Instance</Button
         >
         <Button
