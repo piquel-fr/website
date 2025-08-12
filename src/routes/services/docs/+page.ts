@@ -13,9 +13,9 @@ export const load: PageLoad = async (event) => {
 
     const listResponse = await fetchAPI(
         event,
-        `/docs/list?limit=${limit}&offset=${offset}`,
+        `/docs?own&limit=${limit}&offset=${offset}`,
     );
-    const countResponse = await fetchAPI(event, "/docs/list?count");
+    const countResponse = await fetchAPI(event, "/docs?count");
 
     return {
         docs: {

@@ -40,7 +40,7 @@ export const fetchDocsPage = async (
     page: string,
 ): Promise<{ data: Promise<string>; status: number }> => {
     const response = await fetch(
-        `${PUBLIC_API}/docs/piquel${page}`,
+        `${PUBLIC_API}/docs/piquel/page${page}?pathPrefix=/docs`,
     );
 
     if (response.status != 200) {

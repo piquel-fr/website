@@ -3,7 +3,6 @@
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
     import { PUBLIC_API } from "$env/static/public";
-    import { goto, invalidateAll } from "$app/navigation";
 
     let { doc, updated } = $props();
 
@@ -11,15 +10,13 @@
     let repo: string = $state(doc.repoOwner + "/" + doc.repoName);
     let ref: string = $state(doc.repoRef);
     let root: string = $state(doc.root);
-    let pathPrefix: string = $state(doc.pathPrefix);
-    let highlightStyle: string = $state(doc.highlightStyle);
     let isPublic: boolean = $state(doc.public);
-    let fullPage: boolean = $state(doc.fullPage);
-    let useTailwind: boolean = $state(doc.useTailwind);
 
     let error: string = $state("");
 
-    async function testRepository() {}
+    async function testRepository() {
+        alert("not implemented yet");
+    }
 
     async function updateInstance() {
         const repoSplit = repo.split("/");
@@ -31,14 +28,10 @@
             repoName,
             repoRef: ref,
             root,
-            pathPrefix,
-            highlightStyle,
-            fullPage,
             public: isPublic,
-            useTailwind,
         };
 
-        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}/update`, {
+        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}`, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -49,34 +42,17 @@
 
         if (response.status != 200) {
             error = await response.text();
-            return
+            return;
         }
 
         updated(false);
     }
 
-    async function transferInstance(destination: string) {
-        const response = await fetch(
-            `${PUBLIC_API}/docs/${doc.name}/transfer/${destination}`,
-            {
-                credentials: "include",
-                method: "PUT",
-            },
-        );
-
-        if (response.status != 200) {
-            error = await response.text();
-            return;
-        }
-
-        updated(true);
-    }
-
     async function deleteInstance() {
         // TODO: confirmation for deletion
-        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}/delete`, {
+        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}`, {
             credentials: "include",
-            method: "PUT",
+            method: "DELETE",
         });
 
         if (response.status != 200) {
@@ -93,8 +69,6 @@
     <TextInput label="Repository" bind:value={repo} />
     <TextInput label="Branch/Tag" bind:value={ref} />
     <TextInput label="Root" bind:value={root} />
-    <TextInput label="Path prefix" bind:value={pathPrefix} />
-    <TextInput label="Highlight style" bind:value={highlightStyle} />
 
     <p class="text-red-500 font-bold text-sm">{error}</p>
 
@@ -116,11 +90,6 @@
                 form="update-profile">Test</Button
             >
         </div>
-        <Button
-            className="p-1 text-red-600 border-red-600 border-2"
-            onclick={() => alert("not implemnted yet")}
-            form="update-profile">Transfer Instance</Button
-        >
         <Button
             className="p-1 text-red-600 border-red-600 border-2"
             onclick={deleteInstance}

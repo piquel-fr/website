@@ -15,7 +15,7 @@
 
     async function updateProfile() {
         const response = await fetch(
-            `${PUBLIC_API}/profile/${data.profile.username}/update`,
+            `${PUBLIC_API}/profile/${data.profile.username}`,
             {
                 headers: {
                     "Content-Type": "application/json",
