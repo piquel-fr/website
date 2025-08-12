@@ -14,10 +14,12 @@
 {#if editing}
     <DocumentationInstanceSettings
         {doc}
-        updated={() => {
+        onsave={() => {
             invalidateAll();
             editing = false;
         }}
+        ondelete={invalidateAll}
+        oncancel={() => (editing = false)}
     />
 {:else}
     <Card popOut={false} className="grid grid-cols-2 p-1 my-1">

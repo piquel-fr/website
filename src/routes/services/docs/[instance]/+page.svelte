@@ -6,11 +6,7 @@
 
 <DocumentationInstanceSettings
     doc={data.doc}
-    updated={(moved: boolean) => {
-        if (moved) {
-            goto("/services/docs");
-        } else {
-            invalidateAll();
-        }
-    }}
+    onsave={invalidateAll}
+    ondelete={() => goto("/services/docs")}
+    oncancel={() => goto("/services/docs")}
 />

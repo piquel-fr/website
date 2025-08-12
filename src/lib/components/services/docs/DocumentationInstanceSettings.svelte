@@ -4,7 +4,7 @@
     import Card from "$lib/components/Card.svelte";
     import { PUBLIC_API } from "$env/static/public";
 
-    let { doc, updated } = $props();
+    let { doc, onsave, oncancel, ondelete } = $props();
 
     let name: string = $state(doc.name);
     let repo: string = $state(doc.repoOwner + "/" + doc.repoName);
@@ -13,10 +13,6 @@
     let isPublic: boolean = $state(doc.public);
 
     let error: string = $state("");
-
-    async function testRepository() {
-        alert("not implemented yet");
-    }
 
     async function updateInstance() {
         const repoSplit = repo.split("/");
@@ -45,7 +41,7 @@
             return;
         }
 
-        updated(false);
+        onsave();
     }
 
     async function deleteInstance() {
@@ -60,7 +56,7 @@
             return;
         }
 
-        updated(true);
+        ondelete();
     }
 </script>
 
@@ -86,8 +82,8 @@
             <Button
                 fullWidth={true}
                 className="w-full p-1 min-w-20 text-gray-500 border-gray-500 border-2"
-                onclick={testRepository}
-                form="update-profile">Test</Button
+                onclick={oncancel}
+                form="update-profile">Cancel</Button
             >
         </div>
         <Button
