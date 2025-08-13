@@ -45,7 +45,7 @@
     }
 
     async function deleteInstance() {
-        // TODO: confirmation for deletion
+        if (!confirm(`Are you sure you want to delete ${doc.name}?`)) return;
         const response = await fetch(`${PUBLIC_API}/docs/${doc.name}`, {
             credentials: "include",
             method: "DELETE",
