@@ -3,6 +3,7 @@
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
     import { PUBLIC_API } from "$env/static/public";
+    import CheckBoxInput from "$lib/components/input/CheckBoxInput.svelte";
 
     let { doc, onsave, oncancel, ondelete } = $props();
 
@@ -65,6 +66,7 @@
     <TextInput label="Repository" bind:value={repo} />
     <TextInput label="Branch/Tag" bind:value={ref} />
     <TextInput label="Root" bind:value={root} />
+    <CheckBoxInput label="Public" bind:checked={isPublic} />
 
     <p class="text-red-500 font-bold text-sm">{error}</p>
 
