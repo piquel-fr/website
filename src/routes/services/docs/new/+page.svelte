@@ -9,9 +9,9 @@
     let repo: string = $state("");
 
     let doc = $state({
-        name: "newinstance",
-        repoOwner: "",
-        repoName: "",
+        name: "mydocsinstance",
+        repoOwner: "my",
+        repoName: "repo",
         repoRef: "main",
         root: "index.md",
         public: true,
