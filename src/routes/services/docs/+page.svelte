@@ -28,7 +28,10 @@
 
 <div class="flex mr-0.5">
     <h1 class="text-xl mr-auto">Your Documentation Instances</h1>
-    <NavButton className="p-1 bg-gray-200" dest="/services/docs/new"
+    <NavButton
+        popOut={false}
+        className="p-1 bg-gray-200"
+        dest="/services/docs/new"
         ><img src={plus} alt="New" class="size-5" /></NavButton
     >
 </div>
