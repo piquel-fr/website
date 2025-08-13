@@ -2,8 +2,8 @@
     import TextInput from "$lib/components/input/TextInput.svelte";
     import Button from "$lib/components/Button.svelte";
     import Card from "$lib/components/Card.svelte";
-    import { PUBLIC_API } from "$env/static/public";
     import CheckBoxInput from "$lib/components/input/CheckBoxInput.svelte";
+    import api from "$lib/utils/api";
 
     let { doc, onsave, oncancel, ondelete } = $props();
 
@@ -28,11 +28,10 @@
             public: isPublic,
         };
 
-        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}`, {
+        const response = await api.request(`/docs/${doc.name}`, {
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
             method: "PUT",
             body: JSON.stringify(updatedDoc),
         });
@@ -47,8 +46,7 @@
 
     async function deleteInstance() {
         if (!confirm(`Are you sure you want to delete ${doc.name}?`)) return;
-        const response = await fetch(`${PUBLIC_API}/docs/${doc.name}`, {
-            credentials: "include",
+        const response = await api.request(`/docs/${doc.name}`, {
             method: "DELETE",
         });
 

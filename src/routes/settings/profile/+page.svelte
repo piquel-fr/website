@@ -2,8 +2,8 @@
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
+    import api from "$lib/utils/api";
     import type { PageProps } from "./$types";
-    import { PUBLIC_API } from "$env/static/public";
 
     let { data }: PageProps = $props();
 
@@ -14,13 +14,12 @@
     let error: string = $state("");
 
     async function updateProfile() {
-        const response = await fetch(
-            `${PUBLIC_API}/profile/${data.profile.username}`,
+        const response = await api.request(
+            `/profile/${data.profile.username}`,
             {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                credentials: "include",
                 method: "PUT",
                 body: JSON.stringify({ username, name, image }),
             },

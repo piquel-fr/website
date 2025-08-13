@@ -1,21 +1,22 @@
-import { fetchAPI } from "$lib/utils/api";
-import type { PageLoad } from "./$types";
+import type { LoadEvent, PageLoad } from "@sveltejs/kit";
+import api from "$lib/utils/api";
 
-export const load: PageLoad = async (event) => {
-    let limit = event.url.searchParams.get("limit");
+export const load: PageLoad = async ({ fetch, url }: LoadEvent) => {
+    let limit = url.searchParams.get("limit");
     if (limit == null) {
         limit = "10";
     }
-    let offset = event.url.searchParams.get("offset");
+    let offset = url.searchParams.get("offset");
     if (offset == null) {
         offset = "0";
     }
 
-    const listResponse = await fetchAPI(
-        event,
-        `/docs?own&limit=${limit}&offset=${offset}`,
+    const listResponse = await api.get(
+        fetch,
+        url,
+        `/docs/?own&limit=${limit}&offset=${offset}`,
     );
-    const countResponse = await fetchAPI(event, "/docs?count");
+    const countResponse = await api.get(fetch, url, "/docs/?count");
 
     return {
         docs: {

@@ -7,7 +7,6 @@
     // Import transitions and animations
     import { fade } from "svelte/transition";
     import type { LayoutProps } from "./$types";
-    import { PUBLIC_API } from "$env/static/public";
     import { page } from "$app/state";
     import Login from "$lib/components/Login.svelte";
 

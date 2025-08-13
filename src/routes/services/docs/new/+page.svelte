@@ -1,9 +1,9 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { PUBLIC_API } from "$env/static/public";
     import Button from "$lib/components/Button.svelte";
     import CheckBoxInput from "$lib/components/input/CheckBoxInput.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
+    import api from "$lib/utils/api";
 
     let error: string = $state("");
     let repo: string = $state("");
@@ -24,11 +24,10 @@
     });
 
     async function createInstance() {
-        const response = await fetch(`${PUBLIC_API}/docs/`, {
+        const response = await api.request("/docs/", {
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
             method: "POST",
             body: JSON.stringify(doc),
         });
