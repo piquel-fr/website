@@ -10,6 +10,7 @@ class ApiClient {
         const jwt = cookies.find((cookie: string) =>
             cookie.trim().startsWith("jwt=")
         );
+
         return jwt ? jwt.split("=")[1] : null;
     }
 
@@ -19,13 +20,12 @@ class ApiClient {
         fetchFunc: typeof fetch = fetch,
     ): Promise<Response> {
         const token = this.getToken();
-
         return fetchFunc(`${PUBLIC_API}${endpoint}`, {
+            ...options,
             headers: {
                 ...(token && { "Authorization": `Bearer ${token}` }),
-                ...options.headers,
+                ...(options.headers || {}),
             },
-            ...options,
         });
     }
 

@@ -59,7 +59,7 @@
     }
 </script>
 
-<div class="w-fit">
+<form id="update-instance" onsubmit={(e) => e.preventDefault()} class="w-fit">
     <TextInput label="Name" bind:value={name} />
     <TextInput label="Repository" bind:value={repo} />
     <TextInput label="Branch/Tag" bind:value={ref} />
@@ -77,19 +77,19 @@
                 fullWidth={true}
                 className="w-full p-1 min-w-20 text-gray-500 border-gray-500 border-2"
                 onclick={updateInstance}
-                form="update-profile">Save</Button
+                form="update-instance">Save</Button
             >
             <Button
                 fullWidth={true}
                 className="w-full p-1 min-w-20 text-gray-500 border-gray-500 border-2"
                 onclick={oncancel}
-                form="update-profile">Cancel</Button
+                form="update-instance">Cancel</Button
             >
         </div>
         <Button
             className="p-1 text-red-600 border-red-600 border-2"
             onclick={deleteInstance}
-            form="update-profile">Delete Instance</Button
+            form="update-instance">Delete Instance</Button
         >
     </Card>
-</div>
+</form>

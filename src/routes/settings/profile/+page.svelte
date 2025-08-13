@@ -27,6 +27,7 @@
 
         if (response.status != 200) {
             error = await response.text();
+            return;
         }
 
         invalidateAll();
@@ -35,9 +36,7 @@
 
 <form
     id="update-profile"
-    onsubmit={(e) => {
-        e.preventDefault();
-    }}
+    onsubmit={(e) => e.preventDefault()}
     class="flex flex-col"
 >
     <TextInput label="Username" bind:value={username} />
