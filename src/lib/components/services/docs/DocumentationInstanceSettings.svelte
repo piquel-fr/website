@@ -60,7 +60,7 @@
     }
 </script>
 
-<Card popOut={false} className="w-fit p-1 my-1">
+<div class="w-fit">
     <TextInput label="Name" bind:value={name} />
     <TextInput label="Repository" bind:value={repo} />
     <TextInput label="Branch/Tag" bind:value={ref} />
@@ -92,4 +92,4 @@
             form="update-profile">Delete Instance</Button
         >
     </Card>
-</Card>
+</div>

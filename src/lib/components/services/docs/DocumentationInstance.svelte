@@ -11,44 +11,49 @@
     let editing: boolean = $state(false);
 </script>
 
-{#if editing}
-    <DocumentationInstanceSettings
-        {doc}
-        onsave={() => {
-            invalidateAll();
-            editing = false;
-        }}
-        ondelete={invalidateAll}
-        oncancel={() => (editing = false)}
-    />
-{:else}
-    <Card popOut={false} className="grid grid-cols-2 p-1 my-1">
-        <div>
-            <a class="px-1" href={`/services/docs/${doc.name}`}>{doc.name}</a>
-            <div class="px-2">
-                <p class="text-sm">
-                    <span class="text-xs text-gray-500">repository:</span><a
-                        href={`https://github.com/${doc.repoOwner}/${doc.repoName}/tree/${doc.repoRef}`}
-                    >
-                        {doc.repoOwner}/{doc.repoName}
-                    </a>
-                </p>
-                <p class="text-sm">
-                    <span class="text-xs text-gray-500">ref:</span>{doc.repoRef}
-                </p>
-            </div>
-        </div>
-        <div class="flex justify-end">
-            <div class="flex flex-row items-center p-1">
-                <Button
-                    onclick={() => (editing = true)}
-                    fullWidth={true}
-                    useCardClasses={false}
-                    className="p-1 hover:bg-gray-200 click:gb-gray-500 rounded-sm text-sm"
+<Card popOut={false} className="w-full p-1 my-1">
+    {#if editing}
+        <DocumentationInstanceSettings
+            {doc}
+            onsave={() => {
+                invalidateAll();
+                editing = false;
+            }}
+            ondelete={invalidateAll}
+            oncancel={() => (editing = false)}
+        />
+    {:else}
+        <div class="grid grid-cols-2">
+            <div>
+                <a class="px-1" href={`/services/docs/${doc.name}`}
+                    >{doc.name}</a
                 >
-                    <img src={edit} alt="edit" class="size-5" />
-                </Button>
+                <div class="px-2">
+                    <p class="text-sm">
+                        <span class="text-xs text-gray-500">repository:</span><a
+                            href={`https://github.com/${doc.repoOwner}/${doc.repoName}/tree/${doc.repoRef}`}
+                        >
+                            {doc.repoOwner}/{doc.repoName}
+                        </a>
+                    </p>
+                    <p class="text-sm">
+                        <span class="text-xs text-gray-500">ref:</span
+                        >{doc.repoRef}
+                    </p>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <div class="flex flex-row items-center p-1">
+                    <Button
+                        onclick={() => (editing = true)}
+                        fullWidth={true}
+                        useCardClasses={false}
+                        className="p-1 hover:bg-gray-200 click:gb-gray-500 rounded-sm text-sm"
+                    >
+                        <img src={edit} alt="edit" class="size-5" />
+                    </Button>
+                </div>
             </div>
         </div>
-    </Card>
-{/if}
+    {/if}
+</Card>
