@@ -120,7 +120,7 @@
                     <NavButton
                         popOut={false}
                         className="m-1 p-1 text-red-700"
-                        dest={`${PUBLIC_API}/auth/logout?redirectTo=${page.url.pathname}`}
+                        dest={`/auth/logout?redirectTo=${page.url.pathname}`}
                     >
                         Sign out
                     </NavButton>
