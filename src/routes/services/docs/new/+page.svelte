@@ -2,6 +2,7 @@
     import { goto } from "$app/navigation";
     import { PUBLIC_API } from "$env/static/public";
     import Button from "$lib/components/Button.svelte";
+    import CheckBoxInput from "$lib/components/input/CheckBoxInput.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
 
     let error: string = $state("");
@@ -45,6 +46,7 @@
 <TextInput label="Repository" bind:value={repo} />
 <TextInput label="Branch/Tag" bind:value={doc.repoRef} />
 <TextInput label="Root" bind:value={doc.root} />
+<CheckBoxInput label="Public" bind:checked={doc.public} />
 
 <p class="text-red-500 font-bold text-sm">{error}</p>
 
