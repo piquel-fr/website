@@ -7,6 +7,7 @@ export const GET: RequestHandler = ({ cookies, url }) => {
         httpOnly: false,
         secure: true,
         sameSite: "none",
+        maxAge: 178200,
     });
 
     const redirectTo = url.searchParams.get("redirectTo") || "";
