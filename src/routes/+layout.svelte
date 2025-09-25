@@ -23,23 +23,27 @@
 <div class="flex min-h-screen flex-col bg-white">
     <header class="grid grid-cols-2 bg-gray-300">
         <nav class="flex justify-start">
-            <NavButton popOut={false} useCardClasses={false} className="p-2 m-2">🥒</NavButton>
-            <NavButton
-                popOut={false}
-                useCardClasses={false}
-                className="p-2 m-2"
-                dest="/docs"
+            <NavButton popOut={false} useCardClasses={false} className="p-2 m-2"
+                >🥒</NavButton
             >
-                Docs
-            </NavButton>
-            <NavButton
-                popOut={false}
-                useCardClasses={false}
-                className="p-2 m-2"
-                dest="/services"
-            >
-                Services
-            </NavButton>
+            {#if data.profile?.role === "admin"}
+                <NavButton
+                    popOut={false}
+                    useCardClasses={false}
+                    className="p-2 m-2"
+                    dest="/docs"
+                >
+                    Docs
+                </NavButton>
+                <NavButton
+                    popOut={false}
+                    useCardClasses={false}
+                    className="p-2 m-2"
+                    dest="/services"
+                >
+                    Services
+                </NavButton>
+            {/if}
         </nav>
         <div class="flex justify-end">
             {#if data.profile}
