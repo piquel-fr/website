@@ -138,5 +138,8 @@
     </main>
     <footer class="m-1 mt-auto text-xs">
         Page designed and developped by Joe
+        <a href="https://uptime.piquel.fr/status/piquel-fr"
+            >Status of the Services</a
+        >
     </footer>
 </div>
