@@ -64,7 +64,7 @@ class ApiClient {
 
     async docs(fetchFunc: typeof fetch, page: string) {
         const response = await this.request(
-            `/docs/piquel-docs/page${page}?pathPrefix=/docs`,
+            `/docs/piqueldocs/page${page}?pathPrefix=/docs`,
             {},
             fetchFunc,
         );
