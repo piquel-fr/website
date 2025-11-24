@@ -5,7 +5,7 @@ export const load: PageLoad = async ({ fetch, url, params }: LoadEvent) => {
     const response = await api.get(
         fetch,
         url,
-        `/docs/${params.instance}/`,
+        `/docs/${params.instance}`,
     );
     return {
         doc: await response.data,
