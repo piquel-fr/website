@@ -15,7 +15,14 @@
             children: [
                 { name: "Auth", path: "/docs/api/auth" },
                 { name: "Profile", path: "/docs/api/profile" },
-                { name: "Email", path: "/docs/api/email" },
+                {
+                    name: "Email",
+                    path: "/docs/api/email",
+                    children: [
+                        { name: "Accounts", path: "/docs/api/email/accounts" },
+                        { name: "Inboxes", path: "/docs/api/email/inboxes" },
+                    ],
+                },
             ],
         },
         { name: "Docs", path: "/docs/docs" },
@@ -25,7 +32,7 @@
 <div class="flex w-max">
     <nav>
         {#each nav as node}
-            <NavNode {node} depth={0} />
+            <NavNode {node} />
         {/each}
     </nav>
     <div class="">
