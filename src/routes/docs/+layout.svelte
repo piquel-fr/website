@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { NavTree } from "$types/docs";
     import NavNode from "$lib/components/docs/NavNode.svelte";
+    import type { NavTree } from "$types/docs";
 
     let { children } = $props();
 
@@ -29,13 +29,23 @@
     ];
 </script>
 
-<div class="flex w-max">
-    <nav>
-        {#each nav as node}
-            <NavNode {node} />
-        {/each}
+<div class="flex min-h-screen w-full bg-white text-gray-800">
+    <nav
+        class="w-72 border-r border-gray-200 bg-gray-50 px-4 py-6 overflow-y-auto"
+    >
+        <h2
+            class="mb-4 px-2 font-bold text-gray-500"
+        >
+            Documentation
+        </h2>
+        <ul class="space-y-1">
+            {#each nav as node}
+                <NavNode {node} />
+            {/each}
+        </ul>
     </nav>
-    <div class="">
+
+    <main class="flex-1 p-8">
         {@render children()}
-    </div>
+    </main>
 </div>
