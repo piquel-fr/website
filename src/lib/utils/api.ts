@@ -61,30 +61,6 @@ class ApiClient {
                 return { data: {}, status: response.status };
         }
     }
-
-    async docs(fetchFunc: typeof fetch, page: string) {
-        const response = await this.request(
-            `/docs/piqueldocs/page${page}?pathPrefix=/docs`,
-            {},
-            fetchFunc,
-        );
-
-        if (response.status != 200) {
-            error(response.status, { message: await response.text() });
-        }
-
-        if (response.headers.get("Content-Type") == "text/html") {
-            return {
-                data: response.text(),
-                status: response.status,
-            };
-        }
-
-        return {
-            data: new Promise((resolve) => resolve("")),
-            status: response.status,
-        };
-    }
 }
 
 export default new ApiClient();
