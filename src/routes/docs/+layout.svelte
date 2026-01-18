@@ -2,6 +2,8 @@
     import NavNode from "$lib/components/docs/NavNode.svelte";
     import type { NavTree } from "$types/docs";
 
+    import "$lib/styles/prism-vsc-dark-plus.css";
+
     let { children } = $props();
 
     const nav: NavTree[] = [
