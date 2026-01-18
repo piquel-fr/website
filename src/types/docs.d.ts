@@ -1,5 +1,5 @@
 export type NavTree = {
     name: string;
     path: string;
-    children?: NavNode[];
+    children?: NavTree[];
 };
