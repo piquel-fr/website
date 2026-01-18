@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { NavTree } from "$types/docs";
-    import Nav from "$lib/components/docs/Nav.svelte";
+    import NavNode from "$lib/components/docs/NavNode.svelte";
 
     let { children } = $props();
 
@@ -22,9 +22,13 @@
     ];
 </script>
 
-<div class="flex">
-    <Nav nodes={nav}></Nav>
-    <div>
+<div class="flex w-max">
+    <nav>
+        {#each nav as node}
+            <NavNode {node} depth={0} />
+        {/each}
+    </nav>
+    <div class="">
         {@render children()}
     </div>
 </div>
