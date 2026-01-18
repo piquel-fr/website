@@ -40,7 +40,7 @@
     </nav>
 
     <main class="flex-1 p-8">
-        <article class="prose">
+        <article class="prose max-w-none">
             {@render children()}
         </article>
     </main>
