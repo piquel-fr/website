@@ -12,7 +12,7 @@
     <li class="m-1">
         <NavButton
             dest={node.path}
-            className={"flex items-center gap-2 p-2 rounded-md hover:bg-gray-500 transition duration-500 " +
+            className={"flex items-center gap-2 w-32 p-1 rounded-md hover:bg-gray-500 transition duration-500 " +
                 (isActiveRoute ? "bg-gray-300" : "")}
         >
             <span class="flex-1">{node.name}</span>
@@ -31,6 +31,6 @@
 
 <style>
     .nav-list {
-        padding-left: calc(var(--depth) * 1rem);
+        padding-left: calc(var(--depth) * 0.25rem);
     }
 </style>
