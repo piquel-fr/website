@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 html {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
