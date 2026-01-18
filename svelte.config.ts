@@ -13,6 +13,11 @@ export default {
         })
     ],
 
-    kit: { adapter: adapter() },
+    kit: {
+        alias: {
+            "$types": "./src/types"
+        },
+        adapter: adapter()
+    },
     extensions: [".svelte", ".svx", ".md"]
 };
