@@ -2,7 +2,6 @@
     import "$lib/styles/prism-vsc-dark-plus.css";
 
     let { title, children } = $props();
-    console.log(title);
 </script>
 
 <svelte:head>
