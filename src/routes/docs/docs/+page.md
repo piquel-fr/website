@@ -2,8 +2,12 @@
 title: Docs
 ---
 
+<script>
+    import Notice from "$lib/components/docs/Notice.svelte";
+</script>
+
 # Docs for the docs !
 
->[!TODO]
->
-> Documentation on how to contribute to the docs
+<Notice type="todo">
+WIP: Documentation on how to contribute to the docs
+</Notice>
