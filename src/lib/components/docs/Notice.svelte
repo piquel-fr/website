@@ -12,16 +12,12 @@
     const configs: {
         [key: string]: { styles: string; icon: Component };
     } = {
-        todo: {
-            styles: "bg-gray-300 border-gray-800 text-gray-900",
-            icon: Info,
-        },
         info: {
             styles: "bg-blue-300 border-blue-800 text-blue-900",
             icon: Info,
         },
         warning: {
-            styles: "bg-yellow-300 border-yellow-800 text-yellow-900",
+            styles: "bg-yellow-300 border-yellow-700 text-yellow-900",
             icon: TriangleAlert,
         },
         danger: {

@@ -8,6 +8,6 @@ title: Docs
 
 # Docs for the docs !
 
-<Notice type="todo">
+<Notice type="warning">
 WIP: Documentation on how to contribute to the docs
 </Notice>
