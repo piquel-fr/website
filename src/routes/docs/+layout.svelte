@@ -2,8 +2,6 @@
     import NavNode from "$lib/components/docs/NavNode.svelte";
     import type { NavTree } from "$types/docs";
 
-    import "$lib/styles/prism-vsc-dark-plus.css";
-
     let { children } = $props();
 
     const nav: NavTree[] = [
@@ -42,8 +40,6 @@
     </nav>
 
     <main class="flex-1 p-8">
-        <article class="prose max-w-none">
-            {@render children()}
-        </article>
+        {@render children()}
     </main>
 </div>
