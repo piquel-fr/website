@@ -6,7 +6,7 @@
 
 <svelte:head>
     {#if title != undefined}
-        <title>Docs: {title}</title>
+        <title>Docs - {title}</title>
     {/if}
 </svelte:head>
 
