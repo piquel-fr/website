@@ -1,3 +1,7 @@
+---
+title: Docs
+---
+
 # Docs for the docs !
 
 >[!TODO]

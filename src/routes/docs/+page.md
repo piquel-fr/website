@@ -1,3 +1,7 @@
+---
+title: Docs
+---
+
 # Welcome!
 
 Welcome to the piquel.fr documentations.

@@ -1,3 +1,7 @@
+---
+title: Email Accounts API
+---
+
 # Managing mail accounts
 
 ## Endpoints
