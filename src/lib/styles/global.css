@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 html {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
@@ -6,4 +7,8 @@ html {
 
 .max-div-width {
     max-width: 65em;
+}
+
+.w-max {
+    width: 65em;
 }
