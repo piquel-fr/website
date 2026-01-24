@@ -1,6 +1,6 @@
-import type { LayoutLoad, LoadEvent } from "./$types";
-import { error } from "@sveltejs/kit";
-import api from "$lib/utils/api";
+import type { LayoutLoad } from "./$types";
+import { error, type LoadEvent } from "@sveltejs/kit";
+import api from "$lib/api";
 
 export const ssr = true;
 

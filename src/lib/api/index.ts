@@ -16,7 +16,7 @@ class ApiClient {
 
     request(
         endpoint: string,
-        options = {},
+        options: Record<PropertyKey, any> = {},
         fetchFunc: typeof fetch = fetch,
     ): Promise<Response> {
         const token = this.getToken();
@@ -43,10 +43,10 @@ class ApiClient {
                     break;
                 case 401:
                     redirect(307, `/auth/login?redirectTo=${url.pathname}`);
-                    return {};
+                    return;
                 default:
                     error(response.status, { message: await response.text() });
-                    return {};
+                    return;
             }
         }
 

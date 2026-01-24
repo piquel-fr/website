@@ -3,7 +3,7 @@
     import Button from "$lib/components/Button.svelte";
     import CheckBoxInput from "$lib/components/input/CheckBoxInput.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
-    import api from "$lib/utils/api";
+    import api from "$lib/api";
 
     let error: string = $state("");
     let repo: string = $state("");

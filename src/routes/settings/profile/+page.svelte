@@ -2,7 +2,7 @@
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
-    import api from "$lib/utils/api";
+    import api from "$lib/api";
     import type { PageProps } from "./$types";
 
     let { data }: PageProps = $props();

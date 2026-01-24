@@ -1,5 +1,5 @@
 import type { PageLoad } from "./$types";
-import api from "$lib/utils/api";
+import api from "$lib/api";
 import type { LoadEvent } from "@sveltejs/kit";
 
 export const load: PageLoad = async ({ fetch, url, params }: LoadEvent) => {
