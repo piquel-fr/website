@@ -48,23 +48,21 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         UpdateUserParams: {
-            /** Format: email */
-            email?: string;
-            image?: string;
-            name?: string;
-            username?: string;
+            image: string;
+            name: string;
+            username: string;
         };
         User: {
             /** Format: date-time */
-            createdAt?: string;
+            createdAt: string;
             /** Format: email */
-            email?: string;
+            email: string;
             /** Format: int32 */
-            id?: number;
-            image?: string;
-            name?: string;
-            role?: string;
-            username?: string;
+            id: number;
+            image: string;
+            name: string;
+            role: string;
+            username: string;
         };
     };
     responses: never;
