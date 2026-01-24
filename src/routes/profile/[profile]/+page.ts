@@ -1,8 +1,12 @@
-import type { PageLoad } from "./$types";
-import api from "$lib/api";
+import type { PageLoad } from "./$types.d.ts";
+import { profile } from "$lib/api/client.ts";
 import type { LoadEvent } from "@sveltejs/kit";
 
-export const load: PageLoad = async ({ fetch, url, params }: LoadEvent) => {
-    const response = await api.get(fetch, url, `/profile/${params.profile}`);
-    return { profileData: await response.data };
+export const load: PageLoad = async ({ params, fetch }: LoadEvent) => {
+    const response = profile.GET(`/{user}`, {
+        params: { path: { user: params.profile ? params.profile : "" } },
+        fetch,
+    });
+
+    return { profileData: (await response).data };
 };
