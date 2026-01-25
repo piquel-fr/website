@@ -38,6 +38,9 @@ const middleware: Middleware = {
                 break;
         }
     },
+    onError({ error }) {
+        if (error) throw new Error(`API Error: ${error}`);
+    },
 };
 
 export const profile = createClient<profilePaths>({
