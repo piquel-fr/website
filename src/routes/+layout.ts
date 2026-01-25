@@ -1,4 +1,4 @@
-import { profile } from "$lib/api/client.ts";
+import { profile } from "$lib/api/client";
 import type { LoadEvent } from "@sveltejs/kit";
 import type { LayoutLoad } from "./$types.d.ts";
 
