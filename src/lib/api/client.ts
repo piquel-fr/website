@@ -39,7 +39,7 @@ const middleware: Middleware = {
         }
     },
     onError({ error }) {
-        if (error) throw new Error(`API Error: ${error}`);
+        return new Error(`API Error: ${error}`);
     },
 };
 
