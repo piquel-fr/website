@@ -5,9 +5,13 @@
         CircleX,
         CircleCheck,
     } from "@lucide/svelte/icons";
-    import type { Component } from "svelte";
+    import type { Component, Snippet } from "svelte";
 
-    let { type, children } = $props();
+    let {
+        type,
+        children,
+    }: { type: "info" | "warning" | "danger" | "success"; children: Snippet } =
+        $props();
 
     const configs: {
         [key: string]: { styles: string; icon: Component };
@@ -30,7 +34,7 @@
         },
     };
 
-    const config = configs[type];
+    const config = configs[type]!;
     const Icon = config.icon;
 </script>
 
