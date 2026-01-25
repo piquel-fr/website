@@ -35,14 +35,6 @@
                 >
                     Docs
                 </NavButton>
-                <NavButton
-                    popOut={false}
-                    useCardClasses={false}
-                    className="p-2 m-2"
-                    dest="/services"
-                >
-                    Services
-                </NavButton>
             {/if}
         </nav>
         <div class="flex justify-end">
@@ -138,8 +130,6 @@
     </main>
     <footer class="m-1 mt-auto text-xs">
         Page designed and developped by Joe
-        <a href="https://uptime.piquel.fr/status/piquel-fr"
-            >Status of the Services</a
-        >
+        <a href="https://uptime.piquel.fr/status/piquel-fr">Status of the Services</a>
     </footer>
 </div>
