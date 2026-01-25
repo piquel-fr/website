@@ -1,6 +1,7 @@
 <script lang="ts">
     import NavButton from "$lib/components/NavButton.svelte";
     import type { LayoutProps } from "./$types";
+    import policy from "$lib/api/policy";
 
     let { data, children }: LayoutProps = $props();
 </script>
@@ -12,7 +13,7 @@
                 class="size-16 border-4"
                 src={data.settings.profile.image}
                 alt={data.settings.profile.username}
-                style="border-color: {data.settings.profile.color}; "
+                style="border-color: {policy.roles[data.profile.role].color};"
             />
             <div class="ml-1">
                 <p class="text-2xl">
