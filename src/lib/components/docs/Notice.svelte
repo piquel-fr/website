@@ -34,8 +34,8 @@
         },
     };
 
-    const config = configs[type]!;
-    const Icon = config.icon;
+    const config = $derived(configs[type]!);
+    const Icon = $derived(config.icon);
 </script>
 
 <div class={`flex my-4 rounded-r-lg border-l-4 p-4 ${config.styles}`}>

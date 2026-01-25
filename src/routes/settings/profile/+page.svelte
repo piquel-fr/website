@@ -7,9 +7,9 @@
 
     let { data }: PageProps = $props();
 
-    let username: string = $state(data.settings.profile.username);
-    let name: string = $state(data.settings.profile.name);
-    let image: string = $state(data.settings.profile.image);
+    let username: string = $derived(data.settings.profile.username);
+    let name: string = $derived(data.settings.profile.name);
+    let image: string = $derived(data.settings.profile.image);
 
     let error: string = $state("");
 
