@@ -9,6 +9,7 @@
     import type { LayoutProps } from "./$types";
     import { page } from "$app/state";
     import Login from "$lib/components/Login.svelte";
+    import policy from "$lib/api/policy";
 
     let { data, children }: LayoutProps = $props();
 
@@ -62,7 +63,9 @@
                                 height="32"
                                 width="32"
                                 class="size-8 border-2"
-                                style="border-color: {data.profile.color};"
+                                style="border-color: {policy.roles[
+                                    data.profile.role
+                                ].color};"
                             />
                         </div>
                     </div>
