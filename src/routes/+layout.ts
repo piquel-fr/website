@@ -5,6 +5,6 @@ import type { LayoutLoad } from "./$types.d.ts";
 export const ssr = true;
 
 export const load: LayoutLoad = async ({ fetch }: LoadEvent) => {
-    const response = profile.GET(`/`, { fetch });
-    return { profile: (await response).data };
+    const { data } = await profile.GET(`/`, { fetch });
+    return { profile: data! };
 };

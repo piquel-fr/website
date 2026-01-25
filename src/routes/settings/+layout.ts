@@ -1,11 +1,10 @@
-import type { LayoutLoad } from "./$types";
-import api from "$lib/api";
+import { profile } from "$lib/api/client.ts";
 import type { LoadEvent } from "@sveltejs/kit";
+import type { LayoutLoad } from "./$types.d.ts";
 
 export const ssr = true;
 
-export const load: LayoutLoad = async ({ fetch, url }: LoadEvent) => {
-    const profile = await api.get(fetch, url, "/profile/");
-
-    return { settings: { profile: await profile.data } };
+export const load: LayoutLoad = async ({ fetch }: LoadEvent) => {
+    const { data } = await profile.GET(`/`, { fetch });
+    return { settings: { profile: data! } };
 };

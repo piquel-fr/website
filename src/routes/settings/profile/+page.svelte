@@ -2,7 +2,7 @@
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
-    import api from "$lib/api";
+    import { profile } from "$lib/api/client";
     import type { PageProps } from "./$types";
 
     let { data }: PageProps = $props();
@@ -14,19 +14,17 @@
     let error: string = $state("");
 
     async function updateProfile() {
-        const response = await api.request(
-            `/profile/${data.profile.username}`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                method: "PUT",
-                body: JSON.stringify({ username, name, image }),
+        const response = await profile.PUT("/{user}", {
+            params: { path: { user: data.profile.username } },
+            body: {
+                username: username,
+                image: image,
+                name: name,
             },
-        );
+        });
 
-        if (response.status != 200) {
-            error = await response.text();
+        if (response.response.status != 200) {
+            error = response.data!;
             return;
         }
 
