@@ -3,5 +3,5 @@
 </script>
 
 <p class="text-8xl">
-    {page.error?.status ? page.error.status : page.status}: {page.error?.message}
+    {page.status}: {page.error?.message}
 </p>
