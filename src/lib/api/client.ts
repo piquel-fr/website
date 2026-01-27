@@ -4,7 +4,6 @@ import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
 import { error, redirect } from "@sveltejs/kit";
-import { page } from "$app/state";
 
 function getToken() {
     if (!browser) return null;
@@ -24,13 +23,17 @@ const middleware: Middleware = {
         return request;
     },
     async onResponse({ response }) {
+        const currentPath = browser
+            ? globalThis.window.location.pathname +
+                globalThis.window.location.search
+            : "/";
         switch (response.status) {
             case 200:
                 break;
             case 401:
                 redirect(
                     307,
-                    `/auth/login?redirectTo=${page ? page.url.pathname : ""}`,
+                    `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
                 );
                 break;
             default:
