@@ -3,7 +3,7 @@ import type { paths as profilePaths } from "./gen/profile.d.ts";
 import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
-import { error, redirect } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 
 function getToken() {
     if (!browser) return null;
@@ -22,23 +22,17 @@ const middleware: Middleware = {
         request.headers.set("Authorization", `Bearer ${token}`);
         return request;
     },
-    async onResponse({ response }) {
+    onResponse({ response }) {
         const currentPath = browser
             ? globalThis.window.location.pathname +
                 globalThis.window.location.search
             : "/";
-        switch (response.status) {
-            case 200:
-                break;
-            case 401:
-                redirect(
-                    307,
-                    `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
-                );
-                break;
-            default:
-                error(response.status, { message: await response.text() });
-                break;
+
+        if (response.status == 401) {
+            redirect(
+                307,
+                `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
+            );
         }
     },
     onError({ error }) {

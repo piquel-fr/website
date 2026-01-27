@@ -23,8 +23,9 @@
             },
         });
 
+        error = "";
         if (response.response.status != 200) {
-            error = response.data!;
+            error = response.error!;
             return;
         }
 
