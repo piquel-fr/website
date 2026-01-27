@@ -1,5 +1,5 @@
 import createClient, { type Middleware } from "openapi-fetch";
-import type { paths as profilePaths } from "./gen/profile.d.ts";
+import type { paths as userPaths } from "./gen/users.d.ts";
 import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
@@ -40,14 +40,14 @@ const middleware: Middleware = {
     },
 };
 
-export const profile = createClient<profilePaths>({
+export const users = createClient<userPaths>({
     baseUrl: `${PUBLIC_API}/profile`,
 });
 export const email = createClient<emailPaths>({
     baseUrl: `${PUBLIC_API}/email`,
 });
 
-const clients = [profile, email];
+const clients = [users, email];
 
 for (const client of clients) {
     client.use(middleware);
