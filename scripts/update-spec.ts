@@ -6,7 +6,7 @@ import openapiTS, { astToString } from "openapi-typescript";
 const outDir = "./src/lib/api/gen";
 await fs.mkdir(outDir, { recursive: true });
 
-const specs = ["profile", "email"];
+const specs = ["users", "email"];
 
 async function syncSpec(name: string) {
     const ast = await openapiTS(

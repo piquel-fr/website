@@ -1,5 +1,5 @@
 export interface paths {
-    "/": {
+    "/self": {
         parameters: {
             query?: never;
             header?: never;
@@ -7,10 +7,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get user profile
-         * @description Get user by query param 'username', or the currently authenticated user if empty
+         * Get self user object
+         * @description Get the user that is associated with the auth
          */
-        get: operations["get-profile"];
+        get: operations["get-self"];
         put?: never;
         post?: never;
         delete?: never;
@@ -37,6 +37,30 @@ export interface paths {
          */
         put: operations["update-user"];
         post?: never;
+        /**
+         * Delete user
+         * @description Delete the user specified in the path
+         */
+        delete: operations["delete-user"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{user}/admin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update user
+         * @description Update the profile of the specified user
+         */
+        put: operations["update-user-admin"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -47,6 +71,14 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        UpdateUserAdminParams: {
+            /** Format: email */
+            email: string;
+            image: string;
+            name: string;
+            role: string;
+            username: string;
+        };
         UpdateUserParams: {
             image: string;
             name: string;
@@ -56,7 +88,7 @@ export interface components {
             /** Format: date-time */
             createdAt: string;
             /** Format: email */
-            email: string;
+            email?: string;
             /** Format: int32 */
             id: number;
             image: string;
@@ -73,12 +105,9 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "get-profile": {
+    "get-self": {
         parameters: {
-            query?: {
-                /** @description Optional username. If omitted, returns current user. */
-                username?: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -151,8 +180,63 @@ export interface operations {
                     "text/plain": string;
                 };
             };
+        };
+    };
+    "delete-user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The username */
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description User deleted successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
             /** @description Unauthorized */
             401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    "update-user-admin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The username to update */
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateUserAdminParams"];
+            };
+        };
+        responses: {
+            /** @description User updated successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid input or json */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
