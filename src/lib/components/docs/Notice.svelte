@@ -5,9 +5,13 @@
         CircleX,
         CircleCheck,
     } from "@lucide/svelte/icons";
-    import type { Component } from "svelte";
+    import type { Component, Snippet } from "svelte";
 
-    let { type, children } = $props();
+    let {
+        type,
+        children,
+    }: { type: "info" | "warning" | "danger" | "success"; children: Snippet } =
+        $props();
 
     const configs: {
         [key: string]: { styles: string; icon: Component };
@@ -30,8 +34,8 @@
         },
     };
 
-    const config = configs[type];
-    const Icon = config.icon;
+    const config = $derived(configs[type]!);
+    const Icon = $derived(config.icon);
 </script>
 
 <div class={`flex my-4 rounded-r-lg border-l-4 p-4 ${config.styles}`}>

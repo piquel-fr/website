@@ -6,7 +6,7 @@ export const GET: RequestHandler = ({ cookies, url }) => {
         path: "/",
         httpOnly: false,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
         maxAge: 178200,
     });
 

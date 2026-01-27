@@ -2,10 +2,11 @@
     import { page } from "$app/state";
     import type { PageProps } from "./$types";
     import NavButton from "$lib/components/NavButton.svelte";
+    import policy from "$lib/api/policy";
 
     let { data }: PageProps = $props();
 
-    let profile = data.profileData;
+    let profile = $derived(data.profileData);
 </script>
 
 <div class="max-div-width flex w-full grow flex-wrap justify-center gap-1 px-8">
@@ -14,12 +15,12 @@
             class="size-64 border-8"
             src={profile.image}
             alt={profile.username}
-            style="border-color: {profile.color};"
+            style="border-color: {policy.roles[profile.role].color};"
         />
         <p class="text-4xl">{profile.name}</p>
         <p class="text-2xl">{profile.username}</p>
         {#if profile.role !== ""}
-            <p class="text-lg">{profile.role_name}</p>
+            <p class="text-lg">{policy.roles[profile.role].name}</p>
         {/if}
         {#if profile.username === page.params.profile}
             <NavButton
