@@ -6,7 +6,7 @@
     let { data }: LayoutProps = $props();
 </script>
 
-{#if data.profile?.role === "admin"}
+{#if data.user?.role === "admin"}
     <p class="text-center rounded-xl p-5 text-white font-bold text-3xl mt-3" style="background-color: #404040;">Welcome to the Piquel zone !</p>
     <p class="text-center text-xl p-3"> Hub to all of the Piquel Network, So You Can Tickle Your Piquel in Peace </p>
     <div class="grow justify-center flex flex-wrap gap-1 w-full px-10">
