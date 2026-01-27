@@ -6,7 +6,7 @@
 
     let { data }: PageProps = $props();
 
-    let profile = $derived(data.profileData);
+    let profile = $derived(data.userData);
 </script>
 
 <div class="max-div-width flex w-full grow flex-wrap justify-center gap-1 px-8">
@@ -22,7 +22,7 @@
         {#if profile.role !== ""}
             <p class="text-lg">{policy.roles[profile.role].name}</p>
         {/if}
-        {#if profile.username === page.params.profile}
+        {#if profile.username === page.params.user}
             <NavButton
                 popOut={false}
                 dest="/settings/profile"

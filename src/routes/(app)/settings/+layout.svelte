@@ -11,25 +11,25 @@
         <div class="flex justify-start">
             <img
                 class="size-16 border-4"
-                src={data.settings.profile.image}
-                alt={data.settings.profile.username}
-                style="border-color: {policy.roles[data.profile.role].color};"
+                src={data.settings.user.image}
+                alt={data.settings.user.username}
+                style="border-color: {policy.roles[data.user.role].color};"
             />
             <div class="ml-1">
                 <p class="text-2xl">
-                    {data.settings.profile.name}
+                    {data.settings.user.name}
                     <span class="text-lg text-gray-600"
-                        >({data.settings.profile.username})</span
+                        >({data.settings.user.username})</span
                     >
                 </p>
-                <p>{data.settings.profile.role}</p>
+                <p>{data.settings.user.role}</p>
             </div>
         </div>
         <div class="flex items-center justify-end">
             <NavButton
                 className="p-2 px-3 rounded"
-                dest={`/profile/${data.settings.profile.username}`}
-                popOut={false}>View profile</NavButton
+                dest={`/user/${data.settings.user.username}`}
+                popOut={false}>View user</NavButton
             >
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="w-auto grow justify-center">
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full"
-                dest="/settings/profile"
+                dest="/settings/user"
                 popOut={false}>Profile</NavButton
             >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
