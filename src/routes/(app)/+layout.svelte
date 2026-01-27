@@ -19,7 +19,7 @@
         <NavButton popOut={false} useCardClasses={false} className="p-2 m-2"
             >🥒</NavButton
         >
-        {#if data.profile?.role === "admin"}
+        {#if data.user?.role === "admin"}
             <NavButton
                 popOut={false}
                 useCardClasses={false}
@@ -31,7 +31,7 @@
         {/if}
     </nav>
     <div class="flex justify-end">
-        {#if data.profile}
+        {#if data.user}
             <Button
                 popOut={false}
                 useCardClasses={false}
@@ -39,17 +39,16 @@
                 onclick={() => (showSidebar = !showSidebar)}
             >
                 <div class="flex">
-                    <div class="py-1 pr-2">{data.profile.name}</div>
+                    <div class="py-1 pr-2">{data.user.name}</div>
                     <div class="pr-2">
                         <img
-                            src={data.profile.image}
+                            src={data.user.image}
                             alt="PFP"
                             height="32"
                             width="32"
                             class="size-8 border-2"
-                            style="border-color: {policy.roles[
-                                data.profile.role
-                            ].color};"
+                            style="border-color: {policy.roles[data.user.role]
+                                .color};"
                         />
                     </div>
                 </div>
@@ -69,7 +68,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <main onclick={() => (showSidebar = false)}>
     {#if showSidebar}
-        {#if data.profile}
+        {#if data.user}
             <div
                 transition:fade={{ duration: 100 }}
                 class="fixed right-0 z-50 m-1 flex min-w-32 flex-col rounded bg-gray-100 p-1"
@@ -77,7 +76,7 @@
                 <NavButton
                     popOut={false}
                     className="m-1 p-1"
-                    dest={`/profile/${data.profile.username}`}
+                    dest={`/user/${data.user.username}`}
                 >
                     Profile
                 </NavButton>
