@@ -41,7 +41,7 @@ const middleware: Middleware = {
 };
 
 export const users = createClient<userPaths>({
-    baseUrl: `${PUBLIC_API}/profile`,
+    baseUrl: `${PUBLIC_API}/users`,
 });
 export const email = createClient<emailPaths>({
     baseUrl: `${PUBLIC_API}/email`,
