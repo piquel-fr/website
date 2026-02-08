@@ -35,8 +35,10 @@ const middleware: Middleware = {
             );
         }
     },
+
     onError({ error }) {
-        return new Error(`API Error: ${error}`);
+        console.error("API Network Error:", error);
+        return new Response("Network Error", { status: 503 });
     },
 };
 
