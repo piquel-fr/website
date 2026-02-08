@@ -5,37 +5,47 @@ import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
 import { redirect } from "@sveltejs/kit";
 
-function getToken() {
-    if (!browser) return null;
+let refreshPromise: Promise<void> | null = null;
 
-    const cookies = document.cookie.split(";");
-    const jwt = cookies.find((cookie: string) =>
-        cookie.trim().startsWith("jwt=")
-    );
+async function refreshAuthToken(): Promise<void> {
+    const response = await fetch(`${PUBLIC_API}/auth/refresh`, {
+        method: "POST",
+    });
 
-    return jwt ? jwt.split("=")[1] : null;
+    if (!response.ok) {
+        throw new Error("Session expired");
+    }
 }
 
 const middleware: Middleware = {
-    onRequest({ request }) {
-        const token = getToken();
-        request.headers.set("Authorization", `Bearer ${token}`);
-        return request;
-    },
-    onResponse({ response }) {
-        const currentPath = browser
-            ? globalThis.window.location.pathname +
-                globalThis.window.location.search
-            : "/";
+    async onResponse({ request, response }) {
+        if (response.status === 401) {
+            if (!browser) {
+                return response;
+            }
 
-        if (response.status == 401) {
-            redirect(
-                307,
-                `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
-            );
+            try {
+                if (!refreshPromise) {
+                    refreshPromise = refreshAuthToken().finally(() => {
+                        refreshPromise = null;
+                    });
+                }
+                await refreshPromise;
+
+                return await fetch(request.clone());
+            } catch (err) {
+                const currentPath = browser
+                    ? globalThis.window.location.pathname +
+                        globalThis.window.location.search
+                    : "/";
+                redirect(
+                    307,
+                    `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
+                );
+            }
         }
+        return response;
     },
-
     onError({ error }) {
         console.error("API Network Error:", error);
         return new Response("Network Error", { status: 503 });
