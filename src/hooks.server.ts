@@ -1,5 +1,12 @@
 import { PUBLIC_API } from "$env/static/public";
-import type { HandleFetch } from "@sveltejs/kit";
+import type { Handle, HandleFetch } from "@sveltejs/kit";
+
+export const handle = (({ event, resolve }) => {
+    return resolve(event, {
+        // Forward all headers
+        filterSerializedResponseHeaders: () => true,
+    });
+}) satisfies Handle;
 
 export const handleFetch: HandleFetch = ({ request, event, fetch }) => {
     if (request.url.startsWith(PUBLIC_API)) {
