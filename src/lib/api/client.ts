@@ -4,6 +4,7 @@ import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
 import { redirect } from "@sveltejs/kit";
+import { goto } from "$app/navigation";
 
 let refreshPromise: Promise<void> | null = null;
 
@@ -19,30 +20,30 @@ async function refreshAuthToken(): Promise<void> {
 
 const middleware: Middleware = {
     async onResponse({ request, response }) {
-        if (response.status === 401) {
-            if (!browser) {
-                return response;
-            }
+        if (response.status !== 401) {
+            return response;
+        }
 
-            try {
-                if (!refreshPromise) {
-                    refreshPromise = refreshAuthToken().finally(() => {
-                        refreshPromise = null;
-                    });
-                }
-                await refreshPromise;
+        if (!browser) {
+            return response;
+        }
 
-                return await fetch(request.clone());
-            } catch (err) {
-                const currentPath = browser
-                    ? globalThis.window.location.pathname +
-                        globalThis.window.location.search
-                    : "/";
-                redirect(
-                    307,
-                    `/auth/login?redirectTo=${encodeURIComponent(currentPath)}`,
-                );
+        try {
+            if (!refreshPromise) {
+                refreshPromise = refreshAuthToken().finally(() => {
+                    refreshPromise = null;
+                });
             }
+            await refreshPromise;
+
+            return await fetch(request.clone());
+        } catch (err) {
+            console.log(err);
+            const currentPath = browser
+                ? globalThis.window.location.pathname +
+                    globalThis.window.location.search
+                : "/";
+            goto(`/auth/login?redirectTo=${encodeURIComponent(currentPath)}`);
         }
         return response;
     },
