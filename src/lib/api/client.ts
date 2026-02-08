@@ -3,7 +3,6 @@ import type { paths as userPaths } from "./gen/users.d.ts";
 import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
 import { browser } from "$app/environment";
-import { redirect } from "@sveltejs/kit";
 import { goto } from "$app/navigation";
 
 let refreshPromise: Promise<void> | null = null;
