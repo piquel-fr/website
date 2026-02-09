@@ -67,6 +67,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{user}/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get user sessions
+         * @description Get the active sessions for the specified user
+         */
+        get: operations["get-user-sessions"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete user sessions
+         * @description Delete all sessions for the user, or a specific one if 'id' query param is provided
+         */
+        delete: operations["delete-user-sessions"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -95,6 +119,18 @@ export interface components {
             name: string;
             role: string;
             username: string;
+        };
+        UserSession: {
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            expiresAt: string;
+            /** Format: int32 */
+            id: number;
+            ipAdress: string;
+            userAgent: string;
+            /** Format: int32 */
+            userId: number;
         };
     };
     responses: never;
@@ -243,6 +279,92 @@ export interface operations {
                 content: {
                     "text/plain": string;
                 };
+            };
+        };
+    };
+    "get-user-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The username */
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description User sessions found */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** Format: date-time */
+                        createdAt: string;
+                        /** Format: date-time */
+                        expiresAt: string;
+                        /** Format: int32 */
+                        id: number;
+                        ipAdress: string;
+                        userAgent: string;
+                        /** Format: int32 */
+                        userId: number;
+                    }[];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "delete-user-sessions": {
+        parameters: {
+            query?: {
+                /** @description Specific session ID to delete */
+                id?: number;
+            };
+            header?: never;
+            path: {
+                /** @description The username */
+                user: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Session(s) deleted successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid input */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };
