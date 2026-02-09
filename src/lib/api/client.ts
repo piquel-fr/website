@@ -1,4 +1,7 @@
-import createClient, { type Middleware } from "openapi-fetch";
+import createClient, {
+    type ClientOptions,
+    type Middleware,
+} from "openapi-fetch";
 import type { paths as userPaths } from "./gen/users.d.ts";
 import type { paths as emailPaths } from "./gen/email.d.ts";
 import { PUBLIC_API } from "$env/static/public";
@@ -7,9 +10,10 @@ import { goto } from "$app/navigation";
 
 let refreshPromise: Promise<void> | null = null;
 
-async function refreshAuthToken(): Promise<void> {
-    const response = await fetch(`${PUBLIC_API}/auth/refresh`, {
+async function refreshAuthToken(f: typeof fetch): Promise<void> {
+    const response = await f(`${PUBLIC_API}/auth/refresh`, {
         method: "POST",
+        credentials: "include",
     });
 
     if (!response.ok) {
@@ -17,8 +21,10 @@ async function refreshAuthToken(): Promise<void> {
     }
 }
 
+const fetchOptions: ClientOptions = { credentials: "include" };
+
 const middleware: Middleware = {
-    async onResponse({ request, response }) {
+    async onResponse({ request, response, options }) {
         if (response.status !== 401) {
             return response;
         }
@@ -29,13 +35,15 @@ const middleware: Middleware = {
 
         try {
             if (!refreshPromise) {
-                refreshPromise = refreshAuthToken().finally(() => {
+                refreshPromise = refreshAuthToken(options.fetch).finally(() => {
                     refreshPromise = null;
                 });
             }
             await refreshPromise;
 
-            return await fetch(request.clone());
+            return await options.fetch(request.clone(), {
+                credentials: "include",
+            });
         } catch (err) {
             console.log(err);
             const currentPath = browser
@@ -54,9 +62,11 @@ const middleware: Middleware = {
 
 export const users = createClient<userPaths>({
     baseUrl: `${PUBLIC_API}/users`,
+    ...fetchOptions,
 });
 export const email = createClient<emailPaths>({
     baseUrl: `${PUBLIC_API}/email`,
+    ...fetchOptions,
 });
 
 const clients = [users, email];
