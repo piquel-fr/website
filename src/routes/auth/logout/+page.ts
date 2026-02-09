@@ -1,9 +1,6 @@
-import { type LoadEvent, redirect } from "@sveltejs/kit";
-import type { PageLoad } from "./$types.d.ts";
-import { logout } from "$lib/api/client.ts";
+import { redirect } from "@sveltejs/kit";
+import { PUBLIC_API } from "$env/static/public";
 
-export const load: PageLoad = async ({ url, fetch }: LoadEvent) => {
-    await logout(fetch);
-    const redirectTo = url.searchParams.get("redirectTo") || "";
-    redirect(307, redirectTo);
+export const load = () => {
+    redirect(307, `${PUBLIC_API}/auth/logout`);
 };
