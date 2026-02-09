@@ -74,3 +74,14 @@ const clients = [users, email];
 for (const client of clients) {
     client.use(middleware);
 }
+
+export async function logout(f: typeof fetch) {
+    const response = await f(`${PUBLIC_API}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to logout");
+    }
+}
