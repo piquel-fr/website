@@ -37,7 +37,7 @@
         <div class="w-auto grow justify-center">
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full"
-                dest="/settings/user"
+                dest="/settings/profile"
                 popOut={false}>Profile</NavButton
             >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
