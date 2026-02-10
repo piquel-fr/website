@@ -40,6 +40,11 @@
                 dest="/settings/profile"
                 popOut={false}>Profile</NavButton
             >
+            <NavButton
+                className="p-1 m-1 min-w-64 text-left pl-2 w-full"
+                dest="/settings/mail"
+                popOut={false}>Mail Accounts</NavButton
+            >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full text-red-700"
