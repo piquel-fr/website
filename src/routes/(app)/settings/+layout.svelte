@@ -1,7 +1,7 @@
 <script lang="ts">
     import NavButton from "$lib/components/NavButton.svelte";
     import type { LayoutProps } from "./$types";
-    import policy from "$lib/api/policy";
+    import config from "$lib/api/config";
 
     let { data, children }: LayoutProps = $props();
 </script>
@@ -13,7 +13,7 @@
                 class="size-16 border-4"
                 src={data.settings.user.image}
                 alt={data.settings.user.username}
-                style="border-color: {policy.roles[data.user.role].color};"
+                style="border-color: {config.policy.roles[data.user.role].color};"
             />
             <div class="ml-1">
                 <p class="text-2xl">
@@ -37,7 +37,7 @@
         <div class="w-auto grow justify-center">
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full"
-                dest="/settings/user"
+                dest="/settings/profile"
                 popOut={false}>Profile</NavButton
             >
             <NavButton
