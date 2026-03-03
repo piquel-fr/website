@@ -2,31 +2,30 @@
     import { invalidateAll } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
     import TextInput from "$lib/components/input/TextInput.svelte";
-    import api from "$lib/utils/api";
+    import { users } from "$lib/api/client";
     import type { PageProps } from "./$types";
 
     let { data }: PageProps = $props();
 
-    let username: string = $state(data.settings.profile.username);
-    let name: string = $state(data.settings.profile.name);
-    let image: string = $state(data.settings.profile.image);
+    let username: string = $derived(data.settings.user.username);
+    let name: string = $derived(data.settings.user.name);
+    let image: string = $derived(data.settings.user.image);
 
     let error: string = $state("");
 
     async function updateProfile() {
-        const response = await api.request(
-            `/profile/${data.profile.username}`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                method: "PUT",
-                body: JSON.stringify({ username, name, image }),
+        const response = await users.PUT("/{user}", {
+            params: { path: { user: data.user.username } },
+            body: {
+                username: username,
+                image: image,
+                name: name,
             },
-        );
+        });
 
-        if (response.status != 200) {
-            error = await response.text();
+        error = "";
+        if (response.response.status != 200) {
+            error = response.error!;
             return;
         }
 
@@ -35,7 +34,7 @@
 </script>
 
 <form
-    id="update-profile"
+    id="update-user"
     onsubmit={(e) => e.preventDefault()}
     class="flex flex-col"
 >
@@ -45,7 +44,7 @@
 
     <p class="text-red-500 font-bold text-sm">{error}</p>
 
-    <Button className="mt-2 p-1" onclick={updateProfile} form="update-profile">
+    <Button className="mt-2 p-1" onclick={updateProfile} form="update-user">
         Save
     </Button>
 </form>
