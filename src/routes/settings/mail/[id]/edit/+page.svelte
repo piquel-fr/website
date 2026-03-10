@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { X } from "lucide-svelte";
+    import { X } from "@lucide/svelte";
     import NavButton from "$lib/components/NavButton.svelte";
     import type { PageProps } from "./$types";
 
