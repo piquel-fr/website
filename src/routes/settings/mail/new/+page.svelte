@@ -46,16 +46,16 @@
     }
 </script>
 
-<div class="w-full max-w-2xl">
+<div class="w-full max-w-3xl mx-auto flex flex-col py-8">
     <NavButton
-        className="mb-6 p-2 px-4 rounded text-gray-600 hover:text-gray-800"
+        className="mb-6 p-2 px-4 rounded text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
         dest="/settings/mail"
         popOut={false}
     >
         ← Back to Mail Accounts
     </NavButton>
 
-    <h1 class="text-3xl font-bold mb-6">Add New Mail Account</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Add New Mail Account</h1>
 
     <form onsubmit={handleSubmit} class="space-y-6">
         {#if error}
@@ -65,7 +65,7 @@
         {/if}
 
         <div>
-            <label for="name" class="block text-sm font-medium mb-2">
+            <label for="name" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Display Name
             </label>
             <input
@@ -73,14 +73,14 @@
                 id="name"
                 placeholder="e.g., Personal Email, Work Email"
                 bind:value={form.name}
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
-            <p class="text-xs text-gray-500 mt-1">A friendly name to identify this account</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">A friendly name to identify this account</p>
         </div>
 
         <div>
-            <label for="email" class="block text-sm font-medium mb-2">
+            <label for="email" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Email Address
             </label>
             <input
@@ -88,14 +88,14 @@
                 id="email"
                 placeholder="user@example.com"
                 bind:value={form.email}
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
-            <p class="text-xs text-gray-500 mt-1">The email address for this account</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">The email address for this account</p>
         </div>
 
         <div>
-            <label for="username" class="block text-sm font-medium mb-2">
+            <label for="username" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Username
             </label>
             <input
@@ -103,14 +103,14 @@
                 id="username"
                 placeholder="user@example.com or username"
                 bind:value={form.username}
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
-            <p class="text-xs text-gray-500 mt-1">Login credentials for connecting to the email account</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Login credentials for connecting to the email account</p>
         </div>
 
         <div>
-            <label for="password" class="block text-sm font-medium mb-2">
+            <label for="password" class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Password
             </label>
             <input
@@ -118,10 +118,10 @@
                 id="password"
                 placeholder="••••••••"
                 bind:value={form.password}
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
-            <p class="text-xs text-gray-500 mt-1">Password for connecting to the email account</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Password for connecting to the email account</p>
         </div>
 
         <div class="flex gap-3 pt-4">
