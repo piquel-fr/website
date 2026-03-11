@@ -48,14 +48,14 @@
 
 <div class="w-full max-w-3xl mx-auto flex flex-col py-8">
     <NavButton
-        className="mb-6 p-2 px-4 rounded text-black hover:text-gray-800 dark:text-black dark:hover:text-gray-100"
+        className="mb-6 p-2 px-4 rounded text-black"
         dest="/settings/mail"
         popOut={false} 
     >
         ← Back to Mail Accounts
     </NavButton>
 
-    <h1 class="text-3xl font-bold mb-6 text-black dark:text-gray-100">Add New Mail Account</h1>
+    <h1 class="text-3xl font-bold mb-6 text-black dark:text-black">Add New Mail Account</h1>
 
     <form onsubmit={handleSubmit} class="space-y-6">
         {#if error}
@@ -65,7 +65,7 @@
         {/if}
 
         <div>
-            <label for="name" class="block text-sm font-medium mb-2 text-black dark:text-gray-300">
+            <label for="name" class="block text-sm font-medium mb-2 text-black dark:text-black">
                 Display Name
             </label>
             <input
@@ -110,7 +110,7 @@
         </div>
 
         <div>
-            <label for="password" class="block text-sm font-medium mb-2 text-black dark:text-gray-300">
+            <label for="password" class="block text-sm font-medium mb-2 text-black dark:text-black">
                 Password
             </label>
             <input
