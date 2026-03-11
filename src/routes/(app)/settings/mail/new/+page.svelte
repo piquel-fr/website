@@ -80,7 +80,7 @@
         </div>
 
         <div>
-            <label for="email" class="block text-sm font-medium mb-2 text-black dark:text-gray-300">
+            <label for="email" class="block text-sm font-medium mb-2 text-black dark:text-black">
                 Email Address
             </label>
             <input
@@ -95,7 +95,7 @@
         </div>
 
         <div>
-            <label for="username" class="block text-sm font-medium mb-2 text-black dark:text-gray-300">
+            <label for="username" class="block text-sm font-medium mb-2 text-black dark:text-black">
                 Username
             </label>
             <input
@@ -103,7 +103,7 @@
                 id="username"
                 placeholder="user@example.com or username"
                 bind:value={form.username}
-                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Login credentials for connecting to the email account</p>
