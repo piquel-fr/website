@@ -73,7 +73,7 @@
                 id="name"
                 placeholder="e.g., Personal Email, Work Email"
                 bind:value={form.name}
-                class="flex-1 px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">A friendly name to identify this account</p>
@@ -88,7 +88,7 @@
                 id="email"
                 placeholder="user@example.com"
                 bind:value={form.email}
-                class="flex-1 px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">The email address for this account</p>
@@ -118,7 +118,7 @@
                 id="password"
                 placeholder="••••••••"
                 bind:value={form.password}
-                class="flex-1 px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full px-4 py-2 border rounded-lg bg-white dark:bg_gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={loading}
             />
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Password for connecting to the email account</p>
