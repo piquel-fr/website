@@ -45,7 +45,7 @@
 
     <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
         <p class="text-sm text-gray-800 dark:text-gray-800 mb-2">Email Address</p>
-        <p class="text-lg font-semibold text-gray-900 dark:text-gray-100">{account.email}</p>
+        <p class="text-lg font-semibold text-gray-500 dark:text-gray-400">{account.email}</p>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Read-only: Cannot be changed</p>
     </div>
 
