@@ -33,18 +33,12 @@
             >
         </div>
     </div>
-    <div class="m-1 flex gap-8 pt-1 h-full">
-        <!-- left navigation column: full height, center buttons -->
-        <div class="flex flex-col w-full md:w-64 justify-center items-center h-full">
+    <div class="m-1 flex gap-8 pt-1">
+        <div class="w-auto grow justify-center">
             <NavButton
                 className="p-1 m-1 min-w-64 text-left pl-2 w-full"
                 dest="/settings/profile"
                 popOut={false}>Profile</NavButton
-            >
-            <NavButton
-                className="p-1 m-1 min-w-64 text-left pl-2 w-full"
-                dest="/settings/mail"
-                popOut={false}>Mail Accounts</NavButton
             >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
             <NavButton
@@ -59,9 +53,6 @@
             >
             <hr class="h-px m-1 my-2 grow bg-gray-300 border-0" />
         </div>
-        <!-- content column: center page content horizontally -->
-        <div class="flex-1 flex justify-center items-start">
-            {@render children()}
-        </div>
+        <div>{@render children()}</div>
     </div>
 </div>
