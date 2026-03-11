@@ -48,7 +48,7 @@
 
 <div class="w-full max-w-3xl mx-auto flex flex-col py-8">
     <NavButton
-        className="mb-6 p-2 px-4 rounded text-black hover:text-black dark:text-gray-300 dark:hover:text-gray-100"
+        className="mb-6 p-2 px-4 rounded text-black hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
         dest="/settings/mail"
         popOut={false} 
     >
