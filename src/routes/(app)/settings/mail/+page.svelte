@@ -54,7 +54,7 @@
                     </div>
                     <div class="flex gap-2">
                         <NavButton
-                            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+                            className="p-2 rounded"
                             dest={`/settings/mail/${account.id}/edit`}
                             popOut={false}
                         >
