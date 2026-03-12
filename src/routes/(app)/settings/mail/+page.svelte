@@ -47,7 +47,7 @@
     {:else}
         <div class="space-y-4">
             {#each mailAccounts as account (account.id)}
-                <div class="flex items-center justify-between p-2 border rounded-lg bg-gray-100 dark:bg-gray-100">
+                <div class="flex items-center justify-between p-4 border rounded-sm bg-gray-100 dark:bg-gray-100">
                     <div>
                         <p class="font-semibold text-black dark:text-black">{account.name}</p>
                         <p class="text-sm text-gray-600 dark:text-gray-400">{account.email}</p>
