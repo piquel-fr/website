@@ -57,7 +57,7 @@
     }
 </script>
 
-<div class="w-full max-w-3xl mx-auto flex flex-col py-8">
+<div class="w-full max-w-3xl mx-auto flex flex-col">
     <NavButton
         className="mb-6 p-2 px-4 rounded text-black"
         dest="/settings/mail"
