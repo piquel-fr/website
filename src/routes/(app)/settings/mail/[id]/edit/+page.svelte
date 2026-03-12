@@ -44,8 +44,8 @@
     <h1 class="text-3xl font-bold mb-6 text-black dark:text-black">Manage Account: {account.name}</h1>
 
     <div class="bg-gray-100 dark:bg-gray-100 p-6 rounded-lg mb-6">
-        <p class="text-sm text-white dark:text-white mb-2">Email Address</p>
-        <p class="text-lg font-semibold text-gray-500 dark:text-gray-400">{account.email}</p>
+        <p class="text-sm text-black dark:text-black mb-2">Email Address</p>
+        <p class="text-lg font-semibold text-gray-800 dark:text-gray-800">{account.email}</p>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Read-only: Cannot be changed</p>
     </div>
 
@@ -59,7 +59,7 @@
             <div class="space-y-2 mb-6">
                 {#each account.sharedWith as user (user.id)}
                     <div class="flex items-center justify-between p-3 border rounded-lg bg-gray-100 dark:bg-gray-100">
-                        <p class="font-medium text-gray-900 dark:text-gray-100">{user.username}</p>
+                        <p class="font-medium text-gray-900 dark:text-gray-800">{user.username}</p>
                         <button
                             onclick={() => removeUser(user.id)}
                             class="p-1 rounded hover:bg-red-200 dark:hover:bg-red-700"
@@ -87,7 +87,7 @@
                 />
                 <button
                     onclick={addUser}
-                    class="px-6 py-2 bg-gray-100 text-white rounded-lg"
+                    class="px-6 py-2 bg-gray-100 text-black rounded-lg"
                 >
                     Add
                 </button>
