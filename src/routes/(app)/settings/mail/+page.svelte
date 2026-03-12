@@ -7,10 +7,10 @@
 
     let { data }: PageProps = $props();
 
-    const mailAccounts = [
+    let mailAccounts = $state([
         { id: 1, email: "user1@example.com", name: "Personal Email" },
         { id: 2, email: "user2@example.com", name: "Work Email" },
-    ];
+    ]);
 
     async function deleteAccount(id: number) {
         if (confirm("Are you sure you want to delete this account?")) {
