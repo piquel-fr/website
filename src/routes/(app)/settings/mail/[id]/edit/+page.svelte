@@ -32,7 +32,7 @@
     }
 </script>
 
-<div class="w-full max-w-3xl mx-auto flex flex-col py-8">
+<div class="w-full max-w-3xl mx-auto flex flex-col py-6">
     <NavButton
         className="mb-6 p-2 px-4 rounded text-black"
         dest="/settings/mail"
@@ -87,7 +87,7 @@
                 />
                 <button
                     onclick={addUser}
-                    class="px-6 py-2 bg-gray-100 text-black rounded-lg"
+                    class="px-6 py-2 bg-gray-100 hover:bg-sky-100 text-black rounded-lg"
                 >
                     Add
                 </button>
