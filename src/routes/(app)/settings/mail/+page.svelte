@@ -30,7 +30,7 @@
     }
 </script>
 
-<div class="w-full max-w-3xl mx-auto flex flex-col py-8">
+<div class="w-full max-w-3xl mx-auto flex flex-col">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-3xl font-bold">Mail Accounts</h1>
         <NavButton
