@@ -1,6 +1,8 @@
 <script lang="ts">
     import { Plus, Trash2, Edit3 } from "@lucide/svelte";
     import NavButton from "$lib/components/NavButton.svelte";
+    import { email } from "$lib/api/client";
+    import { goto } from "$app/navigation";
     import type { PageProps } from "./$types";
 
     let { data }: PageProps = $props();
@@ -12,8 +14,18 @@
 
     async function deleteAccount(id: number) {
         if (confirm("Are you sure you want to delete this account?")) {
-            // TODO: Call API to delete account
-            console.log("Deleting account", id);
+            try {
+                // find account by id to get email
+                const account = mailAccounts.find((a) => a.id === id);
+                if (account) {
+                    await email.delete({ path: { email: account.email } });
+                    // remove from local list
+                    mailAccounts = mailAccounts.filter((a) => a.id !== id);
+                }
+            } catch (err) {
+                console.error("Failed to delete account", err);
+                alert("Unable to delete account. Please try again.");
+            }
         }
     }
 </script>

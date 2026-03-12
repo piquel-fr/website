@@ -2,6 +2,8 @@
     import NavButton from "$lib/components/NavButton.svelte";
     import Button from "$lib/components/Button.svelte";
     import type { PageProps } from "./$types";
+    import { email } from "$lib/api/client";
+    import { goto } from "$app/navigation";
 
     let { data }: PageProps = $props();
 
@@ -34,11 +36,20 @@
         }
 
         try {
-            // TODO: Call API to create new mail account
-            console.log("Creating mail account:", form);
-            // Redirect to mail accounts page after successful creation
-            // navigate('/settings/mail');
+            // call the API using the generated client
+            await email.put({
+                body: {
+                    name: form.name,
+                    email: form.email,
+                    username: form.username,
+                    password: form.password,
+                },
+            });
+
+            // redirect after success
+            goto('/settings/mail');
         } catch (err) {
+            console.error(err);
             error = "Failed to create account. Please try again.";
         } finally {
             loading = false;
