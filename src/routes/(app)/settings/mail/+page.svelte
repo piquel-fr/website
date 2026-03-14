@@ -3,14 +3,25 @@
     import NavButton from "$lib/components/NavButton.svelte";
     import { email } from "$lib/api/client";
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
     import type { PageProps } from "./$types";
 
     let { data }: PageProps = $props();
 
-    let mailAccounts = $state([
-        { id: 1, email: "user1@example.com", name: "Personal Email" },
-        { id: 2, email: "user2@example.com", name: "Work Email" },
-    ]);
+    let mailAccounts = $state([]);
+
+    async function fetchAccounts() {
+        try {
+            const res = await email.get();
+            if (res.data) {
+                mailAccounts = res.data.map((acc: any, index: number) => ({ id: index + 1, email: acc.email, name: acc.name }));
+            }
+        } catch (err) {
+            console.error("Failed to fetch accounts", err);
+        }
+    }
+
+    onMount(fetchAccounts);
 
     async function deleteAccount(id: number) {
         if (confirm("Are you sure you want to delete this account?")) {

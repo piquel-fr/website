@@ -136,14 +136,13 @@
         </div>
 
         <div class="flex gap-3 pt-4">
-            <Button
+            <button
                 type="submit"
-                useCardClasses={true}
-                className="px-6 py-2"
+                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
                 disabled={loading}
             >
                 {loading ? "Creating..." : "Create Account"}
-            </Button>
+            </button>
             <NavButton
                 className="px-6 py-2 rounded"
                 dest="/settings/mail"
