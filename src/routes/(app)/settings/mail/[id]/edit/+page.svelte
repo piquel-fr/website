@@ -28,11 +28,18 @@
 
     let newUserInput = $state("");
 
-    function addUser() {
+    async function addUser() {
         if (newUserInput.trim()) {
-            // TODO: Call API to add user to account
-            console.log("Adding user:", newUserInput);
-            newUserInput = "";
+            try {
+                await email.put({ path: { email: account.email }, body: { username: newUserInput } });
+                // Add to local list
+                if (!account.sharedWith) account.sharedWith = [];
+                account.sharedWith.push({ id: Date.now(), username: newUserInput });
+                newUserInput = "";
+            } catch (err) {
+                console.error("Failed to add user", err);
+                alert("Failed to add user. Please try again.");
+            }
         }
     }
 
