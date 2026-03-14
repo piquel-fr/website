@@ -14,7 +14,7 @@
         try {
             const res = await email.get();
             if (res.data) {
-                mailAccounts = res.data.map((acc: any, index: number) => ({ id: index + 1, email: acc.email, name: acc.name }));
+                mailAccounts = res.data.map((acc: any) => ({ email: acc.email, name: acc.name }));
             }
         } catch (err) {
             console.error("Failed to fetch accounts", err);
@@ -23,16 +23,12 @@
 
     onMount(fetchAccounts);
 
-    async function deleteAccount(id: number) {
+    async function deleteAccount(email: string) {
         if (confirm("Are you sure you want to delete this account?")) {
             try {
-                // find account by id to get email
-                const account = mailAccounts.find((a) => a.id === id);
-                if (account) {
-                    await email.delete({ path: { email: account.email } });
-                    // remove from local list
-                    mailAccounts = mailAccounts.filter((a) => a.id !== id);
-                }
+                await email.delete({ path: { email } });
+                // remove from local list
+                mailAccounts = mailAccounts.filter((a) => a.email !== email);
             } catch (err) {
                 console.error("Failed to delete account", err);
                 alert("Unable to delete account. Please try again.");
@@ -57,7 +53,7 @@
         <p class="text-gray-500">No mail accounts configured yet.</p>
     {:else}
         <div class="space-y-4">
-            {#each mailAccounts as account (account.id)}
+            {#each mailAccounts as account (account.email)}
                 <div class="flex items-center justify-between p-4 border rounded-sm bg-gray-100 dark:bg-gray-100">
                     <div>
                         <p class="font-semibold text-black dark:text-black">{account.name}</p>
@@ -66,13 +62,13 @@
                     <div class="flex gap-2">
                         <NavButton
                             className="p-2 rounded"
-                            dest={`/settings/mail/${account.id}/edit`}
+                            dest={`/settings/mail/${account.email}/edit`}
                             popOut={false}
                         >
                             <Edit3 size={18} />
                         </NavButton>
                         <button
-                            onclick={() => deleteAccount(account.id)}
+                            onclick={() => deleteAccount(account.email)}
                             class="p-2 rounded hover:bg-red-200 dark:hover:bg-red-700"
                         >
                             <Trash2 size={18} class="text-red-600" />
