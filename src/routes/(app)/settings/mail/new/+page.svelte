@@ -4,7 +4,6 @@
     import type { PageProps } from "./$types";
     import { email } from "$lib/api/client";
     import { goto } from "$app/navigation";
-    import { PUBLIC_API } from "$env/static/public";
 
     let { data }: PageProps = $props();
 
@@ -36,32 +35,24 @@
             return;
         }
 
-        try {
-            // call the API
-            const response = await fetch(`${PUBLIC_API}/email`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({
-                    name: form.name,
-                    email: form.email,
-                    username: form.username,
-                    password: form.password,
-                }),
-            });
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.message || `HTTP ${response.status}`);
-            }
-
-            // redirect after success
-            goto('/settings/mail');
-        } catch (err) {
-            console.error(err);
-            error = err instanceof Error ? err.message : "Failed to create account. Please try again.";
-        } finally {
+        // call the API using the generated client
+        let response = await email.PUT("/", {
+            body: {
+                name: form.name,
+                email: form.email,
+                username: form.username,
+                password: form.password,
+            },
+        });
+        if (response.response.status !== 200) {
+            error = await response.response.text();
             loading = false;
+            return;
         }
+
+        // redirect after success
+        goto('/settings/mail');
+        loading = false;
     }
 </script>
 
